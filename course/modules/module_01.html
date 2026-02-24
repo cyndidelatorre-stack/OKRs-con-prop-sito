@@ -3,158 +3,480 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>module_01 - OKRs con Propósito</title>
-    <link rel="stylesheet" href="../../assets/style.css">
+    <title>Módulo 1 - OKRs con Propósito</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1D4D4F;
+            --primary-light: #2c6e70;
+            --bg-body: #f8fafc;
+            --bg-card: #ffffff;
+            --text-main: #334155;
+            --text-heading: #0f172a;
+            --border: #e2e8f0;
+            --radius: 12px;
+            --accent-bg: #f0fdf4;
+            --accent-border: #bbf7d0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.7;
+            padding-bottom: 4rem;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            color: var(--text-heading);
+            margin-bottom: 1rem;
+        }
+
+        h3 {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.1rem;
+            color: var(--primary);
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--bg-card);
+            padding: 1rem 2rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo a {
+            font-weight: 600;
+            font-size: 1.2rem;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        nav a {
+            color: var(--text-main);
+            text-decoration: none;
+            margin-left: 1.5rem;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Título del Módulo */
+        .module-header {
+            text-align: center;
+            padding: 4rem 0 3rem;
+        }
+
+        .module-header span {
+            color: var(--primary-light);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-size: 0.9rem;
+        }
+
+        .module-header h1 {
+            font-size: 2.5rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Caja de Objetivos */
+        .goals-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 2rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+        }
+
+        .goals-box ul {
+            list-style-type: none;
+            margin-top: 1rem;
+        }
+
+        .goals-box li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .goals-box li::before {
+            content: '✨';
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        /* Progreso */
+        .progress-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1rem;
+            list-style: none;
+        }
+
+        .progress-list li {
+            background: var(--bg-body);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Lecciones (Cards) */
+        .lesson-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 3rem;
+            margin-bottom: 3rem;
+            scroll-margin-top: 100px;
+        }
+
+        .lesson-card h2 {
+            font-size: 2rem;
+            border-bottom: 2px solid var(--primary-light);
+            padding-bottom: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        ul, ol {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+        }
+
+        /* Destacados */
+        .idea-central {
+            background: var(--primary);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 1.1rem;
+            margin: 2rem 0;
+            border-left: 4px solid var(--accent);
+        }
+
+        .ejemplo-box {
+            background: #f8fafc;
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--primary-light);
+            padding: 1.5rem;
+            border-radius: 0 8px 8px 0;
+            margin: 2rem 0;
+            font-style: italic;
+        }
+
+        .ejercicio-box {
+            background: #fffbeb;
+            border: 1px dashed #34d399;
+            padding: 2rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .ejercicio-box strong {
+            color: #059669;
+            font-size: 1.1rem;
+            display: block;
+            margin-bottom: 1rem;
+        }
+
+        /* Navegación interna */
+        .lesson-nav {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 3rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .lesson-nav a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: opacity 0.2s;
+        }
+
+        .lesson-nav a:hover {
+            opacity: 0.7;
+        }
+
+        /* Botón Módulo Siguiente */
+        .btn-next-module {
+            display: block;
+            width: 100%;
+            text-align: center;
+            background: var(--primary);
+            color: white;
+            padding: 1.2rem;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1.2rem;
+            margin-top: 4rem;
+            transition: transform 0.2s;
+        }
+
+        .btn-next-module:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 15px -3px rgba(29, 77, 79, 0.3);
+        }
+
+        footer {
+            text-align: center;
+            color: #94a3b8;
+            font-size: 0.9rem;
+            margin-top: 4rem;
+            border-top: 1px solid var(--border);
+            padding-top: 2rem;
+        }
+    </style>
 </head>
 <body>
     <header>
         <div class="logo">
-            <a href="../../index.html" style="font-weight: bold; font-size: 1.2rem; color: #111;">🧭 OKRs con Propósito</a>
+            <a href="../../index.html">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
+                </svg>
+                OKRs con Propósito
+            </a>
         </div>
         <nav>
             <a href="../../index.html">Inicio</a>
-            <a href="../../course/modules/module_01.html">Módulo 1</a>
+            <a href="#">Módulo 1</a>
         </nav>
     </header>
 
-    <main>
-        <h1>Módulo 1: Fundamentos – De la Burocracia al Propósito</h1>
-<p><strong>Objetivo:</strong> Comprender la verdadera naturaleza de los OKRs no como una lista de tareas, sino como una herramienta estratégica (brújula) para inspirar y alinear.</p>
-<p><strong>Al terminar este módulo:</strong></p>
-<ul>
-<li>Dejarás de ver los OKRs como un trámite administrativo.</li>
-<li>Sabrás diagnosticar el nivel real de madurez de tu equipo.</li>
-<li>Entenderás tu nuevo rol como facilitador de sentido.</li>
-</ul>
-<p><strong>Tu Progreso:</strong></p>
-<ol>
-<li><input disabled="" type="checkbox"> Lección 1: Bienvenida</li>
-<li><input disabled="" type="checkbox"> Lección 2: Checklist vs. Brújula</li>
-<li><input disabled="" type="checkbox"> Lección 3: Diagnóstico</li>
-<li><input disabled="" type="checkbox"> Lección 4: Tu rol como líder</li>
-</ol>
-<hr>
-<h2><a id="l1"></a>Lección 1: Bienvenida – Por qué los OKRs suelen fallar</h2>
-<h3>Contexto</h3>
-<p>¿Alguna vez has sentido que los objetivos de tu empresa son solo una lista de deseos que se archiva en un cajón y nadie vuelve a ver? o ¿te ha pasado que los líderes se reunen en un lugar con vistas increíbles a definir objetivos que nadie va a cumplir porque nadie les transmitió el propósito? Si sientes que tu equipo está &quot;haciendo cosas&quot; pero no &quot;transformando&quot;, no es culpa de ellos. Es culpa de cómo estamos usando la brújula.</p>
-<h3>Idea central</h3>
-<p><strong>Estar ocupado no es lo mismo que ser productivo.</strong> Podemos tener muchos checklists completos de tareas que no movieron la aguja del negocio ni un milímetro.</p>
-<h3>Desarrollo</h3>
-<p>En muchas organizaciones, los OKRs se convierten en un trámite &quot;para el equipo de estrategia&quot;. Se llenan trimestralmente y se olvidan.</p>
-<ul>
-<li><strong>El problema:</strong> Se usan como herramientas de control y reporte.</li>
-<li><strong>La solución:</strong> Deben usarse como herramientas de alineación y conversación.</li>
-</ul>
-<p>Este curso no es para enseñarte a redactar frases bonitas (&quot;aumentar ventas al 10%&quot;). Es para enseñarte a usar los OKRs como un sistema operativo cultural.</p>
-<h3>Ejemplo Real</h3>
-<p>Imagina al <strong>&quot;Equipo A&quot;</strong>. Cada trimestre llenan su formato. Durante tres meses nadie habla de ellos. Al final, corren para maquillar reportes.
-Ahora mira al <strong>&quot;Equipo B&quot;</strong>. Tienen sus objetivos visibles. Cada semana se preguntan: &quot;¿Lo que voy a hacer hoy nos acerca a ese objetivo?&quot;. Si la respuesta es no, cambian su agenda. Esa es la diferencia que buscaremos.</p>
-<h3>Ejercicio</h3>
-<p>Piensa en tu último ciclo de objetivos. Del 1 al 10, ¿cuánto consultaste esos objetivos para tomar decisiones diarias?</p>
-<ul>
-<li>Si es menos de 7, estás en el lugar correcto.</li>
-</ul>
-<h3>Cierre</h3>
-<p>Ya sabes que el sistema actual no está funcionando al 100%. En la siguiente lección, te mostraré la diferencia fundamental entre tener un Checklist y tener una Brújula.</p>
-<div align="right">
-  <a href="#l2">Siguiente Lección: Checklist vs. Brújula →</a>
-</div>
+    <main class="container">
+        
+        <div class="module-header">
+            <span>Módulo 1</span>
+            <h1>Fundamentos: De la Burocracia al Propósito</h1>
+        </div>
 
-<hr>
-<h2><a id="l2"></a>Lección 2: Checklist vs. Brújula</h2>
-<div align="left">
-  <a href="#l1">← Lección Anterior</a>
-</div>
+        <div class="goals-box">
+            <h3 style="margin-top: 0;">Objetivo del Módulo</h3>
+            <p>Comprender la verdadera naturaleza de los OKRs no como una lista de tareas, sino como una herramienta estratégica (brújula) para inspirar y alinear.</p>
+            
+            <h3 style="margin-top: 2rem;">Al terminar este módulo:</h3>
+            <ul>
+                <li>Dejarás de ver los OKRs como un trámite administrativo.</li>
+                <li>Sabrás diagnosticar el nivel real de madurez de tu equipo.</li>
+                <li>Entenderás tu nuevo rol como facilitador de sentido.</li>
+            </ul>
 
-<h3>Contexto</h3>
-<p>¿Qué prefieres en medio de una tormenta: una lista de instrucciones rígidas que no contempla el clima, o una brújula que te dice dónde está el Norte sin importar cuánto tengas que desviar el barco?</p>
-<h3>Idea central</h3>
-<p><strong>Los OKRs deben ser tu brújula, no tu lista de compras.</strong> La rigidez mata la estrategia; la dirección la salva.</p>
-<h3>Desarrollo</h3>
-<ul>
-<li><strong>La rigidez del Checklist:</strong> Un checklist te dice qué hacer paso a paso. Es útil para tareas repetitivas, pero peligroso para la estrategia. Si el mercado cambia, el checklist te obliga a seguir un plan obsoleto.</li>
-<li><strong>La adaptabilidad de la Brújula:</strong> Los OKRs marcan la dirección (el Objetivo) y las señales de que vas bien (Resultados Clave). No te dicen exactamente cada paso, lo que permite al equipo ser creativo en el &#39;cómo&#39; mientras respetan el &#39;qué&#39;.</li>
-</ul>
-<h3>Ejemplo Aplicado</h3>
-<blockquote>
-<p><strong>Checklist:</strong> &quot;Lanzar el sitio web el 1 de marzo&quot;.
-(Si el sitio se lanza pero es malo, cumpliste la tarea pero fallaste el negocio).</p>
-<p><strong>Brújula:</strong> &quot;Mejorar la experiencia digital del cliente&quot;.
-(Si al lanzar ves que no mejora la experiencia, la brújula te dice: &#39;ajusta, cambia, mejora&#39;, no te conformes con el lanzamiento).</p>
-</blockquote>
-<h3>Ejercicio</h3>
-<p>Toma uno de tus objetivos actuales. Pregúntate:
-<strong>¿Si cumplo esto al pie de la letra pero el entorno cambia, sigue siendo un éxito?</strong>
-Si la respuesta es &quot;no&quot;, tienes un checklist. Necesitamos transformarlo en brújula.</p>
-<h3>Cierre</h3>
-<p>Ahora que entiendes la filosofía, necesitamos saber dónde estás parado realmente.</p>
-<div align="right">
-  <a href="#l3">Siguiente Lección: Diagnóstico →</a>
-</div>
+            <h3 style="margin-top: 2rem;">Tu Progreso:</h3>
+            <ul class="progress-list">
+                <li><input disabled type="checkbox"> L1: Bienvenida</li>
+                <li><input disabled type="checkbox"> L2: Checklist vs. Brújula</li>
+                <li><input disabled type="checkbox"> L3: Diagnóstico</li>
+                <li><input disabled type="checkbox"> L4: Tu rol como líder</li>
+            </ul>
+        </div>
 
-<hr>
-<h2><a id="l3"></a>Lección 3: Diagnóstico – ¿En qué nivel estás?</h2>
-<div align="left">
-  <a href="#l2">← Lección Anterior</a>
-</div>
+        <article class="lesson-card" id="l1">
+            <h2>L1: Por qué los OKRs suelen fallar</h2>
+            
+            <h3>Contexto</h3>
+            <p>¿Alguna vez has sentido que los objetivos de tu empresa son solo una lista de deseos que se archiva en un cajón y nadie vuelve a ver? o ¿te ha pasado que los líderes se reúnen en un lugar con vistas increíbles a definir objetivos que nadie va a cumplir porque nadie les transmitió el propósito?</p>
+            <p>Si sientes que tu equipo está "haciendo cosas" pero no "transformando", no es culpa de ellos. Es culpa de cómo estamos usando la brújula.</p>
+            
+            <div class="idea-central">
+                💡 Estar ocupado no es lo mismo que ser productivo. Podemos tener muchos checklists completos de tareas que no movieron la aguja del negocio ni un milímetro.
+            </div>
+            
+            <h3>Desarrollo</h3>
+            <p>En muchas organizaciones, los OKRs se convierten en un trámite "para el equipo de estrategia". Se llenan trimestralmente y se olvidan.</p>
+            <ul>
+                <li><strong>El problema:</strong> Se usan como herramientas de control y reporte.</li>
+                <li><strong>La solución:</strong> Deben usarse como herramientas de alineación y conversación.</li>
+            </ul>
+            <p>Este curso no es para enseñarte a redactar frases bonitas ("aumentar ventas al 10%"). Es para enseñarte a usar los OKRs como un sistema operativo cultural.</p>
+            
+            <div class="ejemplo-box">
+                <strong>El Ejemplo Real:</strong><br><br>
+                Imagina al <strong>"Equipo A"</strong>. Cada trimestre llenan su formato. Durante tres meses nadie habla de ellos. Al final, corren para maquillar reportes.<br><br>
+                Ahora mira al <strong>"Equipo B"</strong>. Tienen sus objetivos visibles. Cada semana se preguntan: "¿Lo que voy a hacer hoy nos acerca a ese objetivo?". Si la respuesta es no, cambian su agenda. Esa es la diferencia que buscaremos.
+            </div>
+            
+            <div class="ejercicio-box">
+                <strong>📝 Ejercicio de Reflexión</strong>
+                <p>Piensa en tu último ciclo de objetivos. Del 1 al 10, ¿cuánto consultaste esos objetivos para tomar decisiones diarias?</p>
+                <p style="font-size: 0.9rem; color: #64748b; margin-top: 0.5rem;"><em>Si es menos de 7, es el momento de cambiar el rumbo. Estás en el lugar correcto.</em></p>
+            </div>
+            
+            <h3>Cierre</h3>
+            <p>Ya sabes que el sistema actual no está funcionando al 100%. En la siguiente lección, te mostraré la diferencia fundamental entre tener un Checklist y tener una Brújula.</p>
+            
+            <div class="lesson-nav">
+                <span></span>
+                <a href="#l2">Siguiente Lección: Checklist vs. Brújula →</a>
+            </div>
+        </article>
 
-<h3>Contexto</h3>
-<p>No puedes trazar una ruta si no sabes dónde estás parado en el mapa. Muchos líderes creen que tienen una cultura de alto desempeño cuando en realidad solo tienen una cultura de alta obediencia.</p>
-<h3>Idea central</h3>
-<p><strong>La honestidad es clave.</strong> Reconocer que tus OKRs hoy son burocráticos no es un fracaso, es el primer paso para curar el sistema.</p>
-<h3>Desarrollo</h3>
-<p>Existen 3 niveles principales de madurez:</p>
-<ol>
-<li><strong>Nivel Checklist (1-2):</strong> Se revisan solo al final del trimestre. Cada área trabaja aislada. &quot;Burocracia pura&quot;.</li>
-<li><strong>Transición (3-4):</strong> Hay intentos de conectar iniciativas. Se revisan mensualmente. La gente empieza a entender el &#39;por qué&#39;, pero falta hábito.</li>
-<li><strong>Brújula Viva (5):</strong> El sistema funciona como red. Todos saben cómo su trabajo impacta al propósito común. Hay colaboración transversal natural.</li>
-</ol>
-<h3>Ejercicio</h3>
-<p><strong>Utilizarás la herramienta: <a href="../../workbooks/module_01_worksheet.html">Diagnóstico de Madurez en OKRs</a>.</strong>
-Lee las 5 afirmaciones del diagnóstico. Marca con una &#39;X&#39; la que mejor describa tu realidad HOY, no la que deseas.</p>
-<blockquote>
-<p><em>No avances sin hacer esto. Necesitas tu línea base.</em></p>
-</blockquote>
-<h3>Cierre</h3>
-<p>Tener el diagnóstico es el primer paso. Ahora, para mover a tu equipo al siguiente nivel, necesitas redefinir tu papel.</p>
-<div align="right">
-  <a href="#l4">Siguiente Lección: Tu rol como líder →</a>
-</div>
+        <article class="lesson-card" id="l2">
+            <h2>L2: Checklist vs. Brújula</h2>
+            
+            <h3>Contexto</h3>
+            <p>¿Qué prefieres en medio de una tormenta: una lista de instrucciones rígidas que no contempla el clima, o una brújula que te dice dónde está el Norte sin importar cuánto tengas que desviar el barco?</p>
+            
+            <div class="idea-central">
+                🧭 Los OKRs deben ser tu brújula, no tu lista de compras. La rigidez mata la estrategia; la dirección la salva.
+            </div>
+            
+            <h3>Desarrollo</h3>
+            <ul>
+                <li><strong>La rigidez del Checklist:</strong> Un checklist te dice qué hacer paso a paso. Es útil para tareas repetitivas, pero peligroso para la estrategia. Si el mercado cambia, el checklist te obliga a seguir un plan obsoleto.</li>
+                <li><strong>La adaptabilidad de la Brújula:</strong> Los OKRs marcan la dirección (el Objetivo) y las señales de que vas bien (Resultados Clave). No te dicen exactamente cada paso, lo que permite al equipo ser creativo en el 'cómo' mientras respetan el 'qué'.</li>
+            </ul>
+            
+            <div class="ejemplo-box">
+                <strong>La Diferencia en Acción:</strong><br><br>
+                <strong>Checklist:</strong> "Lanzar el sitio web el 1 de marzo".<br>
+                <em>(Si el sitio se lanza pero es malo, cumpliste la tarea pero fallaste el negocio).</em><br><br>
+                <strong>Brújula:</strong> "Mejorar la experiencia digital del cliente".<br>
+                <em>(Si al lanzar ves que no mejora la experiencia, la brújula te dice: 'ajusta, cambia, mejora', no te conformes con el lanzamiento).</em>
+            </div>
+            
+            <div class="ejercicio-box">
+                <strong>📝 Ejercicio de Reflexión</strong>
+                <p>Toma uno de tus objetivos actuales y pregúntate:</p>
+                <p><strong>"¿Si cumplo esto al pie de la letra pero el entorno cambia, sigue siendo un éxito?"</strong></p>
+                <p style="font-size: 0.9rem; color: #64748b; margin-top: 0.5rem;"><em>Si la respuesta es "no", tienes un checklist. Necesitamos transformarlo.</em></p>
+            </div>
+            
+            <h3>Cierre</h3>
+            <p>Ahora que entiendes la filosofía, necesitamos saber dónde estás parado realmente.</p>
+            
+            <div class="lesson-nav">
+                <a href="#l1">← Anterior</a>
+                <a href="#l3">Siguiente Lección: Diagnóstico →</a>
+            </div>
+        </article>
 
-<hr>
-<h2><a id="l4"></a>Lección 4: Tu rol como líder</h2>
-<div align="left">
-  <a href="#l3">← Lección Anterior</a>
-</div>
+        <article class="lesson-card" id="l3">
+            <h2>L3: Diagnóstico – ¿En qué nivel estás?</h2>
+            
+            <h3>Contexto</h3>
+            <p>No puedes trazar una ruta si no sabes dónde estás parado en el mapa. Muchos líderes creen que tienen una cultura de alto desempeño cuando en realidad solo tienen una cultura de alta obediencia.</p>
+            
+            <div class="idea-central">
+                🔍 La honestidad es clave. Reconocer que tus OKRs hoy son burocráticos no es un fracaso, es el primer paso para curar el sistema.
+            </div>
+            
+            <h3>Desarrollo</h3>
+            <p>Existen 3 niveles principales de madurez:</p>
+            <ol>
+                <li><strong>Nivel Checklist (1-2):</strong> Se revisan solo al final del trimestre. Cada área trabaja aislada. "Burocracia pura".</li>
+                <li><strong>Transición (3-4):</strong> Hay intentos de conectar iniciativas. Se revisan mensualmente. La gente empieza a entender el 'por qué', pero falta hábito.</li>
+                <li><strong>Brújula Viva (5):</strong> El sistema funciona como red. Todos saben cómo su trabajo impacta al propósito común. Hay colaboración transversal natural.</li>
+            </ol>
+            
+            <div class="ejercicio-box">
+                <strong>🛠️ Herramienta Práctica</strong>
+                <p>Abre ahora mismo tu <strong><a href="../../workbooks/module_01_worksheet.html" style="color: #059669; text-decoration: underline;">Diagnóstico de Madurez en OKRs</a></strong>.</p>
+                <p>Lee las 5 afirmaciones del diagnóstico. Marca con una 'X' la que mejor describa tu realidad HOY, no la que deseas.</p>
+                <p style="font-size: 0.9rem; color: #64748b; margin-top: 0.5rem;"><em>Nota de Cyn: No avances sin hacer esto. Necesitas tu línea base clara.</em></p>
+            </div>
+            
+            <h3>Cierre</h3>
+            <p>Tener el diagnóstico es el primer paso. Ahora, para mover a tu equipo al siguiente nivel, necesitas redefinir tu papel.</p>
+            
+            <div class="lesson-nav">
+                <a href="#l2">← Anterior</a>
+                <a href="#l4">Siguiente Lección: Tu rol como líder →</a>
+            </div>
+        </article>
 
-<h3>Contexto</h3>
-<p>El error número uno de los líderes al implementar OKRs es creer que su trabajo es dictar las metas y revisar que se cumplan. Eso es micro-management.</p>
-<h3>Idea central</h3>
-<p><strong>Tu rol no es controlar, es diseñar futuro.</strong> Dejas de ser capataz para ser arquitecto de sentido.</p>
-<h3>Desarrollo</h3>
-<ul>
-<li><strong>Diseñar vs. Administrar:</strong> Un administrador gestiona los recursos que tiene hoy. Un líder que diseña futuro crea las condiciones para que cosas nuevas sucedan.</li>
-<li><strong>Facilitador de sentido:</strong> Tu equipo sabe <em>cómo</em> hacer su trabajo técnico. Lo que necesitan de ti es el <em>sentido</em>: ¿Por qué es importante esto? ¿A quién ayudamos?</li>
-<li><strong>Jardinería:</strong> En lugar de empujar instrucciones hacia abajo (cascada), tu rol es cuidar el ecosistema para que los objetivos florezcan desde la base.</li>
-</ul>
-<h3>Ejemplo Aplicado</h3>
-<ul>
-<li><strong>Líder Controlador:</strong> &quot;Quiero este reporte el viernes a las 5pm sin falta&quot;.</li>
-<li><strong>Líder Facilitador:</strong> &quot;Necesitamos entender por qué cayeron las ventas para ajustar la estrategia. ¿Qué necesitan de mí para tener esa información clara antes del viernes?&quot;</li>
-</ul>
-<h3>Ejercicio</h3>
-<p>Escribe una cosa que haces hoy y que sabes que es &quot;controlar&quot; (ej. aprobar cada pequeño gasto).
-Escribe qué acción de &quot;facilitación&quot; podrías hacer en su lugar (ej. dar un presupuesto mensual y confiar en el criterio).</p>
-<h3>Cierre del Módulo</h3>
-<p>Has completado el Módulo 1. Ya tienes la mentalidad correcta. Ahora vamos a lo profundo: conectar el corazón de tu gente con el cerebro de la empresa.</p>
-<div align="center">
-  <a href="../../course/modules/module_02.html" style="background-color: #28a745; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Ir al Módulo 2: Conexión →</a>
-</div>
+        <article class="lesson-card" id="l4">
+            <h2>L4: Tu rol como líder</h2>
+            
+            <h3>Contexto</h3>
+            <p>El error número uno de los líderes al implementar OKRs es creer que su trabajo es dictar las metas y revisar que se cumplan. Eso es micro-management.</p>
+            
+            <div class="idea-central">
+                🏗️ Tu rol no es controlar, es diseñar futuro. Dejas de ser capataz para ser arquitecto de sentido.
+            </div>
+            
+            <h3>Desarrollo</h3>
+            <ul>
+                <li><strong>Diseñar vs. Administrar:</strong> Un administrador gestiona los recursos que tiene hoy. Un líder que diseña futuro crea las condiciones para que cosas nuevas sucedan.</li>
+                <li><strong>Facilitador de sentido:</strong> Tu equipo sabe <em>cómo</em> hacer su trabajo técnico. Lo que necesitan de ti es el <em>sentido</em>: ¿Por qué es importante esto? ¿A quién ayudamos?</li>
+                <li><strong>Jardinería:</strong> En lugar de empujar instrucciones hacia abajo (cascada), tu rol es cuidar el ecosistema para que los objetivos florezcan desde la base.</li>
+            </ul>
+            
+            <div class="ejemplo-box">
+                <strong>Cambio de Conversación:</strong><br><br>
+                🚫 <strong>Líder Controlador:</strong> "Quiero este reporte el viernes a las 5pm sin falta".<br><br>
+                ✅ <strong>Líder Facilitador:</strong> "Necesitamos entender por qué cayeron las ventas para ajustar la estrategia. ¿Qué necesitan de mí para tener esa información clara antes del viernes?"
+            </div>
+            
+            <div class="ejercicio-box">
+                <strong>📝 Ejercicio de Reflexión</strong>
+                <p>Escribe una cosa que haces hoy y que sabes que es "controlar" (ej. aprobar cada pequeño gasto).</p>
+                <p>Luego, escribe qué acción de "facilitación" podrías hacer en su lugar (ej. dar un presupuesto mensual y confiar en el criterio).</p>
+            </div>
+            
+            <h3>Cierre del Módulo</h3>
+            <p>¡Felicidades! Has completado el Módulo 1. Ya tienes la mentalidad correcta. Ahora vamos a lo profundo: conectar el corazón de tu gente con el cerebro de la empresa.</p>
+            
+            <div class="lesson-nav">
+                <a href="#l3">← Anterior</a>
+                <span></span>
+            </div>
+        </article>
+
+        <a href="../../course/modules/module_02.html" class="btn-next-module">Avanzar al Módulo 2: Conexión 🚀</a>
 
     </main>
 
-    <footer style="margin-top: 4rem; text-align: center; color: #6b7280; font-size: 0.9rem;">
-        <p>© 2025 Cyn de la Torre. Curso OKRs con Propósito.</p>
+    <footer>
+        <p>© 2026 Cultura Viva by Cyn De la Torre. Todos los derechos reservados.</p>
     </footer>
 </body>
 </html>
