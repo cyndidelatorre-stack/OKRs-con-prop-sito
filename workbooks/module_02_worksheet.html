@@ -3,70 +3,347 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Workbook: Módulo 02</title>
-    <link rel="stylesheet" href="../assets/style.css">
+    <title>Workbook: Módulo 02 - OKRs con Propósito</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1D4D4F;
+            --primary-light: #2c6e70;
+            --bg-body: #f8fafc;
+            --bg-card: #ffffff;
+            --text-main: #334155;
+            --text-heading: #0f172a;
+            --border: #e2e8f0;
+            --radius: 12px;
+            --accent: #d4af37;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.7;
+            padding-bottom: 4rem;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            color: var(--text-heading);
+            margin-bottom: 1rem;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--bg-card);
+            padding: 1rem 2rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo a {
+            font-weight: 600;
+            font-size: 1.2rem;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        nav a {
+            color: var(--text-main);
+            text-decoration: none;
+            margin-left: 1.5rem;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 3rem auto;
+            background: var(--bg-card);
+            padding: 4rem;
+            border-radius: var(--radius);
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05);
+            border: 1px solid var(--border);
+        }
+
+        .workbook-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 2rem;
+        }
+
+        .workbook-header span {
+            color: var(--primary-light);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-size: 0.9rem;
+        }
+
+        .workbook-header h1 {
+            font-size: 2.5rem;
+            margin-top: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .workbook-header h2 {
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            font-size: 1.2rem;
+            color: #64748b;
+        }
+
+        /* Formulario y Secciones */
+        .reflection-section {
+            margin-top: 2rem;
+        }
+
+        .reflection-section h3 {
+            color: var(--primary);
+            font-size: 1.2rem;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .question-block {
+            margin-bottom: 3.5rem;
+        }
+
+        .question-block p {
+            margin-bottom: 1rem;
+            color: var(--text-main);
+        }
+
+        .ws-input {
+            width: 100%;
+            padding: 1.2rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            color: var(--text-main);
+            resize: vertical;
+            transition: all 0.2s;
+            background-color: var(--bg-body);
+        }
+
+        .ws-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            background-color: white;
+            box-shadow: 0 0 0 3px rgba(29, 77, 79, 0.1);
+        }
+
+        /* Cajas de Ayuda y Destacados */
+        .help-box {
+            background: #f8fafc;
+            border-left: 4px solid var(--primary-light);
+            padding: 1rem 1.5rem;
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+            color: #475569;
+        }
+
+        .help-box ul {
+            margin-top: 0.5rem;
+            padding-left: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .commitment-box {
+            background: #f0fdf4;
+            border: 1px dashed #22c55e;
+            padding: 2rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+        }
+
+        .commitment-box strong {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #166534;
+            font-size: 1.1rem;
+        }
+
+        /* Botones de acción */
+        .worksheet-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 1rem;
+            text-align: center;
+        }
+
+        .btn-print {
+            background-color: var(--bg-body);
+            color: var(--text-heading);
+            border: 1px solid var(--border);
+        }
+
+        .btn-print:hover {
+            background-color: #e2e8f0;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(29, 77, 79, 0.2);
+        }
+
+        footer {
+            text-align: center;
+            color: #94a3b8;
+            font-size: 0.9rem;
+            margin-top: 2rem;
+        }
+
+        /* Estilos de Impresión */
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            header, .worksheet-actions, footer {
+                display: none !important;
+            }
+            .container {
+                box-shadow: none;
+                border: none;
+                padding: 0;
+                margin: 0;
+                max-width: 100%;
+            }
+            .ws-input {
+                border: 1px solid #ccc;
+                background: white;
+            }
+            .help-box {
+                border-left: 2px solid #ccc;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
         <div class="logo">
-            <a href="../index.html" style="font-weight: bold; font-size: 1.2rem; color: #111;">🧭 OKRs con Propósito</a>
+            <a href="../index.html">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
+                </svg>
+                OKRs con Propósito
+            </a>
         </div>
         <nav>
             <a href="../index.html">Inicio</a>
-            <a href="../course/modules/module_01.html">Módulo 1</a>
+            <a href="../course/modules/module_02.html">Volver al Módulo 2</a>
         </nav>
     </header>
 
-    <main>
-        <h1>Workbook: Módulo 2 - Conexión</h1>
-<h2>Alineando el Propósito Personal con el Colectivo</h2>
-<h3>Herramienta 2: Conecta tu Propósito</h3>
-<p><strong>Instrucciones:</strong>
-Este ejercicio busca encontrar el vínculo vital entre lo que tú quieres (tu motor) y lo que el equipo necesita (la misión).</p>
-<h4>Parte 1: Mi Propósito Personal (El Motor Oculto)</h4>
-<p>¿Qué te mueve? No pienses en tu cargo, piensa en tu motivación humana.
-Completa una de estas frases o crea la tuya:</p>
-<ul>
-<li>&quot;Me inspira ayudar a otros a...&quot;</li>
-<li>&quot;Siento satisfacción cuando logro...&quot;</li>
-<li>&quot;Quiero aprender y desarrollarme en...&quot;</li>
-</ul>
-<blockquote>
-<p><strong>Mi Propósito Personal es:</strong></p>
-</blockquote>
-<textarea rows="5" placeholder="Escribe aquí tus ideas detalladas..."></textarea>
+    <main class="container">
+        
+        <div class="workbook-header">
+            <span>Herramienta de Trabajo</span>
+            <h1>Workbook 02</h1>
+            <h2>Conecta tu Propósito: El "Yo" y el "Nosotros"</h2>
+        </div>
 
-<h4>Parte 2: Propósito del Equipo (La Dirección)</h4>
-<p>¿Cuál es el objetivo principal de tu equipo en este ciclo? Escríbelo en lenguaje sencillo e inspirador.</p>
-<blockquote>
-<p><strong>El Propósito de mi Equipo es:</strong></p>
-</blockquote>
-<textarea rows="5" placeholder="Escribe aquí tus ideas detalladas..."></textarea>
+        <section style="margin-bottom: 3rem; text-align: center;">
+            <p style="font-size: 1.1rem; color: var(--text-main);"><strong>Instrucciones:</strong> Este ejercicio busca encontrar el vínculo vital entre lo que tú quieres (tu motor) y lo que el equipo necesita (la misión). Tómate un momento de calma para responder con honestidad.</p>
+        </section>
 
-<h4>Parte 3: El Vínculo (El gancho)</h4>
-<p>Dibuja o describe cómo tu propósito ayuda al equipo, y cómo el éxito del equipo nutre tu propósito.</p>
-<blockquote>
-<p><strong>Conexión:</strong>
-&quot;Al contribuir al objetivo del equipo, yo estoy logrando mi propósito personal porque...&quot;</p>
-</blockquote>
-<textarea rows="5" placeholder="Escribe aquí tus ideas detalladas..."></textarea>
+        <section class="reflection-section">
+            
+            <div class="question-block">
+                <h3>Parte 1: Mi Propósito Personal (El Motor Oculto)</h3>
+                <p>¿Qué te mueve? No pienses en tu cargo, piensa en tu motivación humana.</p>
+                
+                <div class="help-box">
+                    <strong>💡 Ideas para inspirarte:</strong>
+                    <ul>
+                        <li>"Me inspira ayudar a otros a..."</li>
+                        <li>"Siento satisfacción cuando logro..."</li>
+                        <li>"Quiero aprender y desarrollarme en..."</li>
+                    </ul>
+                </div>
+                
+                <textarea class="ws-input" rows="4" placeholder="Mi Propósito Personal es..."></textarea>
+            </div>
 
-<hr>
-<h3>Preguntas para compartir en equipo</h3>
-<ul>
-<li>¿Qué descubriste de ti mismo al escribir esto?</li>
-<li>¿Cómo podemos ayudarnos entre compañeros para que nuestros propósitos florezcan?</li>
-</ul>
+            <div class="question-block">
+                <h3>Parte 2: Propósito del Equipo (La Dirección)</h3>
+                <p>¿Cuál es el objetivo principal de tu equipo en este ciclo? Escríbelo en lenguaje sencillo, humano e inspirador (dejando de lado las palabras corporativas vacías).</p>
+                
+                <textarea class="ws-input" rows="4" placeholder="El Propósito de mi Equipo es..."></textarea>
+            </div>
+
+            <div class="question-block">
+                <h3>Parte 3: El Vínculo (El Gancho)</h3>
+                <p>Dibuja con palabras cómo tu propósito ayuda al equipo, y cómo el éxito del equipo nutre tu propio propósito.</p>
+                
+                <div class="commitment-box">
+                    <strong>🔗 La Conexión Vital:</strong>
+                    <p style="font-size: 0.95rem; margin-bottom: 1rem; color: #15803d; font-style: italic;">"Al contribuir al objetivo del equipo, yo estoy logrando mi propósito personal porque..."</p>
+                    <textarea class="ws-input" rows="4" style="background: white; border-color: #86efac;" placeholder="Escribe tu vínculo aquí..."></textarea>
+                </div>
+            </div>
+
+            <div class="question-block" style="border-top: 1px solid var(--border); padding-top: 3rem; margin-top: 2rem;">
+                <h3 style="border-bottom: none; margin-bottom: 1rem;">💬 Para compartir en equipo</h3>
+                <ul style="color: var(--text-main); margin-left: 1.5rem; line-height: 1.8; font-size: 1.05rem;">
+                    <li>¿Qué descubriste de ti mismo al escribir esto?</li>
+                    <li>¿Cómo podemos ayudarnos entre compañeros para que nuestros propósitos florezcan en el día a día?</li>
+                </ul>
+            </div>
+
+        </section>
 
         <div class="worksheet-actions">
-            <button onclick="window.print()" class="btn btn-print">🖨️ Guardar o Imprimir Mi Workbook</button>
-            <a href="../course/modules/module_02.html" class="btn">🔙 Volver al Módulo 2</a>
+            <button onclick="window.print()" class="btn btn-print">🖨️ Guardar PDF / Imprimir</button>
+            <a href="../course/modules/module_02.html" class="btn btn-primary">Guardar y Volver al Módulo 2</a>
         </div>
-    
+        
     </main>
 
-    <footer style="margin-top: 4rem; text-align: center; color: #6b7280; font-size: 0.9rem;">
-        <p>© 2025 Cyn de la Torre. Curso OKRs con Propósito.</p>
+    <footer>
+        <p>© 2026 Cultura Viva by Cyn De la Torre. Todos los derechos reservados.</p>
     </footer>
 </body>
 </html>
