@@ -3,86 +3,425 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Workbook: Módulo 01</title>
-    <link rel="stylesheet" href="../assets/style.css">
+    <title>Workbook: Módulo 01 - OKRs con Propósito</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1D4D4F;
+            --primary-light: #2c6e70;
+            --bg-body: #f8fafc;
+            --bg-card: #ffffff;
+            --text-main: #334155;
+            --text-heading: #0f172a;
+            --border: #e2e8f0;
+            --radius: 12px;
+            --accent: #d4af37;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.7;
+            padding-bottom: 4rem;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            color: var(--text-heading);
+            margin-bottom: 1rem;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--bg-card);
+            padding: 1rem 2rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo a {
+            font-weight: 600;
+            font-size: 1.2rem;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        nav a {
+            color: var(--text-main);
+            text-decoration: none;
+            margin-left: 1.5rem;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 3rem auto;
+            background: var(--bg-card);
+            padding: 4rem;
+            border-radius: var(--radius);
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05);
+            border: 1px solid var(--border);
+        }
+
+        .workbook-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 2rem;
+        }
+
+        .workbook-header span {
+            color: var(--primary-light);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-size: 0.9rem;
+        }
+
+        .workbook-header h1 {
+            font-size: 2.5rem;
+            margin-top: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .workbook-header h2 {
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            font-size: 1.2rem;
+            color: #64748b;
+        }
+
+        /* Tabla de Diagnóstico */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        th, td {
+            padding: 1.2rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            background-color: var(--primary);
+            color: white;
+            font-weight: 500;
+            font-family: 'Inter', sans-serif;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover td {
+            background-color: #f8fafc;
+        }
+
+        td:first-child {
+            font-weight: 600;
+            color: var(--primary);
+            width: 25%;
+        }
+
+        td:last-child {
+            text-align: center;
+            width: 15%;
+        }
+
+        input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            accent-color: var(--primary);
+        }
+
+        /* Formulario y Reflexión */
+        .reflection-section {
+            margin-top: 4rem;
+        }
+
+        .reflection-section h3 {
+            color: var(--primary);
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 0.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .question-block {
+            margin-bottom: 2.5rem;
+        }
+
+        .question-block p {
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-heading);
+        }
+
+        .ws-input {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            color: var(--text-main);
+            resize: vertical;
+            transition: all 0.2s;
+            background-color: var(--bg-body);
+        }
+
+        .ws-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            background-color: white;
+            box-shadow: 0 0 0 3px rgba(29, 77, 79, 0.1);
+        }
+
+        /* Radio Pills para porcentajes */
+        .pill-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .pill-label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--bg-body);
+            border: 1px solid var(--border);
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-weight: 500;
+        }
+
+        .pill-label:hover {
+            border-color: var(--primary-light);
+        }
+
+        .pill-label input[type="radio"] {
+            accent-color: var(--primary);
+        }
+
+        /* Compromiso Caja */
+        .commitment-box {
+            background: #f0fdf4;
+            border: 1px dashed #22c55e;
+            padding: 2rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+        }
+
+        .commitment-box strong {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #166534;
+        }
+
+        /* Botones de acción */
+        .worksheet-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 1rem;
+            text-align: center;
+        }
+
+        .btn-print {
+            background-color: var(--bg-body);
+            color: var(--text-heading);
+            border: 1px solid var(--border);
+        }
+
+        .btn-print:hover {
+            background-color: #e2e8f0;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(29, 77, 79, 0.2);
+        }
+
+        footer {
+            text-align: center;
+            color: #94a3b8;
+            font-size: 0.9rem;
+            margin-top: 2rem;
+        }
+
+        /* Estilos de Impresión */
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            header, .worksheet-actions, footer {
+                display: none !important;
+            }
+            .container {
+                box-shadow: none;
+                border: none;
+                padding: 0;
+                margin: 0;
+                max-width: 100%;
+            }
+            .ws-input {
+                border: 1px solid #ccc;
+                background: white;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
         <div class="logo">
-            <a href="../index.html" style="font-weight: bold; font-size: 1.2rem; color: #111;">🧭 OKRs con Propósito</a>
+            <a href="../index.html">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
+                </svg>
+                OKRs con Propósito
+            </a>
         </div>
         <nav>
             <a href="../index.html">Inicio</a>
-            <a href="../course/modules/module_01.html">Módulo 1</a>
+            <a href="../course/modules/module_01.html">Volver al Módulo 1</a>
         </nav>
     </header>
 
-    <main>
-        <h1>Workbook: Módulo 1 - Fundamentos</h1>
-<h2>De la Burocracia al Propósito</h2>
-<h3>Herramienta 1: Diagnóstico de Madurez en OKRs</h3>
-<p><strong>Instrucciones:</strong>
-Marca con una &quot;X&quot; la afirmación que mejor describe tu realidad actual en cada línea. Sé honesto, este diagnóstico es para ti.</p>
-<table>
-<thead>
-<tr>
-<th align="left">Nivel</th>
-<th align="left">Descripción del Escenario</th>
-<th align="center">¿Es mi caso?</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left"><strong>Nivel 1 (Checklist)</strong></td>
-<td align="left">Mis OKRs solo se revisan al final del ciclo. Los usamos como reporte burocrático.</td>
-<td align="center"><input type="checkbox"></td>
-</tr>
-<tr>
-<td align="left"><strong>Nivel 2 (Silos)</strong></td>
-<td align="left">Cada área trabaja sus propios OKRs. No sé qué está haciendo el equipo de al lado.</td>
-<td align="center"><input type="checkbox"></td>
-</tr>
-<tr>
-<td align="left"><strong>Nivel 3 (Intención)</strong></td>
-<td align="left">Algunos equipos ya intentan conectar iniciativas, pero aún nos falta constancia.</td>
-<td align="center"><input type="checkbox"></td>
-</tr>
-<tr>
-<td align="left"><strong>Nivel 4 (Conexión)</strong></td>
-<td align="left">Tenemos sesiones mensuales donde alineamos esfuerzos. Ya no se siente tan aislado.</td>
-<td align="center"><input type="checkbox"></td>
-</tr>
-<tr>
-<td align="left"><strong>Nivel 5 (Brújula)</strong></td>
-<td align="left">Nuestro sistema funciona como red. Colaboramos naturalmente y todos saben cómo suman al propósito.</td>
-<td align="center"><input type="checkbox"></td>
-</tr>
-</tbody></table>
-<hr>
-<h3>Reflexión de Liderazgo</h3>
-<ol>
-<li><p><strong>¿En qué nivel te ubicaste?</strong></p>
-<input type="text" class="ws-input" placeholder="...">
-</li>
-<li><p><strong>¿Qué porcentaje de tu equipo dirías que ve los OKRs como &quot;burocracia&quot; hoy?</strong>
-<input type="checkbox"> 0-20%  <input type="checkbox"> 20-50%  <input type="checkbox"> 50-80%  <input type="checkbox"> 80-100%</p>
-</li>
-<li><p><strong>Compromiso de Acción:</strong>
-Escribe una sola acción que harás esta semana para moverte un nivel hacia arriba (ej. &quot;Hablar de OKRs en la reunión semanal en lugar de solo reportar tareas&quot;).</p>
-<blockquote>
-<p><strong>Mi Acción:</strong> <input type="text" class="ws-input" placeholder="..."></p>
-</blockquote>
-</li>
-</ol>
+    <main class="container">
+        
+        <div class="workbook-header">
+            <span>Herramienta de Trabajo</span>
+            <h1>Workbook 01</h1>
+            <h2>Diagnóstico de Madurez: De la Burocracia al Propósito</h2>
+        </div>
+
+        <section>
+            <h3>Tu realidad actual</h3>
+            <p><strong>Instrucciones:</strong> Marca con una "X" la afirmación que mejor describe tu realidad actual en cada línea. Sé brutalmente honesto, este diagnóstico es solo para ti.</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nivel</th>
+                        <th>Descripción del Escenario</th>
+                        <th style="text-align: center;">¿Es mi caso?</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Nivel 1 (Checklist)</td>
+                        <td>Mis OKRs solo se revisan al final del ciclo. Los usamos como reporte burocrático.</td>
+                        <td><input type="checkbox"></td>
+                    </tr>
+                    <tr>
+                        <td>Nivel 2 (Silos)</td>
+                        <td>Cada área trabaja sus propios OKRs. No sé qué está haciendo el equipo de al lado.</td>
+                        <td><input type="checkbox"></td>
+                    </tr>
+                    <tr>
+                        <td>Nivel 3 (Intención)</td>
+                        <td>Algunos equipos ya intentan conectar iniciativas, pero aún nos falta constancia.</td>
+                        <td><input type="checkbox"></td>
+                    </tr>
+                    <tr>
+                        <td>Nivel 4 (Conexión)</td>
+                        <td>Tenemos sesiones mensuales donde alineamos esfuerzos. Ya no se siente tan aislado.</td>
+                        <td><input type="checkbox"></td>
+                    </tr>
+                    <tr>
+                        <td>Nivel 5 (Brújula)</td>
+                        <td>Nuestro sistema funciona como red. Colaboramos naturalmente y todos saben cómo suman al propósito.</td>
+                        <td><input type="checkbox"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="reflection-section">
+            <h3>Reflexión de Liderazgo</h3>
+            
+            <div class="question-block">
+                <p>1. ¿En qué nivel te ubicaste y por qué crees que están ahí?</p>
+                <textarea class="ws-input" rows="3" placeholder="Escribe tu reflexión aquí..."></textarea>
+            </div>
+
+            <div class="question-block">
+                <p>2. ¿Qué porcentaje de tu equipo dirías que ve los OKRs como una "carga burocrática" hoy?</p>
+                <div class="pill-group">
+                    <label class="pill-label"><input type="radio" name="porcentaje"> 0 - 20%</label>
+                    <label class="pill-label"><input type="radio" name="porcentaje"> 21 - 50%</label>
+                    <label class="pill-label"><input type="radio" name="porcentaje"> 51 - 80%</label>
+                    <label class="pill-label"><input type="radio" name="porcentaje"> 81 - 100%</label>
+                </div>
+            </div>
+
+            <div class="question-block">
+                <p>3. Compromiso de Acción</p>
+                <p style="font-weight: 400; color: #64748b; font-size: 0.95rem;">Escribe una sola acción que harás esta semana para moverte un nivel hacia arriba (ej. "Hablar del impacto de los OKRs en la próxima junta de equipo en lugar de solo pedir estatus").</p>
+                
+                <div class="commitment-box">
+                    <strong>Mi Acción de esta semana:</strong>
+                    <textarea class="ws-input" rows="2" style="background: white;" placeholder="Yo me comprometo a..."></textarea>
+                </div>
+            </div>
+        </section>
 
         <div class="worksheet-actions">
-            <button onclick="window.print()" class="btn btn-print">🖨️ Guardar o Imprimir Mi Workbook</button>
-            <a href="../course/modules/module_01.html" class="btn">🔙 Volver al Módulo 1</a>
+            <button onclick="window.print()" class="btn btn-print">🖨️ Guardar PDF / Imprimir</button>
+            <a href="../course/modules/module_01.html" class="btn btn-primary">Guardar y Volver al Módulo 1</a>
         </div>
-    
+        
     </main>
 
-    <footer style="margin-top: 4rem; text-align: center; color: #6b7280; font-size: 0.9rem;">
-        <p>© 2025 Cyn de la Torre. Curso OKRs con Propósito.</p>
+    <footer>
+        <p>© 2026 Cultura Viva by Cyn De la Torre. Todos los derechos reservados.</p>
     </footer>
 </body>
 </html>
