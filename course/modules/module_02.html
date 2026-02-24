@@ -3,158 +3,482 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>module_02 - OKRs con Propósito</title>
-    <link rel="stylesheet" href="../../assets/style.css">
+    <title>Módulo 2 - OKRs con Propósito</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1D4D4F;
+            --primary-light: #2c6e70;
+            --bg-body: #f8fafc;
+            --bg-card: #ffffff;
+            --text-main: #334155;
+            --text-heading: #0f172a;
+            --border: #e2e8f0;
+            --radius: 12px;
+            --accent-bg: #f0fdf4;
+            --accent-border: #bbf7d0;
+            --accent: #d4af37;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.7;
+            padding-bottom: 4rem;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            color: var(--text-heading);
+            margin-bottom: 1rem;
+        }
+
+        h3 {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.1rem;
+            color: var(--primary);
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--bg-card);
+            padding: 1rem 2rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo a {
+            font-weight: 600;
+            font-size: 1.2rem;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        nav a {
+            color: var(--text-main);
+            text-decoration: none;
+            margin-left: 1.5rem;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Título del Módulo */
+        .module-header {
+            text-align: center;
+            padding: 4rem 0 3rem;
+        }
+
+        .module-header span {
+            color: var(--primary-light);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-size: 0.9rem;
+        }
+
+        .module-header h1 {
+            font-size: 2.5rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Caja de Objetivos */
+        .goals-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 2rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+        }
+
+        .goals-box ul {
+            list-style-type: none;
+            margin-top: 1rem;
+        }
+
+        .goals-box li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .goals-box li::before {
+            content: '✨';
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        /* Progreso */
+        .progress-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1rem;
+            list-style: none;
+        }
+
+        .progress-list li {
+            background: var(--bg-body);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Lecciones (Cards) */
+        .lesson-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 3rem;
+            margin-bottom: 3rem;
+            scroll-margin-top: 100px;
+        }
+
+        .lesson-card h2 {
+            font-size: 2rem;
+            border-bottom: 2px solid var(--primary-light);
+            padding-bottom: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        ul, ol {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+        }
+
+        /* Destacados */
+        .idea-central {
+            background: var(--primary);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 1.1rem;
+            margin: 2rem 0;
+            border-left: 4px solid var(--accent);
+        }
+
+        .ejemplo-box {
+            background: #f8fafc;
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--primary-light);
+            padding: 1.5rem;
+            border-radius: 0 8px 8px 0;
+            margin: 2rem 0;
+            font-style: italic;
+        }
+
+        .ejercicio-box {
+            background: #fffbeb;
+            border: 1px dashed #34d399;
+            padding: 2rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .ejercicio-box strong {
+            color: #059669;
+            font-size: 1.1rem;
+            display: block;
+            margin-bottom: 1rem;
+        }
+
+        /* Navegación interna */
+        .lesson-nav {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 3rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .lesson-nav a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: opacity 0.2s;
+        }
+
+        .lesson-nav a:hover {
+            opacity: 0.7;
+        }
+
+        /* Botón Módulo Siguiente */
+        .btn-next-module {
+            display: block;
+            width: 100%;
+            text-align: center;
+            background: var(--primary);
+            color: white;
+            padding: 1.2rem;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1.2rem;
+            margin-top: 4rem;
+            transition: transform 0.2s;
+        }
+
+        .btn-next-module:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 15px -3px rgba(29, 77, 79, 0.3);
+        }
+
+        footer {
+            text-align: center;
+            color: #94a3b8;
+            font-size: 0.9rem;
+            margin-top: 4rem;
+            border-top: 1px solid var(--border);
+            padding-top: 2rem;
+        }
+    </style>
 </head>
 <body>
     <header>
         <div class="logo">
-            <a href="../../index.html" style="font-weight: bold; font-size: 1.2rem; color: #111;">🧭 OKRs con Propósito</a>
+            <a href="../../index.html">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
+                </svg>
+                OKRs con Propósito
+            </a>
         </div>
         <nav>
             <a href="../../index.html">Inicio</a>
-            <a href="../../course/modules/module_01.html">Módulo 1</a>
+            <a href="#">Módulo 2</a>
         </nav>
     </header>
 
-    <main>
-        <h1>Módulo 2: Conexión – Alineando el &quot;Yo&quot; con el &quot;Nosotros&quot;</h1>
-<p><strong>Objetivo:</strong> Conectar las motivaciones individuales (propósito personal) con las metas del equipo para encender un compromiso intrínseco.</p>
-<p><strong>Al terminar este módulo:</strong></p>
-<ul>
-<li>Descubrirás qué mueve realmente a tu equipo.</li>
-<li>Definirás un Propósito Colectivo inspirador.</li>
-<li>Crearás el vínculo vital entre lo que la persona quiere y lo que la empresa necesita.</li>
-</ul>
-<p><strong>Tu Progreso:</strong></p>
-<ol>
-<li><input disabled="" type="checkbox"> Lección 1: El motor oculto</li>
-<li><input disabled="" type="checkbox"> Lección 2: Propósito Personal</li>
-<li><input disabled="" type="checkbox"> Lección 3: Propósito Colectivo</li>
-<li><input disabled="" type="checkbox"> Lección 4: Taller de Alineación</li>
-</ol>
-<hr>
-<h2><a id="l1"></a>Lección 1: El motor oculto</h2>
-<h3>Contexto</h3>
-<p>¿Por qué te levantas cada mañana a trabajar? Si la respuesta es solo &quot;dinero&quot;, probablemente tu energía se agote a medio día. Los equipos de alto rendimiento tienen un combustible diferente.</p>
-<h3>Idea central</h3>
-<p><strong>Puedes comprar el tiempo de una persona, pero no puedes comprar su pasión.</strong> La pasión se regala solo cuando hay conexión de propósito.</p>
-<h3>Desarrollo</h3>
-<p>Detrás de cada tarea técnica hay una motivación humana (el motor oculto).</p>
-<ul>
-<li>Alguien quiere aprender.</li>
-<li>Otro quiere impacto social.</li>
-<li>Otro busca seguridad para su familia y estabilidad.</li>
-<li>Otro busca reconocimiento.</li>
-</ul>
-<p>Si ignoras este motor, te quedas solo con la obediencia (&quot;hago lo que me dices&quot;). Si lo activas, obtienes compromiso (&quot;hago lo que es necesario&quot;).</p>
-<h3>Ejemplo Aplicado</h3>
-<p>Imagina dos albañiles poniendo ladrillos.
-Le preguntas al primero qué hace y dice: &quot;Pongo ladrillos&quot;. (Motor: Ganar el día).
-Le preguntas al segundo y dice: &quot;Estoy construyendo una catedral&quot;. (Motor: Trascendencia).
-Como líder, tu trabajo es ayudar a todos a ver la catedral.</p>
-<h3>Reflexión</h3>
-<p>Piensa en el miembro de tu equipo que está más desmotivado. ¿Sabes qué le mueve en la vida fuera del trabajo? Si no lo sabes, ese es tu primer pendiente.</p>
-<div align="right">
-  <a href="#l2">Siguiente Lección: Propósito Personal →</a>
-</div>
+    <main class="container">
+        
+        <div class="module-header">
+            <span>Módulo 2</span>
+            <h1>Conexión: Alineando el "Yo" con el "Nosotros"</h1>
+        </div>
 
-<hr>
-<h2><a id="l2"></a>Lección 2: Propósito Personal</h2>
-<div align="left">
-  <a href="#l1">← Lección Anterior</a>
-</div>
+        <div class="goals-box">
+            <h3 style="margin-top: 0;">Objetivo del Módulo</h3>
+            <p>Conectar las motivaciones individuales (propósito personal) con las metas del equipo para encender un compromiso intrínseco.</p>
+            
+            <h3 style="margin-top: 2rem;">Al terminar este módulo:</h3>
+            <ul>
+                <li>Descubrirás qué mueve realmente a tu equipo.</li>
+                <li>Definirás un Propósito Colectivo inspirador.</li>
+                <li>Crearás el vínculo vital entre lo que la persona quiere y lo que la empresa necesita.</li>
+            </ul>
 
-<h3>Contexto</h3>
-<p>Todos tenemos una chispa interna, un &quot;para qué&quot;. A veces está enterrada bajo años de rutina corporativa. Hoy vamos a desenterrarla.</p>
-<h3>Idea central</h3>
-<p><strong>Un líder sin chispa no puede encender a nadie.</strong> Antes de exigir motivación a tu equipo, debes tener clara la tuya.</p>
-<h3>Desarrollo</h3>
-<p>Tu propósito personal no tiene que ser &quot;salvar el mundo&quot; o ganar el Nobel. Puede ser simple y honesto:</p>
-<ul>
-<li>&quot;Crecer profesionalmente para ser un referente&quot;.</li>
-<li>&quot;Ayudar a mis compañeros a no sufrir lo que yo sufrí&quot;.</li>
-<li>&quot;Innovar y crear cosas nuevas&quot;.</li>
-</ul>
-<p>Validar que tus aspiraciones personales son legítimas dentro del trabajo es liberador.</p>
-<h3>Ejercicio</h3>
-<p>Abre tu herramienta: <a href="../../workbooks/module_02_worksheet.html">Conecta tu Propósito</a>.
-Completa la frase: <em>&quot;En mi trabajo, lo que realmente me llena de energía y satisfacción es...&quot;</em>
-No lo pienses demasiado. Escribe con el corazón, no con la cabeza corporativa.</p>
-<div align="right">
-  <a href="#l3">Siguiente Lección: Propósito Colectivo →</a>
-</div>
+            <h3 style="margin-top: 2rem;">Tu Progreso:</h3>
+            <ul class="progress-list">
+                <li><input disabled type="checkbox"> L1: El motor oculto</li>
+                <li><input disabled type="checkbox"> L2: Propósito Personal</li>
+                <li><input disabled type="checkbox"> L3: Propósito Colectivo</li>
+                <li><input disabled type="checkbox"> L4: Taller de Alineación</li>
+            </ul>
+        </div>
 
-<hr>
-<h2><a id="l3"></a>Lección 3: Propósito Colectivo</h2>
-<div align="left">
-  <a href="#l2">← Lección Anterior</a>
-</div>
+        <article class="lesson-card" id="l1">
+            <h2>L1: El motor oculto</h2>
+            
+            <h3>Contexto</h3>
+            <p>¿Por qué te levantas cada mañana a trabajar? Si la respuesta es solo "dinero", probablemente tu energía se agote a medio día. Los equipos de alto rendimiento tienen un combustible diferente.</p>
+            
+            <div class="idea-central">
+                💡 Puedes comprar el tiempo de una persona, pero no puedes comprar su pasión. La pasión se regala solo cuando hay conexión de propósito.
+            </div>
+            
+            <h3>Desarrollo</h3>
+            <p>Detrás de cada tarea técnica hay una motivación humana (el motor oculto).</p>
+            <ul>
+                <li>Alguien quiere aprender.</li>
+                <li>Otro quiere impacto social.</li>
+                <li>Otro busca seguridad para su familia y estabilidad.</li>
+                <li>Otro busca reconocimiento.</li>
+            </ul>
+            <p>Si ignoras este motor, te quedas solo con la obediencia ("hago lo que me dices"). Si lo activas, obtienes compromiso ("hago lo que es necesario").</p>
+            
+            <div class="ejemplo-box">
+                <strong>La Diferencia en Acción:</strong><br><br>
+                Imagina dos albañiles poniendo ladrillos.<br>
+                Le preguntas al primero qué hace y dice: "Pongo ladrillos". (Motor: Ganar el día).<br>
+                Le preguntas al segundo y dice: "Estoy construyendo una catedral". (Motor: Trascendencia).<br><br>
+                <em>Como líder, tu trabajo es ayudar a todos a ver la catedral.</em>
+            </div>
+            
+            <div class="ejercicio-box">
+                <strong>📝 Ejercicio de Reflexión</strong>
+                <p>Piensa en el miembro de tu equipo que hoy notas más desconectado o desmotivado.</p>
+                <p><strong>¿Sabes qué le mueve en la vida fuera del trabajo?</strong></p>
+                <p style="font-size: 0.9rem; color: #64748b; margin-top: 0.5rem;"><em>Si no lo sabes, ese es tu primer pendiente para la semana.</em></p>
+            </div>
+            
+            <div class="lesson-nav">
+                <span></span>
+                <a href="#l2">Siguiente Lección: Propósito Personal →</a>
+            </div>
+        </article>
 
-<h3>Contexto</h3>
-<p>Ya tienes tu chispa individual. Pero una empresa es una fogata compartida. El Propósito Colectivo no es borrar quién eres tú, es encontrar dónde tu historia coincide con la historia del equipo.</p>
-<h3>Idea central</h3>
-<p><strong>El propósito del equipo es la dirección común donde caben todos los propósitos individuales.</strong></p>
-<h3>Desarrollo</h3>
-<p>Un buen propósito de equipo NO es un número (&quot;Vender 10% más&quot;). Eso es un resultado.
-El propósito es cualitativo e inspirador:</p>
-<ul>
-<li>&quot;Mejorar la salud de nuestros clientes&quot;.</li>
-<li>&quot;Ser la solución más rápida y amigable del mercado&quot;.</li>
-<li>&quot;Hacer que el trabajo de nuestros usuarios fluya sin fricción&quot;.</li>
-</ul>
-<p>Cuando el propósito es claro, las diferencias personales se vuelven fortalezas complementarias, no conflictos.</p>
-<h3>Ejemplo</h3>
-<p>Un equipo de fútbol.</p>
-<ul>
-<li>Propósito portero: &quot;Que no entre ni un gol&quot; (Seguridad).</li>
-<li>Propósito delantero: &quot;Meter goles&quot; (Logro).</li>
-<li><strong>Propósito Colectivo:</strong> &quot;Ganar el campeonato&quot;.
-Ambos propósitos distintos alimentan al colectivo.</li>
-</ul>
-<h3>Ejercicio</h3>
-<p>En tu herramienta <strong>Conecta tu Propósito</strong>, escribe el objetivo principal de tu equipo para este ciclo, pero tradúcelo a &quot;lenguaje humano&quot;.
-En lugar de &quot;Optimizar procesos operativos&quot;, prueba &quot;Hacer que nuestro trabajo diario sea más simple y eficiente para todos&quot;.</p>
-<div align="right">
-  <a href="#l4">Siguiente Lección: Taller de Alineación →</a>
-</div>
+        <article class="lesson-card" id="l2">
+            <h2>L2: Propósito Personal</h2>
+            
+            <h3>Contexto</h3>
+            <p>Todos tenemos una chispa interna, un "para qué". A veces está enterrada bajo años de rutina corporativa. Hoy vamos a desenterrarla.</p>
+            
+            <div class="idea-central">
+                🔥 Un líder sin chispa no puede encender a nadie. Antes de exigir motivación a tu equipo, debes tener clara la tuya.
+            </div>
+            
+            <h3>Desarrollo</h3>
+            <p>Tu propósito personal no tiene que ser "salvar el mundo" o ganar el Premio Nobel. Puede ser simple, honesto y muy tuyo:</p>
+            <ul>
+                <li>"Crecer profesionalmente para ser un referente".</li>
+                <li>"Ayudar a mis compañeros a no sufrir lo que yo sufrí al iniciar".</li>
+                <li>"Innovar y crear cosas nuevas que faciliten la vida".</li>
+            </ul>
+            <p>Validar que tus aspiraciones personales son legítimas dentro del trabajo es un acto profundamente liberador.</p>
+            
+            <div class="ejercicio-box">
+                <strong>🛠️ Herramienta Práctica</strong>
+                <p>Abre tu herramienta: <strong><a href="../../workbooks/module_02_worksheet.html" style="color: #059669; text-decoration: underline;">Conecta tu Propósito</a></strong>.</p>
+                <p>Completa la frase: <em>"En mi trabajo, lo que realmente me llena de energía y satisfacción es..."</em></p>
+                <p style="font-size: 0.9rem; color: #64748b; margin-top: 0.5rem;"><em>No lo pienses demasiado. Escribe con el corazón humano, no con la cabeza corporativa.</em></p>
+            </div>
+            
+            <div class="lesson-nav">
+                <a href="#l1">← Anterior</a>
+                <a href="#l3">Siguiente Lección: Propósito Colectivo →</a>
+            </div>
+        </article>
 
-<hr>
-<h2><a id="l4"></a>Lección 4: Taller de Alineación</h2>
-<div align="left">
-  <a href="#l3">← Lección Anterior</a>
-</div>
+        <article class="lesson-card" id="l3">
+            <h2>L3: Propósito Colectivo</h2>
+            
+            <h3>Contexto</h3>
+            <p>Ya tienes tu chispa individual. Pero una empresa es una fogata compartida. El Propósito Colectivo no es borrar quién eres tú, es encontrar dónde tu historia coincide con la historia del equipo.</p>
+            
+            <div class="idea-central">
+                🤝 El propósito del equipo es la dirección común donde caben todos los propósitos individuales.
+            </div>
+            
+            <h3>Desarrollo</h3>
+            <p>Un buen propósito de equipo NO es un número ("Vender 10% más"). Eso es un resultado.<br>
+            El propósito es cualitativo, aspiracional e inspirador:</p>
+            <ul>
+                <li>"Mejorar la salud y el bienestar de nuestros clientes".</li>
+                <li>"Ser la solución más rápida y amigable del mercado".</li>
+                <li>"Hacer que el trabajo de nuestros usuarios fluya sin fricción".</li>
+            </ul>
+            <p>Cuando el propósito colectivo es claro, las diferencias personales del equipo se vuelven fortalezas complementarias, no conflictos.</p>
+            
+            <div class="ejemplo-box">
+                <strong>El Ejemplo del Equipo de Fútbol:</strong><br><br>
+                🥅 Propósito del portero: "Que no entre ni un gol" (Seguridad).<br>
+                ⚽ Propósito del delantero: "Meter goles" (Logro).<br><br>
+                🏆 <strong>Propósito Colectivo:</strong> "Ganar el campeonato".<br>
+                <em>Ambos propósitos distintos alimentan perfectamente al colectivo.</em>
+            </div>
+            
+            <div class="ejercicio-box">
+                <strong>📝 Ejercicio de Traducción</strong>
+                <p>En tu herramienta <strong>Conecta tu Propósito</strong>, escribe el objetivo principal de tu equipo para este ciclo, pero <strong>tradúcelo a "lenguaje humano"</strong>.</p>
+                <p style="font-size: 0.9rem; color: #64748b; margin-top: 0.5rem;"><em>En lugar de "Optimizar procesos operativos", prueba "Hacer que nuestro trabajo diario sea más simple y eficiente para todos".</em></p>
+            </div>
+            
+            <div class="lesson-nav">
+                <a href="#l2">← Anterior</a>
+                <a href="#l4">Siguiente Lección: Taller de Alineación →</a>
+            </div>
+        </article>
 
-<h3>Contexto</h3>
-<p>Este es el momento de la verdad. Donde hacemos el &quot;clic&quot;.</p>
-<h3>Idea central</h3>
-<p><strong>El Ganar-Ganar emocional:</strong> El empleado debe sentir que al ayudar al equipo, se está ayudando a sí mismo a lograr sus propias metas.</p>
-<h3>Desarrollo</h3>
-<p>El taller de alineación es una conversación donde hacemos explícito el vínculo.</p>
-<ul>
-<li>Preguntas: &quot;¿Cómo este proyecto te ayuda a ti a aprender lo que quieres?&quot;</li>
-<li>Si el proyecto es aburrido, ¿cómo podemos rediseñar el rol para que tenga algo de lo que te gusta?</li>
-</ul>
-<p>Cuando logras esto, la motivación se vuelve intrínseca. No necesitas empujar; ellos tiran del carro.</p>
-<h3>Ejercicio</h3>
-<p>Ve a la <strong>Parte 3</strong> de tu herramienta. Dibuja la flecha de conexión.
-<strong>Ejemplo:</strong></p>
-<ul>
-<li>Yo (Ana): Quiero aprender tecnología.</li>
-<li>Nosotros (Equipo): Queremos digitalizar el archivo.</li>
-<li><strong>Vínculo:</strong> Ana liderará la digitalización no como secretaria, sino como &quot;Líder de Transformación Digital del Archivo&quot;.</li>
-<li><em>Resultado:</em> Ana aprende, el equipo se digitaliza. ¡Bingo!</li>
-</ul>
-<h3>Cierre del Módulo</h3>
-<p>Has conectado las baterías. Ahora tienes energía. En el Módulo 3 veremos cómo canalizar esa energía en compromisos concretos y no solo buenas intenciones.</p>
-<div align="center">
-  <a href="../../course/modules/module_03.html" style="background-color: #28a745; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Ir al Módulo 3: Compromiso →</a>
-</div>
+        <article class="lesson-card" id="l4">
+            <h2>L4: Taller de Alineación</h2>
+            
+            <h3>Contexto</h3>
+            <p>Este es el momento de la verdad. Donde hacemos el "clic" entre la persona y la empresa.</p>
+            
+            <div class="idea-central">
+                ⚡ El Ganar-Ganar emocional: El colaborador debe sentir que al ayudar al equipo, se está ayudando a sí mismo a lograr sus propias metas.
+            </div>
+            
+            <h3>Desarrollo</h3>
+            <p>El taller de alineación es una conversación donde hacemos explícito el vínculo.</p>
+            <ul>
+                <li><strong>La pregunta clave:</strong> "¿Cómo este proyecto te ayuda a ti a aprender o lograr lo que buscas?"</li>
+                <li><strong>El rediseño:</strong> Si el proyecto es puramente transaccional o aburrido, ¿cómo podemos rediseñar el rol para que tenga algo de lo que le apasiona a la persona?</li>
+            </ul>
+            <p>Cuando logras esto, la motivación se vuelve intrínseca. No necesitas empujar; ellos mismos tiran del carro.</p>
+            
+            <div class="ejemplo-box">
+                <strong>El Vínculo en la Práctica:</strong><br><br>
+                👤 <strong>Yo (Ana):</strong> Quiero aprender tecnología.<br>
+                🏢 <strong>Nosotros (Equipo):</strong> Queremos digitalizar el archivo físico.<br><br>
+                🔗 <strong>El Vínculo:</strong> Ana liderará la digitalización no como una tarea administrativa, sino asumiendo el rol de "Líder de Transformación Digital del Archivo".<br>
+                <em>Resultado: Ana aprende lo que le apasiona, el equipo logra su meta digital. ¡Bingo!</em>
+            </div>
+            
+            <div class="ejercicio-box">
+                <strong>🛠️ Herramienta Práctica</strong>
+                <p>Ve a la <strong>Parte 3</strong> de tu herramienta. Dibuja mentalmente (o escribe) la flecha de conexión para alguien de tu equipo hoy mismo.</p>
+            </div>
+            
+            <h3>Cierre del Módulo</h3>
+            <p>¡Gran trabajo! Has conectado las baterías. Ahora el equipo tiene energía real. En el Módulo 3 veremos cómo canalizar esa energía en compromisos concretos y evitar que se quede solo en buenas intenciones.</p>
+            
+            <div class="lesson-nav">
+                <a href="#l3">← Anterior</a>
+                <span></span>
+            </div>
+        </article>
+
+        <a href="../../course/modules/module_03.html" class="btn-next-module">Avanzar al Módulo 3: Compromiso 🚀</a>
 
     </main>
 
-    <footer style="margin-top: 4rem; text-align: center; color: #6b7280; font-size: 0.9rem;">
-        <p>© 2025 Cyn de la Torre. Curso OKRs con Propósito.</p>
+    <footer>
+        <p>© 2026 Cultura Viva by Cyn De la Torre. Todos los derechos reservados.</p>
     </footer>
 </body>
 </html>
