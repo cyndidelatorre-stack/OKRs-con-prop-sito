@@ -3,135 +3,493 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>module_06 - OKRs con Propósito</title>
-    <link rel="stylesheet" href="../../assets/style.css">
+    <title>Módulo 6 - OKRs con Propósito</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1D4D4F;
+            --primary-light: #2c6e70;
+            --bg-body: #f8fafc;
+            --bg-card: #ffffff;
+            --text-main: #334155;
+            --text-heading: #0f172a;
+            --border: #e2e8f0;
+            --radius: 12px;
+            --accent-bg: #f0fdf4;
+            --accent-border: #bbf7d0;
+            --accent: #d4af37;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.7;
+            padding-bottom: 4rem;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            color: var(--text-heading);
+            margin-bottom: 1rem;
+        }
+
+        h3 {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.1rem;
+            color: var(--primary);
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--bg-card);
+            padding: 1rem 2rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo a {
+            font-weight: 600;
+            font-size: 1.2rem;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        nav a {
+            color: var(--text-main);
+            text-decoration: none;
+            margin-left: 1.5rem;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Título del Módulo */
+        .module-header {
+            text-align: center;
+            padding: 4rem 0 3rem;
+        }
+
+        .module-header span {
+            color: var(--primary-light);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-size: 0.9rem;
+        }
+
+        .module-header h1 {
+            font-size: 2.5rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Caja de Objetivos */
+        .goals-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 2rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+        }
+
+        .goals-box ul {
+            list-style-type: none;
+            margin-top: 1rem;
+        }
+
+        .goals-box li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .goals-box li::before {
+            content: '✨';
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        /* Progreso */
+        .progress-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1rem;
+            list-style: none;
+        }
+
+        .progress-list li {
+            background: var(--bg-body);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Lecciones (Cards) */
+        .lesson-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 3rem;
+            margin-bottom: 3rem;
+            scroll-margin-top: 100px;
+        }
+
+        .lesson-card h2 {
+            font-size: 2rem;
+            border-bottom: 2px solid var(--primary-light);
+            padding-bottom: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        ul, ol {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+        }
+
+        /* Destacados */
+        .idea-central {
+            background: var(--primary);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 1.1rem;
+            margin: 2rem 0;
+            border-left: 4px solid var(--accent);
+        }
+
+        .ejemplo-box {
+            background: #f8fafc;
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--primary-light);
+            padding: 1.5rem;
+            border-radius: 0 8px 8px 0;
+            margin: 2rem 0;
+            font-style: italic;
+        }
+
+        .ejercicio-box {
+            background: #fffbeb;
+            border: 1px dashed #34d399;
+            padding: 2rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .ejercicio-box strong {
+            color: #059669;
+            font-size: 1.1rem;
+            display: block;
+            margin-bottom: 1rem;
+        }
+
+        /* Bloques especiales para Preguntas */
+        .question-highlight {
+            background: white;
+            border: 1px solid var(--border);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+
+        .question-highlight strong {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .question-highlight em {
+            color: var(--text-heading);
+            font-style: normal;
+            font-weight: 500;
+        }
+
+        /* Navegación interna */
+        .lesson-nav {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 3rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .lesson-nav a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: opacity 0.2s;
+        }
+
+        .lesson-nav a:hover {
+            opacity: 0.7;
+        }
+
+        /* Botón Módulo Siguiente */
+        .btn-next-module {
+            display: block;
+            width: 100%;
+            text-align: center;
+            background: var(--primary);
+            color: white;
+            padding: 1.2rem;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1.2rem;
+            margin-top: 4rem;
+            transition: transform 0.2s;
+        }
+
+        .btn-next-module:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 15px -3px rgba(29, 77, 79, 0.3);
+        }
+
+        footer {
+            text-align: center;
+            color: #94a3b8;
+            font-size: 0.9rem;
+            margin-top: 4rem;
+            border-top: 1px solid var(--border);
+            padding-top: 2rem;
+        }
+    </style>
 </head>
 <body>
     <header>
         <div class="logo">
-            <a href="../../index.html" style="font-weight: bold; font-size: 1.2rem; color: #111;">🧭 OKRs con Propósito</a>
+            <a href="../../index.html">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
+                </svg>
+                OKRs con Propósito
+            </a>
         </div>
         <nav>
             <a href="../../index.html">Inicio</a>
-            <a href="../../course/modules/module_01.html">Módulo 1</a>
+            <a href="#">Módulo 6</a>
         </nav>
     </header>
 
-    <main>
-        <h1>Módulo 6: Adaptación – Feedback como Acto de Cuidado</h1>
-<p><strong>Objetivo:</strong> Instaurar una rutina de feedback continuo que permita la adaptación rápida y fortalezca la confianza.</p>
-<p><strong>Al terminar este módulo:</strong></p>
-<ul>
-<li>Abandonarás la &quot;planeación estática&quot;.</li>
-<li>Aprenderás a dar feedback &quot;instantáneo&quot; (técnica deportiva).</li>
-<li>Usarás Preguntas Poderosas para desbloquear a tu equipo.</li>
-</ul>
-<p><strong>Tu Progreso:</strong></p>
-<ol>
-<li><input disabled="" type="checkbox"> Lección 1: Fin de la planeación estática</li>
-<li><input disabled="" type="checkbox"> Lección 2: Feedback Instantáneo</li>
-<li><input disabled="" type="checkbox"> Lección 3: Preguntas Poderosas</li>
-<li><input disabled="" type="checkbox"> Lección 4: Taller 360°</li>
-</ol>
-<hr>
-<h2><a id="l1"></a>Lección 1: El fin de la planeación estática</h2>
-<h3>Contexto</h3>
-<p>¿Alguna vez has seguido el GPS ciegamente y terminado en una calle bloqueada? Eso pasa cuando amamos más el plan que la realidad.</p>
-<h3>Idea central</h3>
-<p><strong>Enamórate del problema, no de tu solución.</strong> Los OKRs no son rieles de tren (rígidos), son un volante (ajustable).</p>
-<h3>Desarrollo</h3>
-<ul>
-<li><strong>Mito:</strong> &quot;Si planeamos bien en enero, todo saldrá igual en diciembre&quot;. Falso. El mundo cambia demasiado rápido.</li>
-<li><strong>Realidad:</strong> La estrategia vive en las conversaciones semanales, no en el documento inicial.</li>
-<li><strong>Adaptación:</strong> Si el mercado cambia, tus KRs deben cambiar. Eso no es &quot;fallar&quot;, es ser inteligente.</li>
-</ul>
-<h3>Ejemplo</h3>
-<p>Plan estático: &quot;Vender paraguas en verano porque así lo pusimos en el presupuesto&quot;. (Nadie compra).
-Adaptación: &quot;Vimos que hace calor, cambiamos el KR de paraguas a sombrillas de sol&quot;. (Éxito).</p>
-<div align="right">
-  <a href="#l2">Siguiente Lección: Feedback Instantáneo →</a>
-</div>
+    <main class="container">
+        
+        <div class="module-header">
+            <span>Módulo 6</span>
+            <h1>Adaptación: Feedback como Acto de Cuidado</h1>
+        </div>
 
-<hr>
-<h2><a id="l2"></a>Lección 2: Feedback Instantáneo</h2>
-<div align="left">
-  <a href="#l1">← Lección Anterior</a>
-</div>
+        <div class="goals-box">
+            <h3 style="margin-top: 0;">Objetivo del Módulo</h3>
+            <p>Instaurar una rutina de feedback continuo que permita la adaptación rápida, prevenga crisis y fortalezca la confianza del equipo.</p>
+            
+            <h3 style="margin-top: 2rem;">Al terminar este módulo:</h3>
+            <ul>
+                <li>Abandonarás el mito de la "planeación estática" anual.</li>
+                <li>Aprenderás a dar feedback "instantáneo" usando mentalidad deportiva.</li>
+                <li>Usarás Preguntas Poderosas para desbloquear a tu equipo y generar insights.</li>
+            </ul>
 
-<h3>Contexto</h3>
-<p>Imagina un partido de fútbol donde el entrenador no dice nada hasta que termina el juego. Absurdo, ¿verdad? El jugador necesita saber si falló el pase AHORA. En la oficina, esperamos meses para dar feedback.</p>
-<h3>Idea central</h3>
-<p><strong>El feedback útil caduca rápido.</strong> Decirle a alguien en diciembre lo que hizo mal en marzo es inútil y frustrante.</p>
-<h3>Desarrollo</h3>
-<p>Lecciones del deporte para la oficina:</p>
-<ol>
-<li><strong>Tiempo real:</strong> Dilo en el momento (o máximo esa semana).</li>
-<li><strong>Intención:</strong> Te corrijo para que ganes, no para humillarte.</li>
-<li><strong>Especificidad:</strong> &quot;Mejora tu actitud&quot; es vago. &quot;En la reunión interrumpiste a X tres veces, déjalo terminar&quot; es claro.</li>
-</ol>
-<h3>Historia Personal (Cyn)</h3>
-<p>Cuando jugué tochito, mis compañeras me gritaban &quot;¡Cubre más cerca!&quot; en plena jugada. No se esperaban. Eso me hizo aprender en minutos lo que me hubiera tomado años.</p>
-<h3>Ejercicio</h3>
-<p><strong>Reto de 24 horas:</strong> Hoy, cuando veas algo que se puede mejorar (o celebrar), dilo en los siguientes 5 minutos.
-<em>&quot;Oye, me gustó mucho cómo manejaste esa llamada&quot;</em>.</p>
-<div align="right">
-  <a href="#l3">Siguiente Lección: Preguntas Poderosas →</a>
-</div>
+            <h3 style="margin-top: 2rem;">Tu Progreso:</h3>
+            <ul class="progress-list">
+                <li><input disabled type="checkbox"> L1: Fin de la planeación estática</li>
+                <li><input disabled type="checkbox"> L2: Feedback Instantáneo</li>
+                <li><input disabled type="checkbox"> L3: Preguntas Poderosas</li>
+                <li><input disabled type="checkbox"> L4: Taller 360°</li>
+            </ul>
+        </div>
 
-<hr>
-<h2><a id="l3"></a>Lección 3: Preguntas Poderosas</h2>
-<div align="left">
-  <a href="#l2">← Lección Anterior</a>
-</div>
+        <article class="lesson-card" id="l1">
+            <h2>L1: El fin de la planeación estática</h2>
+            
+            <h3>Contexto</h3>
+            <p>¿Alguna vez has seguido el GPS ciegamente, confiando en la ruta, y terminado frente a una calle bloqueada? Eso pasa en las empresas cuando amamos más nuestro plan original que la realidad del mercado.</p>
+            
+            <div class="idea-central">
+                🎯 Enamórate del problema, no de tu solución inicial. Los OKRs no son rieles de tren rígidos, son un volante ajustable.
+            </div>
+            
+            <h3>Desarrollo</h3>
+            <ul>
+                <li><strong>El Mito:</strong> "Si planeamos perfectamente en enero, todo saldrá igual en diciembre". Falso. El mundo cambia demasiado rápido.</li>
+                <li><strong>La Realidad:</strong> La estrategia vive en las conversaciones semanales, no en el documento bonito que creaste a inicio de año.</li>
+                <li><strong>Adaptación Activa:</strong> Si el mercado cambia, tus KRs deben cambiar. Ajustar una meta a medio ciclo no es "fallar", es ser inteligente.</li>
+            </ul>
+            
+            <div class="ejemplo-box">
+                <strong>Adaptación al Entorno:</strong><br><br>
+                🧊 <strong>Plan estático:</strong> "Tenemos que vender paraguas en verano porque así lo pusimos en el presupuesto anual". <em>(Nadie compra, el equipo se frustra).</em><br><br>
+                🌊 <strong>Adaptación:</strong> "Vimos que hace calor y no llueve. Cambiamos el KR de paraguas por sombrillas de sol hoy mismo". <em>(Éxito y agilidad).</em>
+            </div>
+            
+            <div class="lesson-nav">
+                <span></span>
+                <a href="#l2">Siguiente Lección: Feedback Instantáneo →</a>
+            </div>
+        </article>
 
-<h3>Contexto</h3>
-<p>La calidad de tu liderazgo depende de la calidad de tus preguntas. Si solo preguntas &quot;¿Cómo vas?&quot;, obtendrás respuestas vacías como &quot;Bien&quot;.</p>
-<h3>Idea central</h3>
-<p><strong>Tu rol es quitar piedras del camino.</strong> Deja de preguntar solo por la tarea y pregunta por la persona y el proceso.</p>
-<h3>Desarrollo</h3>
-<p>Usa estas llaves en tus reuniones 1 a 1:</p>
-<ol>
-<li><strong>Detectar Barreras:</strong> <em>&quot;¿Qué obstáculo te frenó esta semana y qué puedo hacer yo para limpiarte el camino?&quot;</em> (Genera colaboración).</li>
-<li><strong>Reconectar Propósito:</strong> <em>&quot;¿Qué parte de tu trabajo de hoy sentiste que realmente aportó valor?&quot;</em> (Genera consciencia).</li>
-<li><strong>Futuro:</strong> <em>&quot;¿Qué aprendiste esta semana que usaremos la próxima?&quot;</em></li>
-</ol>
-<h3>Ejercicio</h3>
-<p>Elige UNA pregunta poderosa. Úsala en tu próxima conversación. Escucha la respuesta completa sin interrumpir.</p>
-<div align="right">
-  <a href="#l4">Siguiente Lección: Taller 360° →</a>
-</div>
+        <article class="lesson-card" id="l2">
+            <h2>L2: Feedback Instantáneo</h2>
+            
+            <h3>Contexto</h3>
+            <p>Imagina un partido de fútbol donde el entrenador se queda en silencio y no le dice nada a sus jugadores hasta que termina el juego. Es absurdo, ¿verdad? El jugador necesita saber si falló el pase AHORA. Sin embargo, en la oficina esperamos hasta la "evaluación de desempeño" de diciembre para dar feedback.</p>
+            
+            <div class="idea-central">
+                ⏱️ El feedback útil caduca rápido. Decirle a alguien en diciembre lo que hizo mal en marzo es inútil, injusto y muy frustrante.
+            </div>
+            
+            <h3>Desarrollo</h3>
+            <p>Lecciones del deporte que debes llevar a tu oficina hoy mismo:</p>
+            <ol>
+                <li><strong>Tiempo real:</strong> Dilo en el momento (o como máximo, al final de esa misma semana).</li>
+                <li><strong>Intención clara:</strong> Te corrijo para que ganes el partido, no para humillarte ni mostrar mi poder.</li>
+                <li><strong>Especificidad brutal:</strong> "Mejora tu actitud" es vago y genera resistencia. "En la reunión interrumpiste a X tres veces, déjalo terminar" es un dato accionable.</li>
+            </ol>
+            
+            <div class="ejemplo-box" style="border-left-color: var(--accent);">
+                <strong>🏈 Historia Personal (Cyn)</strong><br><br>
+                Cuando jugué tochito, mis compañeras me gritaban: <em>"¡Cubre más cerca!"</em> en plena jugada. No se esperaban al final del partido ni hacían una cita formal. <br><br>
+                Esa corrección inmediata, dura pero enfocada en ganar, me hizo aprender en minutos lo que me hubiera tomado años descubrir sola.
+            </div>
+            
+            <div class="ejercicio-box">
+                <strong>🛠️ Reto de Liderazgo (24 horas)</strong>
+                <p>Hoy, cuando veas algo en tu equipo que se puede mejorar (o algo increíble que se deba celebrar), <strong>dilo en los siguientes 5 minutos</strong>.</p>
+                <p style="font-size: 0.9rem; color: #64748b; margin-top: 0.5rem;"><em>Ejemplo: "Oye, me gustó mucho cómo manejaste a ese cliente difícil en la llamada. Gran paciencia."</em></p>
+            </div>
+            
+            <div class="lesson-nav">
+                <a href="#l1">← Anterior</a>
+                <a href="#l3">Siguiente Lección: Preguntas Poderosas →</a>
+            </div>
+        </article>
 
-<hr>
-<h2><a id="l4"></a>Lección 4: Taller 360° con Propósito</h2>
-<div align="left">
-  <a href="#l3">← Lección Anterior</a>
-</div>
+        <article class="lesson-card" id="l3">
+            <h2>L3: Preguntas Poderosas</h2>
+            
+            <h3>Contexto</h3>
+            <p>La calidad de tu liderazgo depende directamente de la calidad de tus preguntas. Si todo el tiempo preguntas "¿Cómo vas?", obtendrás respuestas vacías y defensivas como "Bien, ahí voy".</p>
+            
+            <div class="idea-central">
+                🗝️ Tu rol principal es quitar piedras del camino. Deja de preguntar solo por la tarea (control) y empieza a preguntar por la persona y el proceso (facilitación).
+            </div>
+            
+            <h3>Desarrollo</h3>
+            <p>Usa estas "llaves" maestras en tus reuniones 1 a 1:</p>
+            
+            <div class="question-highlight">
+                <strong>1. Para Detectar Barreras (Genera colaboración):</strong>
+                <em>"¿Qué obstáculo te frenó esta semana y qué puedo hacer yo para limpiarte el camino?"</em>
+            </div>
+            
+            <div class="question-highlight">
+                <strong>2. Para Reconectar con el Propósito (Genera consciencia):</strong>
+                <em>"De todo lo que hiciste hoy/esta semana, ¿qué parte sentiste que realmente aportó valor al cliente o al equipo?"</em>
+            </div>
+            
+            <div class="question-highlight">
+                <strong>3. Para Fomentar la Adaptación (Visión de futuro):</strong>
+                <em>"¿Qué aprendiste esta semana que falló y que debemos cambiar para la próxima?"</em>
+            </div>
+            
+            <div class="ejercicio-box">
+                <strong>📝 Ejercicio Práctico</strong>
+                <p>Elige UNA de estas tres preguntas poderosas. Úsala en tu próxima conversación con alguien del equipo.</p>
+                <p style="color: #059669; font-weight: bold; margin-top: 0.5rem;">El reto real: Escucha su respuesta completa sin interrumpir y sin querer darle la solución inmediata.</p>
+            </div>
+            
+            <div class="lesson-nav">
+                <a href="#l2">← Anterior</a>
+                <a href="#l4">Siguiente Lección: Taller 360° →</a>
+            </div>
+        </article>
 
-<h3>Contexto</h3>
-<p>Las mejores organizaciones son aquellas donde todos pueden decir la verdad con respeto. Un feedback 360 no es un juicio, es un regalo de perspectivas.</p>
-<h3>Idea central</h3>
-<p><strong>La vía es bidireccional.</strong> El líder también necesita escuchar cómo mejorar. Eso genera una confianza brutal.</p>
-<h3>Desarrollo</h3>
-<p>La herramienta <a href="../../workbooks/module_06_worksheet.html">Guía de Feedback 360° con Propósito</a> te guía para facilitar una sesión donde preguntamos:</p>
-<ul>
-<li>¿Qué debemos <strong>EMPEZAR</strong> a hacer?</li>
-<li>¿Qué debemos <strong>DEJAR</strong> de hacer?</li>
-<li>¿Qué debemos <strong>CONTINUAR</strong> haciendo?</li>
-</ul>
-<p>Hacer esto una vez al mes limpia las tuberías de la comunicación y evita que se acumule &quot;mugre&quot; emocional.</p>
-<h3>Ejercicio Práctico</h3>
-<p>Utilizarás la herramienta: <a href="../../workbooks/module_06_worksheet.html">Guía de Feedback 360° con Propósito</a>. Úsalo como guion para tu cierre de mes.
-<em>Tip: Empieza tú pidiendo feedback sobre tu liderazgo para romper el hielo.</em></p>
-<h3>Cierre del Módulo</h3>
-<p>¡Módulo 6 completado! Ya tienes todas las herramientas. Mentalidad, Propósito, Red, Medición y Feedback. Ahora solo nos falta el plan de despegue. Vamos al último módulo: Implementación.</p>
-<div align="center">
-  <a href="../../course/modules/module_07.html" style="background-color: #28a745; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Ir al Módulo 7: Implementación →</a>
-</div>
+        <article class="lesson-card" id="l4">
+            <h2>L4: Taller 360° con Propósito</h2>
+            
+            <h3>Contexto</h3>
+            <p>Las mejores organizaciones son aquellas donde todos, sin importar su jerarquía, pueden decir la verdad con respeto. Un feedback 360° no es un tribunal de juicio, es un regalo de perspectivas cruzadas para mejorar el sistema.</p>
+            
+            <div class="idea-central">
+                🔄 La vía es bidireccional. El líder también necesita escuchar cómo mejorar. Mostrar esa vulnerabilidad genera un nivel de confianza brutal.
+            </div>
+            
+            <h3>Desarrollo</h3>
+            <p>Para sistematizar esta cultura de la franqueza, utilizaremos el formato <strong>"Empezar, Dejar, Continuar"</strong>. Es una sesión (idealmente mensual) donde preguntamos abiertamente sobre nuestros procesos y actitudes:</p>
+            <ul>
+                <li>🟢 <strong>EMPEZAR:</strong> ¿Qué cosas no estamos haciendo y nos ayudarían a lograr los KRs?</li>
+                <li>🔴 <strong>DEJAR:</strong> ¿Qué burocracia, mala actitud o proceso nos está drenando energía inútilmente?</li>
+                <li>🔵 <strong>CONTINUAR:</strong> ¿Qué estamos haciendo increíblemente bien y no debemos perder?</li>
+            </ul>
+            <p>Hacer esto con frecuencia limpia las tuberías de la comunicación y evita que se acumule "mugre" emocional en el equipo.</p>
+            
+            <div class="ejercicio-box">
+                <strong>🛠️ Herramienta Práctica</strong>
+                <p>Abre tu herramienta: <strong><a href="../../workbooks/module_06_worksheet.html" style="color: #059669; text-decoration: underline;">Guía de Feedback 360° con Propósito</a></strong>.</p>
+                <p>Úsalo como guion para tu próxima sesión de cierre de mes.</p>
+                <p style="font-size: 0.9rem; color: #64748b; margin-top: 0.5rem;"><em>Tip de Liderazgo: Empieza la sesión pidiendo feedback sobre ti mismo para romper el hielo. "¿Qué debería dejar de hacer yo como líder que los está atrasando?".</em></p>
+            </div>
+            
+            <h3>Cierre del Módulo</h3>
+            <p>¡Increíble! Módulo 6 completado. A este punto ya tienes todas las piezas maestras: Mentalidad, Propósito, Red Estratégica, Medición y Cultura de Feedback.</p>
+            <p>Ya armamos el cohete, ahora solo nos falta el plan de despegue. Vamos al último módulo: Implementación.</p>
+            
+            <div class="lesson-nav">
+                <a href="#l3">← Anterior</a>
+                <span></span>
+            </div>
+        </article>
+
+        <a href="../../course/modules/module_07.html" class="btn-next-module">Avanzar al Módulo 7: Implementación 🚀</a>
 
     </main>
 
-    <footer style="margin-top: 4rem; text-align: center; color: #6b7280; font-size: 0.9rem;">
-        <p>© 2025 Cyn de la Torre. Curso OKRs con Propósito.</p>
+    <footer>
+        <p>© 2026 Cyn de la Torre. Curso OKRs con Propósito. Todos los derechos reservados.</p>
     </footer>
 </body>
 </html>
