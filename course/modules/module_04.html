@@ -3,148 +3,475 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>module_04 - OKRs con Propósito</title>
-    <link rel="stylesheet" href="../../assets/style.css">
+    <title>Módulo 4 - OKRs con Propósito</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1D4D4F;
+            --primary-light: #2c6e70;
+            --bg-body: #f8fafc;
+            --bg-card: #ffffff;
+            --text-main: #334155;
+            --text-heading: #0f172a;
+            --border: #e2e8f0;
+            --radius: 12px;
+            --accent-bg: #f0fdf4;
+            --accent-border: #bbf7d0;
+            --accent: #d4af37;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.7;
+            padding-bottom: 4rem;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            color: var(--text-heading);
+            margin-bottom: 1rem;
+        }
+
+        h3 {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.1rem;
+            color: var(--primary);
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--bg-card);
+            padding: 1rem 2rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo a {
+            font-weight: 600;
+            font-size: 1.2rem;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        nav a {
+            color: var(--text-main);
+            text-decoration: none;
+            margin-left: 1.5rem;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Título del Módulo */
+        .module-header {
+            text-align: center;
+            padding: 4rem 0 3rem;
+        }
+
+        .module-header span {
+            color: var(--primary-light);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-size: 0.9rem;
+        }
+
+        .module-header h1 {
+            font-size: 2.5rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Caja de Objetivos */
+        .goals-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 2rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+        }
+
+        .goals-box ul {
+            list-style-type: none;
+            margin-top: 1rem;
+        }
+
+        .goals-box li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .goals-box li::before {
+            content: '✨';
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        /* Progreso */
+        .progress-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1rem;
+            list-style: none;
+        }
+
+        .progress-list li {
+            background: var(--bg-body);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Lecciones (Cards) */
+        .lesson-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 3rem;
+            margin-bottom: 3rem;
+            scroll-margin-top: 100px;
+        }
+
+        .lesson-card h2 {
+            font-size: 2rem;
+            border-bottom: 2px solid var(--primary-light);
+            padding-bottom: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        ul, ol {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+        }
+
+        /* Destacados */
+        .idea-central {
+            background: var(--primary);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 1.1rem;
+            margin: 2rem 0;
+            border-left: 4px solid var(--accent);
+        }
+
+        .ejemplo-box {
+            background: #f8fafc;
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--primary-light);
+            padding: 1.5rem;
+            border-radius: 0 8px 8px 0;
+            margin: 2rem 0;
+            font-style: italic;
+        }
+
+        .ejercicio-box {
+            background: #fffbeb;
+            border: 1px dashed #34d399;
+            padding: 2rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .ejercicio-box strong {
+            color: #059669;
+            font-size: 1.1rem;
+            display: block;
+            margin-bottom: 1rem;
+        }
+
+        /* Navegación interna */
+        .lesson-nav {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 3rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .lesson-nav a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: opacity 0.2s;
+        }
+
+        .lesson-nav a:hover {
+            opacity: 0.7;
+        }
+
+        /* Botón Módulo Siguiente */
+        .btn-next-module {
+            display: block;
+            width: 100%;
+            text-align: center;
+            background: var(--primary);
+            color: white;
+            padding: 1.2rem;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1.2rem;
+            margin-top: 4rem;
+            transition: transform 0.2s;
+        }
+
+        .btn-next-module:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 15px -3px rgba(29, 77, 79, 0.3);
+        }
+
+        footer {
+            text-align: center;
+            color: #94a3b8;
+            font-size: 0.9rem;
+            margin-top: 4rem;
+            border-top: 1px solid var(--border);
+            padding-top: 2rem;
+        }
+    </style>
 </head>
 <body>
     <header>
         <div class="logo">
-            <a href="../../index.html" style="font-weight: bold; font-size: 1.2rem; color: #111;">🧭 OKRs con Propósito</a>
+            <a href="../../index.html">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
+                </svg>
+                OKRs con Propósito
+            </a>
         </div>
         <nav>
             <a href="../../index.html">Inicio</a>
-            <a href="../../course/modules/module_01.html">Módulo 1</a>
+            <a href="#">Módulo 4</a>
         </nav>
     </header>
 
-    <main>
-        <h1>Módulo 4: Estrategia – De Silos a Redes Vivas</h1>
-<p><strong>Objetivo:</strong> Evolucionar de un modelo jerárquico (cascada) a un modelo de red colaborativa donde las iniciativas se potencian entre sí.</p>
-<p><strong>Al terminar este módulo:</strong></p>
-<ul>
-<li>Entenderás por qué el modelo &quot;Waterfall&quot; (Cascada) falla hoy.</li>
-<li>Adoptarás el pensamiento de Red.</li>
-<li>Crearás tu mapa estratégico de iniciativas interconectadas.</li>
-</ul>
-<p><strong>Tu Progreso:</strong></p>
-<ol>
-<li><input disabled="" type="checkbox"> Lección 1: La trampa de la Cascada</li>
-<li><input disabled="" type="checkbox"> Lección 2: Red Colaborativa</li>
-<li><input disabled="" type="checkbox"> Lección 3: Conectando Puntos</li>
-<li><input disabled="" type="checkbox"> Lección 4: Mapa de Red</li>
-</ol>
-<hr>
-<h2><a id="l1"></a>Lección 1: La trampa de la Cascada</h2>
-<h3>Contexto</h3>
-<p>¿Recuerdas el juego del &quot;teléfono descompuesto&quot;? El mensaje original cambia totalmente al llegar al final. Eso es lo que pasa con la estrategia en cascada.</p>
-<h3>Idea central</h3>
-<p><strong>Los silos nos hacen lentos y tontos.</strong> Si la información tiene que subir y bajar escaleras jerárquicas para moverse un metro a la derecha, estamos muertos.</p>
-<h3>Desarrollo</h3>
-<p>El modelo antiguo:</p>
-<ol>
-<li>El Director define un gran objetivo.</li>
-<li>El Gerente lo traduce.</li>
-<li>El Jefe lo asigna.</li>
-<li>El Empleado obedece.</li>
-</ol>
-<p>Problemas:</p>
-<ul>
-<li><strong>Desempoderamiento:</strong> La gente abajo solo recibe órdenes desconectadas del contexto (&quot;Llena este Excel&quot;).</li>
-<li><strong>Lentitud:</strong> Para cuando la orden llega abajo, el mercado ya cambió.</li>
-<li><strong>Fragmentación:</strong> Marketing no habla con Producto. Ventas no habla con Soporte.</li>
-</ul>
-<h3>Reflexión</h3>
-<p>Identifica un proyecto reciente que falló o se retrasó porque un área no habló con la otra a tiempo. Ese es el &quot;impuesto de la cascada&quot;.</p>
-<div align="right">
-  <a href="#l2">Siguiente Lección: Red Colaborativa →</a>
-</div>
+    <main class="container">
+        
+        <div class="module-header">
+            <span>Módulo 4</span>
+            <h1>Estrategia: De Silos a Redes Vivas</h1>
+        </div>
 
-<hr>
-<h2><a id="l2"></a>Lección 2: Red Colaborativa</h2>
-<div align="left">
-  <a href="#l1">← Lección Anterior</a>
-</div>
+        <div class="goals-box">
+            <h3 style="margin-top: 0;">Objetivo del Módulo</h3>
+            <p>Evolucionar de un modelo jerárquico (cascada) a un modelo de red colaborativa donde las iniciativas se potencian entre sí.</p>
+            
+            <h3 style="margin-top: 2rem;">Al terminar este módulo:</h3>
+            <ul>
+                <li>Entenderás por qué el modelo "Waterfall" (Cascada) falla en el entorno actual.</li>
+                <li>Adoptarás el pensamiento estratégico de Red.</li>
+                <li>Crearás tu primer mapa visual de iniciativas interconectadas.</li>
+            </ul>
 
-<h3>Contexto</h3>
-<p>Piensa en tu cerebro. Las neuronas no están en fila india. Están en red, conectadas en todas direcciones. Así funcionan las organizaciones inteligentes hoy.</p>
-<h3>Idea central</h3>
-<p><strong>No se trata de quién está arriba de quién, sino de quién está conectado con quién.</strong></p>
-<h3>Desarrollo</h3>
-<p>En una Red Colaborativa:</p>
-<ul>
-<li><strong>Multidireccionalidad:</strong> Las ideas pueden venir de cualquier lado, no solo de arriba.</li>
-<li><strong>Objetivos Compartidos:</strong> Varios nodos (personas/áreas) trabajan juntos para un mismo Resultado Clave (KR).</li>
-<li><strong>Agilidad:</strong> Si un nodo falla, otro toma la carga. La red se reconfigura rápido ante cambios.</li>
-</ul>
-<h3>Ejemplo</h3>
-<p>En lugar de que Marketing termine y le pase la estafeta a Ventas (lineal), Marketing y Ventas se sientan juntos desde el día 1 para diseñar la campaña (red). El resultado es coherente y rápido.</p>
-<h3>Ejercicio</h3>
-<p>Piensa en una persona de OTRO departamento con la que casi no hablas, pero cuyo trabajo afecta el tuyo.
-<strong>El reto de hoy:</strong> mándale un mensaje: <em>&quot;Hola, ¿cómo puedo ayudarte hoy para que tu trabajo sea más fácil?&quot;</em>.</p>
-<div align="right">
-  <a href="#l3">Siguiente Lección: Conectando Puntos →</a>
-</div>
+            <h3 style="margin-top: 2rem;">Tu Progreso:</h3>
+            <ul class="progress-list">
+                <li><input disabled type="checkbox"> L1: La trampa de la Cascada</li>
+                <li><input disabled type="checkbox"> L2: Red Colaborativa</li>
+                <li><input disabled type="checkbox"> L3: Conectando Puntos</li>
+                <li><input disabled type="checkbox"> L4: Mapa de Red</li>
+            </ul>
+        </div>
 
-<hr>
-<h2><a id="l3"></a>Lección 3: Conectando Puntos (Leverage)</h2>
-<div align="left">
-  <a href="#l2">← Lección Anterior</a>
-</div>
+        <article class="lesson-card" id="l1">
+            <h2>L1: La trampa de la Cascada</h2>
+            
+            <h3>Contexto</h3>
+            <p>¿Recuerdas el juego del "teléfono descompuesto"? El mensaje original cambia totalmente al llegar al final de la fila. Eso es exactamente lo que pasa con la estrategia en cascada tradicional.</p>
+            
+            <div class="idea-central">
+                🚧 Los silos nos hacen lentos y tontos. Si la información tiene que subir y bajar escaleras jerárquicas para moverse un metro a la derecha, estamos muertos.
+            </div>
+            
+            <h3>Desarrollo</h3>
+            <p><strong>El modelo antiguo (Cascada):</strong></p>
+            <ol>
+                <li>El Director define un gran objetivo.</li>
+                <li>El Gerente lo traduce.</li>
+                <li>El Jefe lo asigna.</li>
+                <li>El Empleado simplemente obedece.</li>
+            </ol>
+            
+            <p><strong>Los graves problemas de esto:</strong></p>
+            <ul>
+                <li><strong>Desempoderamiento:</strong> La gente abajo solo recibe órdenes desconectadas del contexto ("Llena este Excel", sin saber el por qué).</li>
+                <li><strong>Lentitud:</strong> Para cuando la orden llega a la base, el mercado ya cambió.</li>
+                <li><strong>Fragmentación:</strong> Marketing no habla con Producto. Ventas no habla con Soporte. Se echan la culpa mutuamente.</li>
+            </ul>
+            
+            <div class="ejercicio-box">
+                <strong>📝 Ejercicio de Reflexión</strong>
+                <p>Identifica un proyecto reciente que falló o se retrasó significativamente porque un área no habló con la otra a tiempo.</p>
+                <p style="font-size: 0.9rem; color: #64748b; margin-top: 0.5rem;"><em>Ese retraso o fallo es lo que llamamos el "impuesto de la cascada".</em></p>
+            </div>
+            
+            <div class="lesson-nav">
+                <span></span>
+                <a href="#l2">Siguiente Lección: Red Colaborativa →</a>
+            </div>
+        </article>
 
-<h3>Contexto</h3>
-<p>En la eficiencia tradicional buscamos matar un pájaro de un tiro. En el pensamiento estratégico de red, buscamos un tiro que alimente a muchos pájaros.</p>
-<h3>Idea central</h3>
-<p><strong>Apalancamiento (Leverage):</strong> Una sola iniciativa bien pensada puede mover múltiples agujas a la vez.</p>
-<h3>Desarrollo</h3>
-<p>Buscamos la <strong>Sinergia</strong>: donde 1+1=3.
-En lugar de lanzar 20 proyectos pequeños y dispersos, lanzamos 3 grandes proyectos sistémicos que impactan todos los KRs.</p>
-<h3>Ejemplo</h3>
-<p><em>Iniciativa:</em> &quot;Implementar un nuevo CRM unificado&quot;.</p>
-<ul>
-<li><strong>Impacto 1:</strong> Mejora la eficiencia de Ventas (KR Negocio).</li>
-<li><strong>Impacto 2:</strong> Mejora la atención al cliente porque tenemos historial (KR Satisfacción).</li>
-<li><strong>Impacto 3:</strong> Reduce el estrés administrativo del equipo (KR Cultura).
-¡Bingo! Una iniciativa, triple impacto.</li>
-</ul>
-<h3>Ejercicio</h3>
-<p>Mira tu lista de tareas o proyectos actuales. Encuentra uno que solo sirva para una cosa y pregúntate: <em>¿Cómo podría rediseñarlo para que impacte otra área también?</em></p>
-<div align="right">
-  <a href="#l4">Siguiente Lección: Mapa de Red →</a>
-</div>
+        <article class="lesson-card" id="l2">
+            <h2>L2: Red Colaborativa</h2>
+            
+            <h3>Contexto</h3>
+            <p>Piensa en tu cerebro. Las neuronas no están formadas en fila india esperando instrucciones. Están en red, conectadas en todas direcciones. Así funcionan las organizaciones inteligentes hoy.</p>
+            
+            <div class="idea-central">
+                🌐 No se trata de quién está arriba de quién, sino de quién está conectado con quién.
+            </div>
+            
+            <h3>Desarrollo</h3>
+            <p>En una verdadera Red Colaborativa:</p>
+            <ul>
+                <li><strong>Multidireccionalidad:</strong> Las ideas y alertas pueden venir de cualquier lado, no solo "de arriba".</li>
+                <li><strong>Objetivos Compartidos:</strong> Varios nodos (personas o áreas distintas) trabajan juntos y son co-responsables de un mismo Resultado Clave (KR).</li>
+                <li><strong>Agilidad extrema:</strong> Si un nodo falla, otro toma la carga. La red se reconfigura rápido ante los cambios del entorno.</li>
+            </ul>
+            
+            <div class="ejemplo-box">
+                <strong>Red vs. Lineal:</strong><br><br>
+                En lugar de que Marketing termine su diseño y le pase "el problema" a Ventas (modelo lineal), Marketing y Ventas se sientan juntos desde el <strong>Día 1</strong> para diseñar la campaña (modelo red). <br><br>
+                <em>El resultado es un lanzamiento coherente, más rápido y sin fricciones internas.</em>
+            </div>
+            
+            <div class="ejercicio-box">
+                <strong>🛠️ Reto Práctico</strong>
+                <p>Piensa en una persona de OTRO departamento con la que casi no hablas, pero cuyo trabajo afecta directamente el tuyo (o viceversa).</p>
+                <p><strong>El reto de hoy:</strong> Mándale un mensaje genuino que diga: <em>"Hola, ¿cómo puedo ayudarte hoy para que tu trabajo sea más fácil?"</em>.</p>
+            </div>
+            
+            <div class="lesson-nav">
+                <a href="#l1">← Anterior</a>
+                <a href="#l3">Siguiente Lección: Conectando Puntos →</a>
+            </div>
+        </article>
 
-<hr>
-<h2><a id="l4"></a>Lección 4: Mapa de Red Estratégica</h2>
-<div align="left">
-  <a href="#l3">← Lección Anterior</a>
-</div>
+        <article class="lesson-card" id="l3">
+            <h2>L3: Conectando Puntos (Leverage)</h2>
+            
+            <h3>Contexto</h3>
+            <p>En la eficiencia tradicional buscamos "matar un pájaro de un tiro" (hacer las cosas más rápido). En el pensamiento estratégico de red, buscamos un tiro que alimente a muchos pájaros a la vez.</p>
+            
+            <div class="idea-central">
+                ⚙️ Apalancamiento (Leverage): Una sola iniciativa bien pensada y ejecutada puede mover múltiples agujas estratégicas al mismo tiempo.
+            </div>
+            
+            <h3>Desarrollo</h3>
+            <p>Aquí buscamos la <strong>Sinergia</strong> pura: donde 1 + 1 = 3.</p>
+            <p>En lugar de agotar a nuestro equipo lanzando 20 proyectos pequeños, dispersos y desgastantes, lanzamos solo <strong>3 grandes proyectos sistémicos</strong> que impacten todos nuestros Resultados Clave (KRs).</p>
+            
+            <div class="ejemplo-box">
+                <strong>El Poder del Apalancamiento:</strong><br><br>
+                <em>Iniciativa Estratégica:</em> "Implementar un nuevo CRM unificado para toda la empresa".<br><br>
+                ✅ <strong>Impacto 1:</strong> Mejora la eficiencia de Ventas (KR Negocio).<br>
+                ✅ <strong>Impacto 2:</strong> Mejora la atención al cliente porque Soporte ya tiene todo el historial (KR Satisfacción).<br>
+                ✅ <strong>Impacto 3:</strong> Reduce el estrés administrativo general del equipo (KR Cultura).<br><br>
+                <em>¡Bingo! Una iniciativa, triple impacto.</em>
+            </div>
+            
+            <div class="ejercicio-box">
+                <strong>📝 Ejercicio de Reflexión</strong>
+                <p>Mira tu lista de tareas o proyectos actuales. Encuentra uno que parece servir solo para una cosa específica.</p>
+                <p>Pregúntate: <strong>¿Cómo podría rediseñar este proyecto para que genere impacto en otra área al mismo tiempo?</strong></p>
+            </div>
+            
+            <div class="lesson-nav">
+                <a href="#l2">← Anterior</a>
+                <a href="#l4">Siguiente Lección: Mapa de Red →</a>
+            </div>
+        </article>
 
-<h3>Contexto</h3>
-<p>Si miras tus OKRs y ves un Excel, tu cerebro se aburre. Si ves un mapa, tu cerebro despierta. Somos seres visuales.</p>
-<h3>Idea central</h3>
-<p><strong>Dibuja tu estrategia para entenderla.</strong></p>
-<h3>Desarrollo</h3>
-<p>Utilizarás la herramienta: <a href="../../workbooks/module_04_worksheet.html">Mapa de Red de Iniciativas</a>:</p>
-<ol>
-<li><strong>El Sol (Centro):</strong> Tu Objetivo Principal.</li>
-<li><strong>Los Planetas (Órbita):</strong> Tus Resultados Clave (KRs).</li>
-<li><strong>Los Satélites (Nodos):</strong> Tus Iniciativas/Proyectos.</li>
-<li><strong>Las Líneas:</strong> Conexiones.</li>
-</ol>
-<p>Si una iniciativa conecta con dos planetas, ¡es una iniciativa ganadora! Si una iniciativa no conecta con nada, ¡es basura espacial, elimínala!</p>
-<h3>Ejercicio Práctico</h3>
-<p><strong>Utilizarás la herramienta: <a href="../../workbooks/module_04_worksheet.html">Mapa de Red de Iniciativas</a>.</strong>
-Toma un lápiz y dibuja tu red.
-Al terminar, observa: ¿Hay equilibrio? ¿O tienes un KR lleno de iniciativas y otro olvidado? El mapa revela lo que el Excel esconde.</p>
-<h3>Cierre del Módulo</h3>
-<p>Ya tenemos la red dibujada. Pero, ¿cómo sabemos si estamos ganando el juego? ¿Solo mirando la cuenta bancaria? No. Necesitamos un tablero más completo. Bienvenido al Módulo 5.</p>
-<div align="center">
-  <a href="../../course/modules/module_05.html" style="background-color: #28a745; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Ir al Módulo 5: Medición →</a>
-</div>
+        <article class="lesson-card" id="l4">
+            <h2>L4: Mapa de Red Estratégica</h2>
+            
+            <h3>Contexto</h3>
+            <p>Si miras tus OKRs y solo ves una aburrida tabla de Excel, tu cerebro de estratega se apaga. Si ves un mapa, tu cerebro despierta y conecta. Somos seres profundamente visuales.</p>
+            
+            <div class="idea-central">
+                🗺️ Dibuja tu estrategia para entenderla. Si no puedes dibujarla, probablemente no esté clara.
+            </div>
+            
+            <h3>Desarrollo</h3>
+            <p>Para construir nuestro universo estratégico usaremos el <strong>Mapa de Red de Iniciativas</strong>:</p>
+            <ul>
+                <li>☀️ <strong>El Sol (Centro):</strong> Tu Objetivo Principal cualitativo.</li>
+                <li>🌍 <strong>Los Planetas (Órbita):</strong> Tus Resultados Clave (KRs).</li>
+                <li>🛰️ <strong>Los Satélites (Nodos):</strong> Tus Iniciativas / Proyectos.</li>
+                <li>🔀 <strong>Las Líneas:</strong> Las conexiones vitales entre ellos.</li>
+            </ul>
+            <p><strong>La regla de oro:</strong> Si una iniciativa conecta con dos o más planetas, ¡es una iniciativa ganadora (leverage)! Si una iniciativa no conecta de forma lógica con ningún planeta... ¡es basura espacial, elimínala sin piedad!</p>
+            
+            <div class="ejercicio-box">
+                <strong>🛠️ Herramienta Práctica</strong>
+                <p>Abre ahora tu herramienta: <strong><a href="../../workbooks/module_04_worksheet.html" style="color: #059669; text-decoration: underline;">Mapa de Red de Iniciativas</a></strong>.</p>
+                <p>Toma un lápiz o usa una pizarra virtual y dibuja tu red.</p>
+                <p style="font-size: 0.9rem; color: #64748b; margin-top: 0.5rem;"><em>Al terminar, observa: ¿Hay equilibrio? ¿O tienes un KR lleno de iniciativas y otro completamente olvidado? El mapa visual revelará las fallas que el Excel esconde.</em></p>
+            </div>
+            
+            <h3>Cierre del Módulo</h3>
+            <p>¡Felicidades! Ya tenemos la red dibujada y conectada. Pero, ¿cómo sabemos si realmente estamos ganando el juego? ¿Se trata solo de mirar la cuenta bancaria al final del mes?</p>
+            <p>No. Necesitamos un tablero de mando mucho más completo. Bienvenido al Módulo 5, el arte de medir lo que importa.</p>
+            
+            <div class="lesson-nav">
+                <a href="#l3">← Anterior</a>
+                <span></span>
+            </div>
+        </article>
+
+        <a href="../../course/modules/module_05.html" class="btn-next-module">Avanzar al Módulo 5: Medición 🚀</a>
 
     </main>
 
-    <footer style="margin-top: 4rem; text-align: center; color: #6b7280; font-size: 0.9rem;">
-        <p>© 2025 Cyn de la Torre. Curso OKRs con Propósito.</p>
+    <footer>
+        <p>© 2026 OKRs con Propósito by Cyn De la Torre. Todos los derechos reservados.</p>
     </footer>
 </body>
 </html>
