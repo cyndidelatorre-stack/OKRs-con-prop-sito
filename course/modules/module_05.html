@@ -3,140 +3,512 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>module_05 - OKRs con Propósito</title>
-    <link rel="stylesheet" href="../../assets/style.css">
+    <title>Módulo 5 - OKRs con Propósito</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1D4D4F;
+            --primary-light: #2c6e70;
+            --bg-body: #f8fafc;
+            --bg-card: #ffffff;
+            --text-main: #334155;
+            --text-heading: #0f172a;
+            --border: #e2e8f0;
+            --radius: 12px;
+            --accent-bg: #f0fdf4;
+            --accent-border: #bbf7d0;
+            --accent: #d4af37;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.7;
+            padding-bottom: 4rem;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            color: var(--text-heading);
+            margin-bottom: 1rem;
+        }
+
+        h3 {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.1rem;
+            color: var(--primary);
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--bg-card);
+            padding: 1rem 2rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo a {
+            font-weight: 600;
+            font-size: 1.2rem;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        nav a {
+            color: var(--text-main);
+            text-decoration: none;
+            margin-left: 1.5rem;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Título del Módulo */
+        .module-header {
+            text-align: center;
+            padding: 4rem 0 3rem;
+        }
+
+        .module-header span {
+            color: var(--primary-light);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-size: 0.9rem;
+        }
+
+        .module-header h1 {
+            font-size: 2.5rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Caja de Objetivos */
+        .goals-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 2rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+        }
+
+        .goals-box ul {
+            list-style-type: none;
+            margin-top: 1rem;
+        }
+
+        .goals-box li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .goals-box li::before {
+            content: '✨';
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        /* Progreso */
+        .progress-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1rem;
+            list-style: none;
+        }
+
+        .progress-list li {
+            background: var(--bg-body);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Lecciones (Cards) */
+        .lesson-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 3rem;
+            margin-bottom: 3rem;
+            scroll-margin-top: 100px;
+        }
+
+        .lesson-card h2 {
+            font-size: 2rem;
+            border-bottom: 2px solid var(--primary-light);
+            padding-bottom: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        ul, ol {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+        }
+
+        /* Destacados */
+        .idea-central {
+            background: var(--primary);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 1.1rem;
+            margin: 2rem 0;
+            border-left: 4px solid var(--accent);
+        }
+
+        .ejemplo-box {
+            background: #f8fafc;
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--primary-light);
+            padding: 1.5rem;
+            border-radius: 0 8px 8px 0;
+            margin: 2rem 0;
+            font-style: italic;
+        }
+
+        .ejercicio-box {
+            background: #fffbeb;
+            border: 1px dashed #34d399;
+            padding: 2rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .ejercicio-box strong {
+            color: #059669;
+            font-size: 1.1rem;
+            display: block;
+            margin-bottom: 1rem;
+        }
+
+        /* Cuadrantes Grid */
+        .quadrants-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .quadrant-item {
+            background: var(--bg-body);
+            border: 1px solid var(--border);
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+
+        .quadrant-item strong {
+            display: block;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        /* Navegación interna */
+        .lesson-nav {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 3rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .lesson-nav a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: opacity 0.2s;
+        }
+
+        .lesson-nav a:hover {
+            opacity: 0.7;
+        }
+
+        /* Botón Módulo Siguiente */
+        .btn-next-module {
+            display: block;
+            width: 100%;
+            text-align: center;
+            background: var(--primary);
+            color: white;
+            padding: 1.2rem;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1.2rem;
+            margin-top: 4rem;
+            transition: transform 0.2s;
+        }
+
+        .btn-next-module:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 15px -3px rgba(29, 77, 79, 0.3);
+        }
+
+        footer {
+            text-align: center;
+            color: #94a3b8;
+            font-size: 0.9rem;
+            margin-top: 4rem;
+            border-top: 1px solid var(--border);
+            padding-top: 2rem;
+        }
+
+        @media (max-width: 600px) {
+            .quadrants-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
         <div class="logo">
-            <a href="../../index.html" style="font-weight: bold; font-size: 1.2rem; color: #111;">🧭 OKRs con Propósito</a>
+            <a href="../../index.html">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
+                </svg>
+                OKRs con Propósito
+            </a>
         </div>
         <nav>
             <a href="../../index.html">Inicio</a>
-            <a href="../../course/modules/module_01.html">Módulo 1</a>
+            <a href="#">Módulo 5</a>
         </nav>
     </header>
 
-    <main>
-        <h1>Módulo 5: Medición – El Scorecard de lo que Importa</h1>
-<p><strong>Objetivo:</strong> Diseñar un sistema de medición equilibrado que incluya no solo resultados de negocio, sino también métricas humanas y culturales.</p>
-<p><strong>Al terminar este módulo:</strong></p>
-<ul>
-<li>Diferenciarás entre KPIs (Salud) y OKRs (Avance).</li>
-<li>Entenderás por qué medir la cultura es vital.</li>
-<li>Crearás tu Scorecard de 4 cuadrantes.</li>
-</ul>
-<p><strong>Tu Progreso:</strong></p>
-<ol>
-<li><input disabled="" type="checkbox"> Lección 1: KPIs vs. OKRs</li>
-<li><input disabled="" type="checkbox"> Lección 2: La Cultura se come a la estrategia</li>
-<li><input disabled="" type="checkbox"> Lección 3: Los 4 Cuadrantes</li>
-<li><input disabled="" type="checkbox"> Lección 4: Tu Scorecard Integral</li>
-</ol>
-<hr>
-<h2><a id="l1"></a>Lección 1: KPIs vs. OKRs vs. Cultura</h2>
-<h3>Contexto</h3>
-<p>En el mundo de las métricas hay una sopa de letras: KPI, OKR, NPS... Si confundes el velocímetro con el GPS, vas a chocar. Vamos a poner orden.</p>
-<h3>Idea central</h3>
-<p><strong>Gestionar solo con KPIs es manejar viendo el retrovisor.</strong> Necesitas OKRs para mirar a través del parabrisas.</p>
-<h3>Desarrollo</h3>
-<ul>
-<li><strong>KPIs (Health metrics - Operación):</strong> Son como la temperatura corporal o la presión arterial. Te dicen que estás vivo y sano HOY. (Ej. Ventas del mes, Asistencia, Uptime). Mantienen el barco a flote.</li>
-<li><strong>OKRs (Growth metrics - Estrategia):</strong> Son el mapa del tesoro. Te dicen hacia dónde vas y cuánto avanzaste hacia el FUTURO. Miden la transformación. (Ej. Penetración en nuevo mercado, Lanzamiento de producto X).</li>
-<li><strong>Métricas de Cultura:</strong> Son el clima. Te dicen si va a haber tormenta. (Ej. Confianza, Bienestar).</li>
-</ul>
-<h3>Ejemplo</h3>
-<ol>
-<li><strong>KPI:</strong> &quot;Vendimos 100 unidades&quot;. (Bien, seguimos operando).</li>
-<li><strong>OKR:</strong> &quot;Logramos entrar al nuevo mercado joven&quot;. (Bien, estamos evolucionando).</li>
-<li><strong>Cultura:</strong> &quot;El equipo está motivado&quot;. (Bien, es sostenible).</li>
-</ol>
-<h3>Ejercicio</h3>
-<p>Escribe 3 números que reportas mensualmente. Clasifícalos: ¿Es KPI, OKR o Cultura? Si no tienes ninguno de cultura, sigue leyendo con atención.</p>
-<div align="right">
-  <a href="#l2">Siguiente Lección: Medir la Cultura →</a>
-</div>
+    <main class="container">
+        
+        <div class="module-header">
+            <span>Módulo 5</span>
+            <h1>Medición: El Scorecard de lo que Importa</h1>
+        </div>
 
-<hr>
-<h2><a id="l2"></a>Lección 2: La Cultura se come a la Estrategia</h2>
-<div align="left">
-  <a href="#l1">← Lección Anterior</a>
-</div>
+        <div class="goals-box">
+            <h3 style="margin-top: 0;">Objetivo del Módulo</h3>
+            <p>Diseñar un sistema de medición equilibrado que incluya no solo resultados financieros o de negocio, sino también métricas vitales, humanas y culturales.</p>
+            
+            <h3 style="margin-top: 2rem;">Al terminar este módulo:</h3>
+            <ul>
+                <li>Diferenciarás claramente entre KPIs (Salud operativa) y OKRs (Avance estratégico).</li>
+                <li>Entenderás por qué medir la cultura no es opcional, es vital.</li>
+                <li>Crearás tu propio Scorecard Integral de 4 cuadrantes.</li>
+            </ul>
 
-<h3>Contexto</h3>
-<p>Peter Drucker dijo: <em>&quot;La cultura se come a la estrategia en el desayuno&quot;</em>. Puedes tener el mejor plan en papel, pero si tu cultura es de miedo, silencio o competencia tóxica, ese plan está muerto.</p>
-<h3>Idea central</h3>
-<p><strong>Lo que no se mide, se desprecia.</strong> Si dices que &quot;la gente es lo más importante&quot; pero solo mides las ventas, estás mintiendo con tus actos.</p>
-<h3>Desarrollo</h3>
-<ul>
-<li><strong>Lo invisible manda:</strong> Lo que no está escrito (creencias, miedos) dirige el comportamiento.</li>
-<li><strong>Alertas tempranas:</strong> Una baja en el &quot;ánimo del equipo&quot; es una alerta temprana de que los resultados de negocio van a caer pronto. Es un indicador predictivo.</li>
-</ul>
-<h3>Ejemplo</h3>
-<p>Estrategia: &quot;Innovar rápido&quot;.
-Cultura Real: &quot;Aquí se castiga el error&quot;.
-Resultado: Nadie innova. La cultura ganó.</p>
-<h3>Reflexión</h3>
-<p>Del 1 al 10, ¿qué tan seguro se siente tu equipo para decir &quot;metí la pata&quot; sin miedo a represalias? Ese número es tu métrica cultural más importante hoy.</p>
-<div align="right">
-  <a href="#l3">Siguiente Lección: Los 4 Cuadrantes →</a>
-</div>
+            <h3 style="margin-top: 2rem;">Tu Progreso:</h3>
+            <ul class="progress-list">
+                <li><input disabled type="checkbox"> L1: KPIs vs. OKRs</li>
+                <li><input disabled type="checkbox"> L2: La Cultura y la Estrategia</li>
+                <li><input disabled type="checkbox"> L3: Los 4 Cuadrantes</li>
+                <li><input disabled type="checkbox"> L4: Tu Scorecard Integral</li>
+            </ul>
+        </div>
 
-<hr>
-<h2><a id="l3"></a>Lección 3: Los 4 Cuadrantes</h2>
-<div align="left">
-  <a href="#l2">← Lección Anterior</a>
-</div>
+        <article class="lesson-card" id="l1">
+            <h2>L1: KPIs vs. OKRs vs. Cultura</h2>
+            
+            <h3>Contexto</h3>
+            <p>En el mundo de las métricas corporativas hay una sopa de letras: KPI, OKR, NPS, eNPS... Si confundes el velocímetro con el GPS, vas a chocar. Vamos a poner orden.</p>
+            
+            <div class="idea-central">
+                🚗 Gestionar un equipo mirando solo los KPIs es como manejar viendo únicamente el espejo retrovisor. Necesitas OKRs para mirar hacia adelante a través del parabrisas.
+            </div>
+            
+            <h3>Desarrollo</h3>
+            <ul>
+                <li><strong>KPIs (Health metrics - Operación):</strong> Son como la temperatura corporal o la presión arterial de tu negocio. Te dicen que estás "vivo y sano" HOY. (Ej. Ventas del mes, Asistencia, Uptime del sistema). Mantienen el barco a flote, pero no lo hacen avanzar a nuevos puertos.</li>
+                <li><strong>OKRs (Growth metrics - Estrategia):</strong> Son el mapa del tesoro. Te dicen hacia dónde vas y cuánto avanzaste hacia el FUTURO. Miden la transformación y el crecimiento. (Ej. Penetración en un nuevo mercado, Lanzamiento de un producto innovador).</li>
+                <li><strong>Métricas de Cultura:</strong> Son el clima. Te dicen si va a haber tormenta. (Ej. Nivel de Confianza, Bienestar, Seguridad Psicológica).</li>
+            </ul>
+            
+            <div class="ejemplo-box">
+                <strong>La tríada perfecta en acción:</strong><br><br>
+                📉 <strong>KPI:</strong> "Vendimos 100 unidades este mes". <em>(Bien, seguimos operando y pagando nóminas).</em><br>
+                🚀 <strong>OKR:</strong> "Logramos entrar al nuevo mercado joven con un 15% de adopción". <em>(Excelente, estamos evolucionando hacia el futuro).</em><br>
+                🌱 <strong>Cultura:</strong> "El equipo reporta un nivel de motivación de 8/10". <em>(Perfecto, este crecimiento es sostenible y no estamos quemando a la gente).</em>
+            </div>
+            
+            <div class="ejercicio-box">
+                <strong>📝 Ejercicio de Auditoría</strong>
+                <p>Escribe en un papel 3 números que revisas o reportas mensualmente a tus líderes.</p>
+                <p>Clasifícalos: ¿Es un KPI, un OKR o una métrica de Cultura?</p>
+                <p style="font-size: 0.9rem; color: #64748b; margin-top: 0.5rem;"><em>Si no tienes ninguno que pertenezca a la categoría de "Cultura", sigue leyendo con mucha atención.</em></p>
+            </div>
+            
+            <div class="lesson-nav">
+                <span></span>
+                <a href="#l2">Siguiente Lección: Medir la Cultura →</a>
+            </div>
+        </article>
 
-<h3>Contexto</h3>
-<p>Una mesa de una pata se cae. Una de dos, también. Tu éxito como líder necesita apoyarse en cuatro pilares para ser sostenible.</p>
-<h3>Idea central</h3>
-<p><strong>El equilibrio dinámico.</strong> No se trata de tener 10 en todo siempre, sino de no dejar ninguna pata en cero.</p>
-<h3>Desarrollo</h3>
-<p>Los 4 pilares que debemos monitorear:</p>
-<ol>
-<li><strong>NEGOCIO / FINANCIERO:</strong> (La billetera). ¿Es rentable? ¿Somos eficientes?</li>
-<li><strong>CLIENTE / USUARIO:</strong> (El Rey). ¿Están satisfechos? ¿Nos recomiendan? (NPS).</li>
-<li><strong>EQUIPO / PROCESOS:</strong> (La Máquina). ¿Estamos aprendiendo? ¿Estamos contentos? (eNPS).</li>
-<li><strong>PROPÓSITO / IMPACTO:</strong> (El Alma). ¿Estamos cumpliendo nuestra misión social/ambiental?</li>
-</ol>
-<p>Si solo miras el Negocio (1), quemarás al Equipo (3) y perderás al Cliente (2).</p>
-<h3>Ejercicio</h3>
-<p>Dibuja un cuadrado en una hoja. Divídelo en cuatro. Pon una nota (1-10) a cada cuadrante según cómo sientes a tu equipo hoy. ¿Cuál es la pata más corta?</p>
-<div align="right">
-  <a href="#l4">Siguiente Lección: Tu Scorecard Integral →</a>
-</div>
+        <article class="lesson-card" id="l2">
+            <h2>L2: La Cultura se come a la Estrategia</h2>
+            
+            <h3>Contexto</h3>
+            <p>El gurú del management Peter Drucker dijo una frase que todo líder debe tatuarse: <em>"La cultura se come a la estrategia en el desayuno"</em>. Puedes tener el plan más brillante en papel, pero si tu cultura es de miedo, silencio o competencia tóxica, ese plan nace muerto.</p>
+            
+            <div class="idea-central">
+                ⚖️ Lo que no se mide, se desprecia. Si dices que "nuestra gente es lo más importante" pero en las juntas solo mides las ventas, estás mintiendo con tus actos.
+            </div>
+            
+            <h3>Desarrollo</h3>
+            <ul>
+                <li><strong>Lo invisible manda:</strong> Lo que no está escrito (las creencias limitantes, los miedos, las reglas no dichas) es lo que realmente dirige el comportamiento de tu equipo.</li>
+                <li><strong>Las métricas culturales son alertas tempranas (Predictivas):</strong> Una baja en el "ánimo" o la "confianza" del equipo es una alerta temprana garantizada de que los resultados de negocio (las ventas, la calidad) van a caer el próximo mes.</li>
+            </ul>
+            
+            <div class="ejemplo-box">
+                <strong>Cuando la cultura gana:</strong><br><br>
+                📄 <strong>Estrategia Oficial:</strong> "Innovar rápido y lanzar productos disruptivos".<br>
+                👻 <strong>Cultura Real:</strong> "Aquí se castiga el error. Al que se equivoca lo regañan en público".<br>
+                💥 <strong>Resultado:</strong> Nadie innova. Todos hacen lo seguro. La cultura se comió a la estrategia.
+            </div>
+            
+            <div class="ejercicio-box">
+                <strong>📝 Ejercicio de Reflexión</strong>
+                <p>Del 1 al 10, ¿qué tan seguro se siente tu equipo hoy para levantar la mano en una reunión y decir <em>"metí la pata, me equivoqué"</em> sin miedo a ser castigados o humillados?</p>
+                <p style="font-size: 0.9rem; color: #64748b; margin-top: 0.5rem;"><em>Ese número de "Seguridad Psicológica" es tu métrica cultural más importante hoy.</em></p>
+            </div>
+            
+            <div class="lesson-nav">
+                <a href="#l1">← Anterior</a>
+                <a href="#l3">Siguiente Lección: Los 4 Cuadrantes →</a>
+            </div>
+        </article>
 
-<hr>
-<h2><a id="l4"></a>Lección 4: Taller: Construyendo tu Scorecard</h2>
-<div align="left">
-  <a href="#l3">← Lección Anterior</a>
-</div>
+        <article class="lesson-card" id="l3">
+            <h2>L3: Los 4 Cuadrantes</h2>
+            
+            <h3>Contexto</h3>
+            <p>Una mesa de una pata se cae. Una de dos, también. Tu éxito como líder necesita apoyarse en cuatro pilares sólidos para que no se derrumbe ante la primera crisis.</p>
+            
+            <div class="idea-central">
+                🔄 El equilibrio dinámico. No se trata de tener 10 en todos los frentes siempre (eso es irreal), sino de asegurar que no dejamos ninguna pata en cero por demasiado tiempo.
+            </div>
+            
+            <h3>Desarrollo</h3>
+            <p>Estos son los 4 pilares (cuadrantes) que debemos monitorear constantemente:</p>
+            
+            <div class="quadrants-grid">
+                <div class="quadrant-item">
+                    <strong>1. Negocio / Financiero (La Billetera)</strong>
+                    <p>¿Es rentable lo que hacemos? ¿Somos eficientes con los recursos? (Ventas, ROI, Costos).</p>
+                </div>
+                <div class="quadrant-item">
+                    <strong>2. Cliente / Usuario (El Rey)</strong>
+                    <p>¿Están satisfechos? ¿Nos recomendarían a un amigo? (Retención, NPS, Tiempo de respuesta).</p>
+                </div>
+                <div class="quadrant-item">
+                    <strong>3. Equipo / Procesos (La Máquina)</strong>
+                    <p>¿Estamos aprendiendo? ¿Nuestros procesos fluyen? ¿Estamos contentos? (eNPS, Rotación, Agilidad).</p>
+                </div>
+                <div class="quadrant-item">
+                    <strong>4. Propósito / Impacto (El Alma)</strong>
+                    <p>¿Estamos cumpliendo nuestra misión social o ambiental real? (Vidas impactadas, Huella, Trascendencia).</p>
+                </div>
+            </div>
+            
+            <p style="margin-top: 1rem;"><strong>La advertencia:</strong> Si solo miras el cuadrante Financiero (1), ten por seguro que terminarás quemando al Equipo (3) y por consecuencia, perdiendo al Cliente (2).</p>
+            
+            <div class="ejercicio-box">
+                <strong>📝 Ejercicio Rápido</strong>
+                <p>Imagina los 4 cuadrantes. Ponle una calificación mental (del 1 al 10) a cada uno según cómo sientes la realidad de tu empresa hoy.</p>
+                <p><strong>¿Cuál es tu pata más corta?</strong> Ahí es donde debes enfocar tus OKRs del próximo ciclo.</p>
+            </div>
+            
+            <div class="lesson-nav">
+                <a href="#l2">← Anterior</a>
+                <a href="#l4">Siguiente Lección: Tu Scorecard Integral →</a>
+            </div>
+        </article>
 
-<h3>Contexto</h3>
-<p>Llegó el momento de elegir tus batallas. No puedes medirlo todo. Parálisis por análisis.</p>
-<h3>Idea central</h3>
-<p><strong>Menos es más.</strong> Elige las pocas métricas vitales que te darán la foto completa.</p>
-<h3>Desarrollo</h3>
-<p>Utilizarás la herramienta: <a href="../../workbooks/module_05_worksheet.html">Tablero Integral Equilibrado</a>.</p>
-<ul>
-<li>Define <strong>1 o 2 métricas clave</strong> por cuadrante. No más.</li>
-<li>Define la <strong>frecuencia</strong>. El pulso financiero puede ser mensual, pero el pulso del equipo quizás deba ser semanal (viernes de survey rápido).</li>
-<li><strong>Semáforo:</strong> Define qué es Rojo (peligro) y Verde (éxito).</li>
-</ul>
-<h3>Ejercicio Práctico</h3>
-<p>Completa tu <strong>Tablero Integral Equilibrado</strong>.
-Prométete imprimirlo (o ponerlo en tu dashboard digital) y revisarlo en la próxima reunión de equipo. Pregunta: <em>&quot;¿Estamos en verde en las 4 áreas?&quot;</em>.</p>
-<h3>Cierre del Módulo</h3>
-<p>Ya tienes el mapa (OKRs), la red (Estrategia) y el tablero (Scorecard). Pero el viaje será movido. Necesitas corregir el rumbo constantemente. Bienvenido al arte del Feedback Continuo en el Módulo 6.</p>
-<div align="center">
-  <a href="../../course/modules/module_06.html" style="background-color: #28a745; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Ir al Módulo 6: Adaptación →</a>
-</div>
+        <article class="lesson-card" id="l4">
+            <h2>L4: Tu Scorecard Integral</h2>
+            
+            <h3>Contexto</h3>
+            <p>Llegó el momento de diseñar tu panel de control. Pero cuidado: intentar medirlo todo genera "parálisis por análisis". Necesitas elegir tus batallas.</p>
+            
+            <div class="idea-central">
+                🎯 Menos es más. Elige las pocas métricas vitales (señales de pulso) que te darán la fotografía completa de la salud y el avance de tu equipo.
+            </div>
+            
+            <h3>Desarrollo</h3>
+            <p>Para construir tu sistema utilizaremos la herramienta <strong>Tablero Integral Equilibrado</strong>. Sigue estas reglas de diseño:</p>
+            <ul>
+                <li><strong>Elige tu enfoque:</strong> Define máximo 1 o 2 métricas clave por cuadrante. Si pones 10 en cada uno, nadie las revisará.</li>
+                <li><strong>Define el ritmo (Frecuencia):</strong> El pulso financiero puede revisarse mensualmente, pero el pulso del estado de ánimo del equipo quizás deba medirse cada viernes (con un survey rápido de 1 pregunta).</li>
+                <li><strong>Configura el Semáforo:</strong> Define con total claridad qué número representa el color Verde (Éxito), Amarillo (Precaución) y Rojo (Peligro crítico).</li>
+            </ul>
+            
+            <div class="ejercicio-box">
+                <strong>🛠️ Herramienta Práctica</strong>
+                <ol style="text-align: left; margin: 1rem auto; max-width: 500px;">
+                    <li>Abre tu herramienta: <strong><a href="../../workbooks/module_05_worksheet.html" style="color: #059669; text-decoration: underline;">Tablero Integral Equilibrado</a></strong>.</li>
+                    <li>Completa tus métricas en cada cuadrante.</li>
+                    <li><strong>El compromiso de líder:</strong> Prométete imprimir este tablero (o anclarlo en tu dashboard digital) y abrir tu próxima reunión de equipo proyectándolo y preguntando: <em>"¿Estamos en verde en las 4 áreas?"</em>.</li>
+                </ol>
+            </div>
+            
+            <h3>Cierre del Módulo</h3>
+            <p>¡Gran salto estratégico! Ya tienes el mapa de destino (OKRs), la red de acción (Estrategia) y el tablero de navegación (Scorecard).</p>
+            <p>Pero el viaje será turbulento, los planes fallarán y el entorno cambiará. Necesitas un mecanismo para corregir el rumbo sin drama. Bienvenido al arte del Feedback Continuo en el Módulo 6.</p>
+            
+            <div class="lesson-nav">
+                <a href="#l3">← Anterior</a>
+                <span></span>
+            </div>
+        </article>
+
+        <a href="../../course/modules/module_06.html" class="btn-next-module">Avanzar al Módulo 6: Adaptación 🚀</a>
 
     </main>
 
-    <footer style="margin-top: 4rem; text-align: center; color: #6b7280; font-size: 0.9rem;">
-        <p>© 2025 Cyn de la Torre. Curso OKRs con Propósito.</p>
+    <footer>
+        <p>© 2026 Cyn de la Torre. Curso OKRs con Propósito. Todos los derechos reservados.</p>
     </footer>
 </body>
 </html>
