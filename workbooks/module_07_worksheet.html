@@ -3,74 +3,452 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Workbook: Módulo 07</title>
-    <link rel="stylesheet" href="../assets/style.css">
+    <title>Workbook: Módulo 07 - OKRs con Propósito</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1D4D4F;
+            --primary-light: #2c6e70;
+            --bg-body: #f8fafc;
+            --bg-card: #ffffff;
+            --text-main: #334155;
+            --text-heading: #0f172a;
+            --border: #e2e8f0;
+            --radius: 12px;
+            --accent: #d4af37;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.7;
+            padding-bottom: 4rem;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            color: var(--text-heading);
+            margin-bottom: 1rem;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--bg-card);
+            padding: 1rem 2rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo a {
+            font-weight: 600;
+            font-size: 1.2rem;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        nav a {
+            color: var(--text-main);
+            text-decoration: none;
+            margin-left: 1.5rem;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 3rem auto;
+            background: var(--bg-card);
+            padding: 4rem;
+            border-radius: var(--radius);
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05);
+            border: 1px solid var(--border);
+        }
+
+        .workbook-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 2rem;
+        }
+
+        .workbook-header span {
+            color: var(--primary-light);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-size: 0.9rem;
+        }
+
+        .workbook-header h1 {
+            font-size: 2.5rem;
+            margin-top: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .workbook-header h2 {
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            font-size: 1.2rem;
+            color: #64748b;
+        }
+
+        /* Roadmap Grid (30 Días) */
+        .roadmap-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+            margin-top: 2rem;
+        }
+
+        .week-card {
+            background: #ffffff;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+
+        .week-card h4 {
+            color: var(--primary);
+            font-family: 'Inter', sans-serif;
+            font-size: 1.1rem;
+            border-bottom: 1px dashed var(--border);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+            font-size: 0.95rem;
+            color: var(--text-main);
+        }
+
+        .checklist-item input[type="checkbox"] {
+            margin-top: 0.3rem;
+            width: 18px;
+            height: 18px;
+            accent-color: var(--primary);
+            cursor: pointer;
+        }
+
+        /* Caja de 7 Errores */
+        .errors-box {
+            background: #fff1f2;
+            border: 1px solid #fecdd3;
+            border-left: 4px solid #ef4444;
+            padding: 2rem;
+            border-radius: 8px;
+            margin-bottom: 3rem;
+        }
+
+        .errors-box h3 {
+            color: #991b1b;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .errors-list {
+            list-style: none;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0.75rem;
+        }
+
+        .errors-list li {
+            color: #7f1d1d;
+            font-size: 0.95rem;
+        }
+
+        .errors-list strong {
+            color: #991b1b;
+        }
+
+        /* Firma de Compromiso */
+        .pledge-box {
+            background: #f8fafc;
+            border: 1px solid var(--border);
+            padding: 2.5rem;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .pledge-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.25rem;
+            color: var(--text-heading);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .ws-inline-input {
+            border: none;
+            border-bottom: 2px solid var(--primary);
+            background: transparent;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.25rem;
+            color: var(--primary);
+            text-align: center;
+            width: 250px;
+            outline: none;
+            padding: 0 0.5rem;
+        }
+
+        .ws-inline-input:focus {
+            border-bottom-color: var(--accent);
+        }
+
+        .date-line {
+            font-size: 1rem;
+            color: #64748b;
+        }
+
+        .date-line input {
+            width: 150px;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            text-align: center;
+            border: none;
+            border-bottom: 1px solid #cbd5e1;
+            background: transparent;
+            outline: none;
+        }
+
+        /* Cierre Viaje del Héroe */
+        .hero-closing {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            padding: 3rem 2.5rem;
+            border-radius: var(--radius);
+            text-align: center;
+            margin-bottom: 1rem;
+            box-shadow: 0 10px 25px -5px rgba(29, 77, 79, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-closing::before {
+            content: '✨';
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 4rem;
+            opacity: 0.1;
+        }
+
+        .hero-closing p {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            line-height: 1.6;
+            margin: 0;
+            font-style: italic;
+        }
+
+        .hero-closing span {
+            display: block;
+            margin-top: 1.5rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            font-style: normal;
+            font-weight: 600;
+        }
+
+        /* Botones de acción */
+        .worksheet-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 1rem;
+            text-align: center;
+        }
+
+        .btn-print {
+            background-color: var(--bg-body);
+            color: var(--text-heading);
+            border: 1px solid var(--border);
+        }
+
+        .btn-print:hover {
+            background-color: #e2e8f0;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(29, 77, 79, 0.2);
+        }
+
+        footer {
+            text-align: center;
+            color: #94a3b8;
+            font-size: 0.9rem;
+            margin-top: 2rem;
+        }
+
+        /* Estilos de Impresión */
+        @media print {
+            body { background: white; padding: 0; }
+            header, .worksheet-actions, footer { display: none !important; }
+            .container { box-shadow: none; border: none; padding: 0; margin: 0; max-width: 100%; }
+            .roadmap-grid { grid-template-columns: 1fr; gap: 1rem; }
+            .hero-closing { border: 2px solid var(--primary); color: var(--primary); background: white; box-shadow: none; }
+            .hero-closing span { color: var(--text-main); }
+            .errors-box { border: 1px solid #ccc; background: white; }
+            .pledge-box { border: 1px solid #ccc; background: white; }
+        }
+
+        @media (max-width: 768px) {
+            .roadmap-grid { grid-template-columns: 1fr; }
+            .ws-inline-input { width: 200px; }
+        }
+    </style>
 </head>
 <body>
     <header>
         <div class="logo">
-            <a href="../index.html" style="font-weight: bold; font-size: 1.2rem; color: #111;">🧭 OKRs con Propósito</a>
+            <a href="../index.html">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
+                </svg>
+                OKRs con Propósito
+            </a>
         </div>
         <nav>
             <a href="../index.html">Inicio</a>
-            <a href="../course/modules/module_01.html">Módulo 1</a>
+            <a href="#" onclick="window.history.back(); return false;">Volver al Módulo</a>
         </nav>
     </header>
 
-    <main>
-        <h1>Workbook: Módulo 7 - Implementación</h1>
-<h2>El Líder que Diseña Futuro</h2>
-<h3>Herramienta 7: Checklist del Reto de 30 Días</h3>
-<p><strong>Tu mapa de ruta para despegar.</strong> Marca cada hito cuando lo completes.</p>
-<h4>Semana 1: Claridad</h4>
-<ul>
-<li><input type="checkbox"> Definir el Objetivo Principal del ciclo (el &quot;Qué&quot; inspirador).</li>
-<li><input type="checkbox"> Comunicar el objetivo al equipo (en reunión, no por email).</li>
-<li><input type="checkbox"> Verificar que el objetivo esté alineado a la visión de la empresa.</li>
-</ul>
-<h4>Semana 2: Conexión</h4>
-<ul>
-<li><input type="checkbox"> Pedir a cada miembro que reflexione sobre su Propósito Personal.</li>
-<li><input type="checkbox"> Realizar la sesión de &quot;Alineación de Propósitos&quot; (vincular Yo con Nosotros).</li>
-<li><input type="checkbox"> Asegurar que todos tengan un rol claro.</li>
-</ul>
-<h4>Semana 3: Red</h4>
-<ul>
-<li><input type="checkbox"> Taller de Mapeo de Iniciativas (dibujar la red).</li>
-<li><input type="checkbox"> Identificar interdependencias (quién necesita a quién).</li>
-<li><input type="checkbox"> Eliminar proyectos &quot;basura&quot; que no conectan con los KRs.</li>
-</ul>
-<h4>Semana 4: Medición y Ajuste</h4>
-<ul>
-<li><input type="checkbox"> Definir métricas para el Scorecard (Negocio, Cliente, Equipo, Propósito).</li>
-<li><input type="checkbox"> Tener la primera sesión de Feedback usando las &quot;Preguntas Poderosas&quot;.</li>
-<li><input type="checkbox"> Celebrar el cierre del mes y el inicio del sistema vivo.</li>
-</ul>
-<hr>
-<h3>Guía Rápida: Los 7 Errores Comunes (¡Evítalos!)</h3>
-<ol>
-<li>🚫 <strong>Checklist:</strong> Usar OKRs solo como lista de tareas.</li>
-<li>🚫 <strong>Castigo:</strong> Usar OKRs para regañar si no se llega al 100%.</li>
-<li>🚫 <strong>Exceso:</strong> Tener más de 3-4 objetivos (falta de foco).</li>
-<li>🚫 <strong>Desconexión:</strong> Objetivos sin propósito (&quot;Subir 5% ventas&quot; vs &quot;Ayudar a más clientes&quot;).</li>
-<li>🚫 <strong>Cascada:</strong> &quot;Bajar&quot; metas sin escuchar a la base.</li>
-<li>🚫 <strong>Ceguera:</strong> Medir solo dinero y olvidar la cultura.</li>
-<li>🚫 <strong>Autopsia:</strong> Revisar solo al final del trimestre (cuando ya murió el paciente).</li>
-</ol>
-<hr>
-<p><strong>Firma de Compromiso:</strong>
-Yo, <input type="text" class="ws-input" placeholder="...">, me comprometo a ser un Líder que Diseña Futuro, usando estas herramientas para inspirar, no para controlar.</p>
-<p>Fecha: <input type="text" class="ws-input" placeholder="..."></p>
-
-        <div class="worksheet-actions">
-            <button onclick="window.print()" class="btn btn-print">🖨️ Guardar o Imprimir Mi Workbook</button>
-            <a href="../course/modules/module_07.html" class="btn">🔙 Volver al Módulo 7</a>
+    <main class="container">
+        
+        <div class="workbook-header">
+            <span>Herramienta de Trabajo</span>
+            <h1>Workbook 07</h1>
+            <h2>Checklist del Reto de 30 Días</h2>
         </div>
-    
-    </main>
 
-    <footer style="margin-top: 4rem; text-align: center; color: #6b7280; font-size: 0.9rem;">
-        <p>© 2025 Cyn de la Torre. Curso OKRs con Propósito.</p>
-    </footer>
-</body>
-</html>
+        <p style="text-align: center; color: var(--text-main); font-size: 1.05rem;"><strong>Tu mapa de ruta para despegar.</strong> Imprime esta hoja y marca cada hito con orgullo cuando lo completes en la vida real.</p>
+
+        <div class="roadmap-grid">
+            
+            <div class="week-card">
+                <h4>Semana 1: Claridad <span>🎯</span></h4>
+                <div class="checklist-item">
+                    <input type="checkbox"> 
+                    <label>Definir el Objetivo Principal del ciclo (el "Qué" inspirador).</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox"> 
+                    <label>Verificar que este objetivo esté perfectamente alineado a la visión de la empresa.</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox"> 
+                    <label>Comunicar el objetivo al equipo (en una reunión en vivo, no por un frío email).</label>
+                </div>
+            </div>
+
+            <div class="week-card">
+                <h4>Semana 2: Conexión <span>🤝</span></h4>
+                <div class="checklist-item">
+                    <input type="checkbox"> 
+                    <label>Pedir a cada miembro que reflexione sobre su Propósito Personal (Usando el Workbook 2).</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox"> 
+                    <label>Tener sesiones 1 a 1 de "Alineación de Propósitos" (vincular el Yo con el Nosotros).</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox"> 
+                    <label>Asegurar que todos tengan un rol claro en el ciclo.</label>
+                </div>
+            </div>
+
+            <div class="week-card">
+                <h4>Semana 3: Red <span>🕸️</span></h4>
+                <div class="checklist-item">
+                    <input type="checkbox"> 
+                    <label>Taller de Mapeo de Iniciativas: dibujar la red en conjunto.</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox"> 
+                    <label>Identificar interdependencias y hacer visible quién necesita a quién.</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox"> 
+                    <label>Eliminar proyectos "basura" que consumen energía y no conectan con los KRs.</label>
+                </div>
+            </div>
+
+            <div class="week-card">
+                <h4>Semana 4: Medición y Ajuste <span>📊</span></h4>
+                <div class="checklist-item">
+                    <input type="checkbox"> 
+                    <label>Definir las métricas vitales para el Scorecard (Negocio, Cliente, Equipo, Propósito).</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox"> 
+                    <label>Tener la primera sesión de Feedback usando las "Preguntas Poderosas".</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox"> 
+                    <label>Celebrar el cierre del mes y el inicio oficial de su nuevo sistema vivo.</label>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="errors-box">
+            <h3>⚠️ Guía Rápida: Los 7 Errores Comunes (¡Evítalos!)</h3>
+            <ul class="errors-list">
+                <li>🚫 <strong>1. Checklist:</strong> Usar OKRs solo como una lista de tareas administrativas.</li>
+                <li>🚫 <strong>2. Castigo:</strong> Usar los OKRs para regañar o castigar si no se llega al 100%.</li>
+                <li>🚫 <strong>3. Exceso:</strong> Tener más de 3-4 objetivos (Falta de foco absoluto).</li>
+                <li>🚫 <strong>4. Desconexión:</strong> Objetivos sin propósito ("
