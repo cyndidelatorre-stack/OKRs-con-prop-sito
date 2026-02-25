@@ -3,71 +3,509 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Workbook: Módulo 04</title>
-    <link rel="stylesheet" href="../assets/style.css">
+    <title>Workbook: Módulo 04 - OKRs con Propósito</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1D4D4F;
+            --primary-light: #2c6e70;
+            --bg-body: #f8fafc;
+            --bg-card: #ffffff;
+            --text-main: #334155;
+            --text-heading: #0f172a;
+            --border: #e2e8f0;
+            --radius: 12px;
+            --accent: #d4af37;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.7;
+            padding-bottom: 4rem;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            color: var(--text-heading);
+            margin-bottom: 1rem;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--bg-card);
+            padding: 1rem 2rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo a {
+            font-weight: 600;
+            font-size: 1.2rem;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        nav a {
+            color: var(--text-main);
+            text-decoration: none;
+            margin-left: 1.5rem;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 3rem auto;
+            background: var(--bg-card);
+            padding: 4rem;
+            border-radius: var(--radius);
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05);
+            border: 1px solid var(--border);
+        }
+
+        .workbook-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 2rem;
+        }
+
+        .workbook-header span {
+            color: var(--primary-light);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-size: 0.9rem;
+        }
+
+        .workbook-header h1 {
+            font-size: 2.5rem;
+            margin-top: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .workbook-header h2 {
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            font-size: 1.2rem;
+            color: #64748b;
+        }
+
+        /* Instrucciones y Cajas */
+        .instruction-box {
+            background: #f8fafc;
+            border-left: 4px solid var(--primary-light);
+            padding: 1.5rem;
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
+        }
+
+        .instruction-box ul {
+            margin-top: 0.5rem;
+            padding-left: 1.5rem;
+        }
+
+        .instruction-box li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Ejemplo Estructurado Visualmente */
+        .example-network {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+        }
+
+        .example-title {
+            color: var(--primary);
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            border-bottom: 1px dashed var(--border);
+            padding-bottom: 1rem;
+        }
+
+        .obj-center {
+            text-align: center;
+            background: #fffbeb;
+            border: 2px solid #f59e0b;
+            padding: 1rem;
+            border-radius: 8px;
+            font-weight: 600;
+            color: #b45309;
+            margin-bottom: 2rem;
+        }
+
+        .kr-row {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            justify-content: space-between;
+        }
+
+        .kr-box {
+            flex: 1;
+            background: #eff6ff;
+            border: 1px solid #3b82f6;
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 500;
+            color: #1e3a8a;
+            font-size: 0.9rem;
+        }
+
+        .inic-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .inic-card {
+            background: #f8fafc;
+            border: 1px solid #cbd5e1;
+            padding: 1rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+
+        .inic-card strong {
+            display: block;
+            color: var(--text-heading);
+            margin-bottom: 0.5rem;
+        }
+
+        .impact-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+        }
+
+        .tag {
+            background: white;
+            border: 1px solid var(--border);
+            font-size: 0.75rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            color: #64748b;
+        }
+
+        .tag.multi {
+            background: #dcfce7;
+            border-color: #22c55e;
+            color: #166534;
+            font-weight: 600;
+        }
+
+        /* Área de Dibujo / Esquema */
+        .drawing-canvas {
+            border: 2px dashed #cbd5e1;
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            background: #ffffff;
+            margin-bottom: 2rem;
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .drawing-canvas p {
+            color: #94a3b8;
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+
+        /* Formulario y Secciones */
+        .reflection-section {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .reflection-section h3 {
+            color: var(--primary);
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .question-block {
+            margin-bottom: 2rem;
+            background: var(--bg-body);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+
+        .question-block p.title {
+            font-weight: 600;
+            color: var(--text-heading);
+            margin-bottom: 0.25rem;
+        }
+
+        .question-block p.subtitle {
+            font-size: 0.9rem;
+            color: #64748b;
+            margin-bottom: 1rem;
+        }
+
+        .ws-input {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            color: var(--text-main);
+            resize: vertical;
+            transition: all 0.2s;
+            background-color: white;
+        }
+
+        .ws-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(29, 77, 79, 0.1);
+        }
+
+        /* Botones de acción */
+        .worksheet-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 1rem;
+            text-align: center;
+        }
+
+        .btn-print {
+            background-color: var(--bg-body);
+            color: var(--text-heading);
+            border: 1px solid var(--border);
+        }
+
+        .btn-print:hover {
+            background-color: #e2e8f0;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(29, 77, 79, 0.2);
+        }
+
+        footer {
+            text-align: center;
+            color: #94a3b8;
+            font-size: 0.9rem;
+            margin-top: 2rem;
+        }
+
+        /* Estilos de Impresión */
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            header, .worksheet-actions, footer {
+                display: none !important;
+            }
+            .container {
+                box-shadow: none;
+                border: none;
+                padding: 0;
+                margin: 0;
+                max-width: 100%;
+            }
+            .ws-input {
+                border: 1px solid #ccc;
+                background: white;
+            }
+            .drawing-canvas {
+                border: 1px solid #ccc;
+                min-height: 500px;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
         <div class="logo">
-            <a href="../index.html" style="font-weight: bold; font-size: 1.2rem; color: #111;">🧭 OKRs con Propósito</a>
+            <a href="../index.html">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
+                </svg>
+                OKRs con Propósito
+            </a>
         </div>
         <nav>
             <a href="../index.html">Inicio</a>
-            <a href="../course/modules/module_01.html">Módulo 1</a>
+            <a href="#" onclick="window.history.back(); return false;">Volver al Módulo</a>
         </nav>
     </header>
 
-    <main>
-        <h1>Workbook: Módulo 4 - Estrategia</h1>
-<h2>De Silos a Redes Vivas</h2>
-<h3>Herramienta 4: Mapa de Red de Iniciativas</h3>
-<p><strong>Instrucciones:</strong>
-Dibuja aquí tu red estratégica. Olvida las listas; visualiza las conexiones.</p>
-<p><strong>Paso 1: El Centro</strong>
-Escribe tu Objetivo Principal (Propósito del ciclo) en el centro.</p>
-<p><strong>Paso 2: La Órbita</strong>
-Escribe tus 2-4 Resultados Clave (KR) alrededor.</p>
-<p><strong>Paso 3: Los Nodos (Iniciativas)</strong>
-Añade puntos o cuadros con tus Proyectos/Iniciativas actuales y conéctalos con líneas a los KRs que impactan.</p>
-<hr>
-<p><em>(Espacio para dibujar o esquematizar)</em></p>
-<pre><code>       [ KR 1 ]          [ KR 2 ]
-          \                /
-           \              /
-        [ INICIATIVA CLAVE ]
-           /              \
-          /                \
-       [ KR 3 ]          [ KR 4 ]
-</code></pre>
-<blockquote>
-<p><strong>Dibuja tu esquema aquí:</strong></p>
-</blockquote>
-<hr>
-<h3>Análisis de la Red</h3>
-<ol>
-<li><strong>¿Hay iniciativas aisladas?</strong> (Que no conectan con ningún KR).<ul>
-<li><em>Acción:</em> Elimínalas o redefínelas.</li>
-</ul>
-</li>
-<li><strong>¿Hay KRs huérfanos?</strong> (Que no tienen iniciativas conectadas).<ul>
-<li><em>Acción:</em> Crea una iniciativa urgente para mover ese KR.</li>
-</ul>
-</li>
-<li><strong>¿Hay iniciativas &quot;Multi-Impacto&quot;?</strong> (Conectan con 2+ KRs).<ul>
-<li><em>Acción:</em> ¡Dale prioridad! Son las de mayor apalancamiento.</li>
-</ul>
-</li>
-</ol>
+    <main class="container">
+        
+        <div class="workbook-header">
+            <span>Herramienta de Trabajo</span>
+            <h1>Workbook 04</h1>
+            <h2>Mapa de Red de Iniciativas</h2>
+        </div>
+
+        <div class="instruction-box">
+            <strong>Instrucciones de Mapeo:</strong>
+            <p style="margin-top: 0.5rem; margin-bottom: 0.5rem;">Olvida las listas planas; visualiza las conexiones reales de tu equipo. Sigue estos pasos:</p>
+            <ul>
+                <li><strong>El Centro:</strong> Escribe tu Objetivo Principal (Propósito del ciclo). <em>Nota: Si tu empresa tiene 3 o 4 Objetivos principales, dibújalos como "soles vecinos". Verás cómo se crea una galaxia de colaboración.</em></li>
+                <li><strong>La Órbita:</strong> Ubica tus Resultados Clave (KR) alrededor.</li>
+                <li><strong>Los Nodos:</strong> Añade tus Proyectos/Iniciativas actuales y traza líneas hacia todos los KRs que impactan.</li>
+            </ul>
+        </div>
+
+        <div class="example-network">
+            <h3 class="example-title">🔍 Ejemplo de una Red Viva (1 Objetivo, 3 KRs, 7 Iniciativas)</h3>
+            
+            <div class="obj-center">
+                ☀️ OBJETIVO: "Convertirnos en el estándar de oro en experiencia del cliente"
+            </div>
+
+            <div class="kr-row">
+                <div class="kr-box">🌍 KR 1: Reducir quejas de servicio al 5%</div>
+                <div class="kr-box">🌍 KR 2: Aumentar tasa de recompra al 40%</div>
+                <div class="kr-box">🌍 KR 3: Subir felicidad interna (eNPS) a 80 pts</div>
+            </div>
+
+            <div class="inic-list">
+                <div class="inic-card">
+                    <strong>1. Nuevo sistema de tickets</strong>
+                    <div class="impact-tags">
+                        <span class="tag">Conecta a: KR 1</span>
+                        <span class="tag multi">Conecta a: KR 3</span>
+                    </div>
+                </div>
+                <div class="inic-card">
+                    <strong>2. Programa de lealtad</strong>
+                    <div class="impact-tags">
+                        <span class="tag">Conecta a: KR 2</span>
+                    </div>
+                </div>
+                <div class="inic-card" style="border-color: #22c55e; background: #f0fdf4;">
+                    <strong>3. Capacitación cruzada Ventas/Soporte</strong>
+                    <div class="impact-tags">
+                        <span class="tag multi">Conecta a: KR 1, KR 2 y KR 3</span>
+                    </div>
+                </div>
+                <div class="inic-card">
+                    <strong>4. Auditoría de calidad externa</strong>
+                    <div class="impact-tags">
+                        <span class="tag">Conecta a: KR 1</span>
+                    </div>
+                </div>
+                <div class="inic-card">
+                    <strong>5. Campaña de Email Marketing</strong>
+                    <div class="impact-tags">
+                        <span class="tag">Conecta a: KR 2</span>
+                    </div>
+                </div>
+                <div class="inic-card">
+                    <strong>6. Bono interno por cliente feliz</strong>
+                    <div class="impact-tags">
+                        <span class="tag">Conecta a: KR 1</span>
+                        <span class="tag multi">Conecta a: KR 3</span>
+                    </div>
+                </div>
+                <div class="inic-card">
+                    <strong>7. Rediseño de empaque (Unboxing)</strong>
+                    <div class="impact-tags">
+                        <span class="tag">Conecta a: KR 1</span>
+                        <span class="tag multi">Conecta a: KR 2</span>
+                    </div>
+                </div>
+            </div>
+            <p style="margin-top: 1.5rem; font-size: 0.9rem; color: #475569; text-align: center; font-style: italic;">Nota del ejemplo: Fíjate cómo la iniciativa #3 (Capacitación) es el punto de mayor apalancamiento porque nutre a los tres resultados al mismo tiempo.</p>
+        </div>
+
+        <div class="drawing-canvas">
+            <p>👇 Si imprimes este Workbook, usa este gran lienzo en blanco para dibujar tu propio mapa a mano.</p>
+        </div>
+
+        <textarea class="ws-input" rows="5" placeholder="Si estás en digital, usa este espacio para listar tus iniciativas y describir a qué KRs se conectan..."></textarea>
+
+        <section class="reflection-section">
+            <h3>Análisis Estratégico de tu Red</h3>
+            <p style="color: var(--text-main); margin-bottom: 1.5rem;">Una vez trazado (o imaginado) tu mapa, evalúa la salud de tu ecosistema:</p>
+            
+            <div class="question-block">
+                <p class="title">1. ¿Hay iniciativas aisladas (basura espacial)?</p>
+                <p class="subtitle">Son aquellas que no conectan de forma directa con ningún KR. Acción: Elimínalas para liberar energía o redefínelas.</p>
+                <textarea class="ws-input" rows="2" placeholder="Tengo que pausar o ajustar la iniciativa..."></textarea>
+            </div>
+
+            <div class="question-block">
+                <p class="title">2. ¿Hay KRs huérfanos?</p>
+                <p class="subtitle">Resultados Clave que no tienen ninguna iniciativa real conectada. Acción: Crea un proyecto urgente para mover esa aguja.</p>
+                <textarea class="ws-input" rows="2" placeholder="Me falta crear una iniciativa para el KR de..."></textarea>
+            </div>
+
+            <div class="question-block" style="border-color: #22c55e; background: #f0fdf4;">
+                <p class="title" style="color: #166534;">3. ¿Descubriste iniciativas "Multi-Impacto"?</p>
+                <p class="subtitle" style="color: #15803d;">Son las que conectan con 2 o más KRs simultáneamente. Acción: ¡Dales máxima prioridad y recursos!</p>
+                <textarea class="ws-input" rows="2" style="border-color: #86efac; background: white;" placeholder="Mi iniciativa de mayor apalancamiento es..."></textarea>
+            </div>
+        </section>
 
         <div class="worksheet-actions">
-            <button onclick="window.print()" class="btn btn-print">🖨️ Guardar o Imprimir Mi Workbook</button>
-            <a href="../course/modules/module_04.html" class="btn">🔙 Volver al Módulo 4</a>
+            <button onclick="window.print()" class="btn btn-print">🖨️ Guardar PDF / Imprimir</button>
+            <a href="#" onclick="window.history.back(); return false;" class="btn btn-primary">Guardar y Volver</a>
         </div>
-    
+        
     </main>
 
-    <footer style="margin-top: 4rem; text-align: center; color: #6b7280; font-size: 0.9rem;">
-        <p>© 2025 Cyn de la Torre. Curso OKRs con Propósito.</p>
+    <footer>
+        <p>© 2026 Cyn de la Torre. Curso OKRs con Propósito. Todos los derechos reservados.</p>
     </footer>
 </body>
 </html>
