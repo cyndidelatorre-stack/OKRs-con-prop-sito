@@ -3,67 +3,420 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Workbook: Módulo 06</title>
-    <link rel="stylesheet" href="../assets/style.css">
+    <title>Workbook: Módulo 06 - OKRs con Propósito</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1D4D4F;
+            --primary-light: #2c6e70;
+            --bg-body: #f8fafc;
+            --bg-card: #ffffff;
+            --text-main: #334155;
+            --text-heading: #0f172a;
+            --border: #e2e8f0;
+            --radius: 12px;
+            --accent: #d4af37;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.7;
+            padding-bottom: 4rem;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            color: var(--text-heading);
+            margin-bottom: 1rem;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--bg-card);
+            padding: 1rem 2rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo a {
+            font-weight: 600;
+            font-size: 1.2rem;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        nav a {
+            color: var(--text-main);
+            text-decoration: none;
+            margin-left: 1.5rem;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 3rem auto;
+            background: var(--bg-card);
+            padding: 4rem;
+            border-radius: var(--radius);
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05);
+            border: 1px solid var(--border);
+        }
+
+        .workbook-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 2rem;
+        }
+
+        .workbook-header span {
+            color: var(--primary-light);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-size: 0.9rem;
+        }
+
+        .workbook-header h1 {
+            font-size: 2.5rem;
+            margin-top: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .workbook-header h2 {
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            font-size: 1.2rem;
+            color: #64748b;
+        }
+
+        /* Instrucciones */
+        .instruction-box {
+            background: #f8fafc;
+            border-left: 4px solid var(--primary-light);
+            padding: 1.5rem;
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 2.5rem;
+            font-size: 0.95rem;
+        }
+
+        /* Flashcards de Preguntas */
+        .flashcards-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .flashcard {
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            background: #ffffff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+
+        .flashcard h4 {
+            color: var(--primary);
+            font-family: 'Inter', sans-serif;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+            font-size: 1.05rem;
+        }
+
+        .flashcard ol {
+            padding-left: 1.2rem;
+            margin-bottom: 0;
+        }
+
+        .flashcard li {
+            margin-bottom: 1rem;
+            color: var(--text-heading);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .flashcard li strong {
+            color: var(--primary-light);
+            display: block;
+            margin-bottom: 0.2rem;
+        }
+
+        /* Registro de Sesión (Log) */
+        .log-section {
+            background: var(--bg-body);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .log-section h3 {
+            color: var(--primary);
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-heading);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .ws-input {
+            width: 100%;
+            padding: 0.85rem;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            color: var(--text-main);
+            resize: vertical;
+            transition: all 0.2s;
+            background-color: white;
+        }
+
+        .ws-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(29, 77, 79, 0.1);
+        }
+
+        /* Mantra */
+        .mantra-box {
+            text-align: center;
+            padding: 2.5rem;
+            background: #fffbeb;
+            border: 1px dashed #d4af37;
+            border-radius: 8px;
+            margin-top: 1rem;
+        }
+
+        .mantra-box p {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: #b45309;
+            margin: 0;
+            line-height: 1.4;
+            font-style: italic;
+        }
+
+        /* Botones de acción */
+        .worksheet-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 1rem;
+            text-align: center;
+        }
+
+        .btn-print {
+            background-color: var(--bg-body);
+            color: var(--text-heading);
+            border: 1px solid var(--border);
+        }
+
+        .btn-print:hover {
+            background-color: #e2e8f0;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(29, 77, 79, 0.2);
+        }
+
+        footer {
+            text-align: center;
+            color: #94a3b8;
+            font-size: 0.9rem;
+            margin-top: 2rem;
+        }
+
+        /* Estilos de Impresión */
+        @media print {
+            body { background: white; padding: 0; }
+            header, .worksheet-actions, footer { display: none !important; }
+            .container { box-shadow: none; border: none; padding: 0; margin: 0; max-width: 100%; }
+            .ws-input { border: 1px solid #ccc; background: white; }
+            .log-section { border: 1px solid #ccc; background: white; }
+            .mantra-box { border: 1px solid #ccc; background: white; }
+            .flashcards-grid { display: block; }
+            .flashcard { margin-bottom: 1.5rem; border: 1px solid #ccc; }
+        }
+
+        @media (max-width: 650px) {
+            .flashcards-grid { grid-template-columns: 1fr; }
+            .form-row { flex-direction: column; gap: 1rem; }
+        }
+    </style>
 </head>
 <body>
     <header>
         <div class="logo">
-            <a href="../index.html" style="font-weight: bold; font-size: 1.2rem; color: #111;">🧭 OKRs con Propósito</a>
+            <a href="../index.html">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
+                </svg>
+                OKRs con Propósito
+            </a>
         </div>
         <nav>
             <a href="../index.html">Inicio</a>
-            <a href="../course/modules/module_01.html">Módulo 1</a>
+            <a href="#" onclick="window.history.back(); return false;">Volver al Módulo</a>
         </nav>
     </header>
 
-    <main>
-        <h1>Workbook: Módulo 6 - Adaptación</h1>
-<h2>Feedback como Acto de Cuidado</h2>
-<h3>Herramienta 6: Guía de Feedback 360° con Propósito</h3>
-<p><strong>Instrucciones:</strong>
-Usa estas preguntas para tus sesiones de retroalimentación (1 a 1 o grupales). El objetivo no es juzgar, sino ajustar y desbloquear.</p>
-<h4>Preguntas Poderosas (Para el Líder al Colaborador)</h4>
-<ol>
-<li><strong>Reconexión:</strong> &quot;¿Qué fue lo que más disfrutaste de tu trabajo esta semana? ¿Dónde sentiste que brillaste?&quot;</li>
-<li><strong>Barreras:</strong> &quot;¿Qué obstáculo te frenó y qué puedo hacer yo para limpiarte el camino?&quot;</li>
-<li><strong>Propósito:</strong> &quot;¿Sientes que lo que hiciste conectó con nuestro objetivo común? ¿Por qué?&quot;</li>
-</ol>
-<h4>Feedback Inverso (Para el Colaborador al Líder)</h4>
-<ol>
-<li>&quot;¿Qué necesitas de mí que no te estoy dando?&quot;</li>
-<li>&quot;¿Qué debo dejar de hacer que te está complicando la vida?&quot;</li>
-</ol>
-<hr>
-<h3>Registro de Sesión (Log)</h3>
-<ul>
-<li><p><strong>Fecha:</strong> <input type="text" class="ws-input" placeholder="..."></p>
-</li>
-<li><p><strong>Persona:</strong> <input type="text" class="ws-input" placeholder="..."></p>
-</li>
-<li><p><strong>Acuerdo Principal (Action Item):</strong></p>
-<blockquote>
-<input type="text" class="ws-input" placeholder="...">
-<input type="text" class="ws-input" placeholder="..."></blockquote>
-</li>
-<li><p><strong>Próxima Revisión:</strong> <input type="text" class="ws-input" placeholder="..."></p>
-</li>
-</ul>
-<hr>
-<h3>Mantra de Feedback</h3>
-<blockquote>
-<p><em>&quot;El feedback es desayuno para campeones. Se sirve fresco (al momento), no añejo (meses después).&quot;</em></p>
-</blockquote>
+    <main class="container">
+        
+        <div class="workbook-header">
+            <span>Herramienta de Trabajo</span>
+            <h1>Workbook 06</h1>
+            <h2>Guía de Feedback 360° con Propósito</h2>
+        </div>
+
+        <div class="instruction-box">
+            <p style="margin: 0;"><strong>Instrucciones:</strong> Mantén esta guía abierta durante tus sesiones de retroalimentación (1 a 1 o grupales). El objetivo de esta charla <strong>no es juzgar</strong>, sino ajustar el rumbo, limpiar barreras y desbloquear el potencial del equipo.</p>
+        </div>
+
+        <div class="flashcards-grid">
+            
+            <div class="flashcard" style="border-top: 4px solid var(--primary);">
+                <h4>💬 Preguntas Poderosas<br><span style="font-size: 0.85rem; font-weight: 400; color: #64748b;">(Del Líder hacia el Colaborador)</span></h4>
+                <ol>
+                    <li>
+                        <strong>Reconexión:</strong>
+                        "¿Qué fue lo que más disfrutaste de tu trabajo esta semana? ¿Dónde sentiste que brillaste?"
+                    </li>
+                    <li>
+                        <strong>Barreras:</strong>
+                        "¿Qué obstáculo te frenó y qué puedo hacer yo para limpiarte el camino?"
+                    </li>
+                    <li>
+                        <strong>Propósito:</strong>
+                        "¿Sientes que lo que hiciste conectó con nuestro objetivo común? ¿Por qué?"
+                    </li>
+                </ol>
+            </div>
+
+            <div class="flashcard" style="border-top: 4px solid var(--accent);">
+                <h4>🔄 Feedback Inverso<br><span style="font-size: 0.85rem; font-weight: 400; color: #64748b;">(Del Colaborador hacia el Líder)</span></h4>
+                <ol>
+                    <li>
+                        <strong>Petición de Ayuda:</strong>
+                        "¿Qué necesitas de mí (como líder) que no te estoy dando?"
+                    </li>
+                    <li>
+                        <strong>Eficiencia:</strong>
+                        "¿Qué actitud, proceso o micro-gestión debo dejar de hacer que te está complicando la vida o el trabajo?"
+                    </li>
+                </ol>
+            </div>
+
+        </div>
+
+        <section class="log-section">
+            <h3>📝 Registro de Sesión (Log)</h3>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Fecha de la Sesión</label>
+                    <input type="date" class="ws-input">
+                </div>
+                <div class="form-group">
+                    <label>Nombre del Colaborador</label>
+                    <input type="text" class="ws-input" placeholder="Ej. Ana Pérez">
+                </div>
+            </div>
+
+            <div class="form-group" style="margin-bottom: 1.5rem;">
+                <label>Acuerdos Principales (Action Items)</label>
+                <textarea class="ws-input" rows="3" placeholder="¿A qué nos comprometimos ambas partes para esta semana?"></textarea>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Fecha de Próxima Revisión</label>
+                    <input type="date" class="ws-input">
+                </div>
+                <div class="form-group">
+                    <label>Foco de la próxima revisión</label>
+                    <input type="text" class="ws-input" placeholder="Ej. Revisar si el proceso fluyó mejor...">
+                </div>
+            </div>
+        </section>
+
+        <div class="mantra-box">
+            <p>"El feedback es el desayuno de los campeones. Se sirve fresco (al momento), no añejo (meses después)."</p>
+        </div>
 
         <div class="worksheet-actions">
-            <button onclick="window.print()" class="btn btn-print">🖨️ Guardar o Imprimir Mi Workbook</button>
-            <a href="../course/modules/module_06.html" class="btn">🔙 Volver al Módulo 6</a>
+            <button onclick="window.print()" class="btn btn-print">🖨️ Guardar PDF / Imprimir</button>
+            <a href="#" onclick="window.history.back(); return false;" class="btn btn-primary">Guardar y Volver</a>
         </div>
-    
+        
     </main>
 
-    <footer style="margin-top: 4rem; text-align: center; color: #6b7280; font-size: 0.9rem;">
-        <p>© 2025 Cyn de la Torre. Curso OKRs con Propósito.</p>
+    <footer>
+        <p>© 2026 Cyn de la Torre. Curso OKRs con Propósito. Todos los derechos reservados.</p>
     </footer>
 </body>
 </html>
