@@ -3,149 +3,477 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>module_07 - OKRs con Propósito</title>
-    <link rel="stylesheet" href="../../assets/style.css">
+    <title>Módulo 7 - OKRs con Propósito</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1D4D4F;
+            --primary-light: #2c6e70;
+            --bg-body: #f8fafc;
+            --bg-card: #ffffff;
+            --text-main: #334155;
+            --text-heading: #0f172a;
+            --border: #e2e8f0;
+            --radius: 12px;
+            --accent-bg: #f0fdf4;
+            --accent-border: #bbf7d0;
+            --accent: #d4af37;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.7;
+            padding-bottom: 4rem;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            color: var(--text-heading);
+            margin-bottom: 1rem;
+        }
+
+        h3 {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.1rem;
+            color: var(--primary);
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--bg-card);
+            padding: 1rem 2rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo a {
+            font-weight: 600;
+            font-size: 1.2rem;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        nav a {
+            color: var(--text-main);
+            text-decoration: none;
+            margin-left: 1.5rem;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Título del Módulo */
+        .module-header {
+            text-align: center;
+            padding: 4rem 0 3rem;
+        }
+
+        .module-header span {
+            color: var(--primary-light);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-size: 0.9rem;
+        }
+
+        .module-header h1 {
+            font-size: 2.5rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Caja de Objetivos */
+        .goals-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 2rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+        }
+
+        .goals-box ul {
+            list-style-type: none;
+            margin-top: 1rem;
+        }
+
+        .goals-box li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .goals-box li::before {
+            content: '✨';
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        /* Progreso */
+        .progress-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1rem;
+            list-style: none;
+        }
+
+        .progress-list li {
+            background: var(--bg-body);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Lecciones (Cards) */
+        .lesson-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 3rem;
+            margin-bottom: 3rem;
+            scroll-margin-top: 100px;
+        }
+
+        .lesson-card h2 {
+            font-size: 2rem;
+            border-bottom: 2px solid var(--primary-light);
+            padding-bottom: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        ul, ol {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+        }
+
+        /* Destacados */
+        .idea-central {
+            background: var(--primary);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 1.1rem;
+            margin: 2rem 0;
+            border-left: 4px solid var(--accent);
+        }
+
+        .ejemplo-box {
+            background: #f8fafc;
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--primary-light);
+            padding: 1.5rem;
+            border-radius: 0 8px 8px 0;
+            margin: 2rem 0;
+        }
+
+        .ejemplo-box strong {
+            color: var(--primary);
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 1.05rem;
+        }
+
+        .ejercicio-box {
+            background: #fffbeb;
+            border: 1px dashed #d4af37;
+            padding: 2rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .ejercicio-box strong {
+            color: #b45309;
+            font-size: 1.1rem;
+            display: block;
+            margin-bottom: 1rem;
+        }
+
+        /* Caja de Celebración Final */
+        .celebration-box {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            padding: 4rem 2rem;
+            border-radius: var(--radius);
+            text-align: center;
+            margin-top: 3rem;
+            box-shadow: 0 10px 25px -5px rgba(29, 77, 79, 0.3);
+        }
+
+        .celebration-box h3 {
+            color: var(--accent);
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .celebration-box p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        /* Navegación interna */
+        .lesson-nav {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 3rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .lesson-nav a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: opacity 0.2s;
+        }
+
+        .lesson-nav a:hover {
+            opacity: 0.7;
+        }
+
+        /* Botón Módulo Siguiente / Final */
+        .btn-finish {
+            display: inline-block;
+            background: white;
+            color: var(--primary);
+            padding: 1.2rem 3rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn-finish:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
+        }
+
+        footer {
+            text-align: center;
+            color: #94a3b8;
+            font-size: 0.9rem;
+            margin-top: 4rem;
+            border-top: 1px solid var(--border);
+            padding-top: 2rem;
+        }
+    </style>
 </head>
 <body>
     <header>
         <div class="logo">
-            <a href="../../index.html" style="font-weight: bold; font-size: 1.2rem; color: #111;">🧭 OKRs con Propósito</a>
+            <a href="../../index.html">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
+                </svg>
+                OKRs con Propósito
+            </a>
         </div>
         <nav>
             <a href="../../index.html">Inicio</a>
-            <a href="../../course/modules/module_01.html">Módulo 1</a>
+            <a href="#">Módulo 7</a>
         </nav>
     </header>
 
-    <main>
-        <h1>Módulo 7: Implementación – El Líder que Diseña Futuro</h1>
-<p><strong>Objetivo:</strong> Consolidar el aprendizaje y lanzar un plan de acción de 30 días para asegurar que el cambio perdure.</p>
-<p><strong>Al terminar este módulo:</strong></p>
-<ul>
-<li>Asumirás tu identidad como Líder de Futuro.</li>
-<li>Conocerás los 7 errores mortales a evitar.</li>
-<li>Tendrás tu Plan de Vuelo de 30 días listo.</li>
-</ul>
-<p><strong>Tu Progreso:</strong></p>
-<ol>
-<li><input disabled="" type="checkbox"> Lección 1: Perfil del Líder</li>
-<li><input disabled="" type="checkbox"> Lección 2: Los 7 Errores Comunes</li>
-<li><input disabled="" type="checkbox"> Lección 3: Reto de 30 Días (Parte 1)</li>
-<li><input disabled="" type="checkbox"> Lección 4: Reto de 30 Días (Parte 2)</li>
-<li><input disabled="" type="checkbox"> Lección 5: Cierre y Compromiso</li>
-</ol>
-<hr>
-<h2><a id="l1"></a>Lección 1: Perfil del Líder de Futuro</h2>
-<h3>Contexto</h3>
-<p>Has llegado a la recta final. La diferencia entre que todo esto quede en apuntes o se vuelva realidad eres TÚ.</p>
-<h3>Idea central</h3>
-<p><strong>No eres un administrador del pasado, eres un diseñador de futuro.</strong></p>
-<h3>Desarrollo</h3>
-<ul>
-<li><strong>El Administrador:</strong> Cuida lo que ya existe. Se preocupa por el control. Pregunta &quot;¿Por qué fallamos?&quot;.</li>
-<li><strong>El Diseñador:</strong> Crea lo que aún no existe. Se preocupa por el propósito. Pregunta &quot;¿Cómo podemos lograrlo?&quot;.</li>
-<li><strong>Humildad:</strong> El líder de futuro sabe que no tiene todas las respuestas, pero sabe hacer las preguntas correctas para encontrarlas en equipo.</li>
-</ul>
-<h3>Reflexión</h3>
-<p>Mírate al espejo (metafóricamente). Repite: <em>&quot;No soy solo un gestor de tareas. Soy quien diseña el futuro de este equipo&quot;</em>. Créetelo.</p>
-<div align="right">
-  <a href="#l2">Siguiente Lección: Los 7 Errores Comunes →</a>
-</div>
+    <main class="container">
+        
+        <div class="module-header">
+            <span>Módulo 7 (Gran Final)</span>
+            <h1>Implementación: El Líder que Diseña Futuro</h1>
+        </div>
 
-<hr>
-<h2><a id="l2"></a>Lección 2: Los 7 Errores Comunes</h2>
-<div align="left">
-  <a href="#l1">← Lección Anterior</a>
-</div>
+        <div class="goals-box">
+            <h3 style="margin-top: 0;">Objetivo del Módulo</h3>
+            <p>Consolidar el aprendizaje y lanzar un plan de acción de 30 días para asegurar que el cambio cultural y estratégico perdure en tu equipo.</p>
+            
+            <h3 style="margin-top: 2rem;">Al terminar este módulo:</h3>
+            <ul>
+                <li>Asumirás tu nueva identidad como Líder de Futuro.</li>
+                <li>Conocerás (y evitarás) los 7 errores mortales en la implementación de OKRs.</li>
+                <li>Tendrás tu Plan de Vuelo de 30 días completamente listo.</li>
+            </ul>
 
-<h3>Contexto</h3>
-<p>Es de sabios aprender de los errores propios, pero es de genios aprender de los ajenos. Te voy a ahorrar años de frustración.</p>
-<h3>Idea central</h3>
-<p><strong>Conoce las trampas para no caer en ellas.</strong></p>
-<h3>Desarrollo</h3>
-<p>El &quot;Cementerio de OKRs&quot; está lleno de equipos que cometieron estos errores:</p>
-<ol>
-<li><strong>Checklist:</strong> Usarlos como burocracia.</li>
-<li><strong>Castigo:</strong> Usarlos para regañar.</li>
-<li><strong>Exceso:</strong> Tener 10 prioridades (si todo es prioridad, nada lo es). Elege 3.</li>
-<li><strong>Desconexión:</strong> Objetivos sin propósito.</li>
-<li><strong>Cascada:</strong> Imponer sin escuchar.</li>
-<li><strong>Ceguera:</strong> Medir solo dinero y olvidar cultura.</li>
-<li><strong>Autopsia:</strong> Revisar solo al final, cuando el paciente ya murió.</li>
-</ol>
-<h3>Ejercicio</h3>
-<p>En tu herramienta <a href="../../workbooks/module_07_worksheet.html">Checklist del Reto de 30 Días</a> hay una lista detallada. Marca con un círculo rojo el error que sientes que es tu mayor tentación hoy. Sé consciente de él.</p>
-<div align="right">
-  <a href="#l3">Siguiente Lección: Reto de 30 Días (Parte 1) →</a>
-</div>
+            <h3 style="margin-top: 2rem;">Tu Progreso:</h3>
+            <ul class="progress-list">
+                <li><input disabled type="checkbox"> L1: Perfil del Líder</li>
+                <li><input disabled type="checkbox"> L2: Los 7 Errores Comunes</li>
+                <li><input disabled type="checkbox"> L3: Reto (Semanas 1-2)</li>
+                <li><input disabled type="checkbox"> L4: Reto (Semanas 3-4)</li>
+                <li><input disabled type="checkbox"> L5: Cierre</li>
+            </ul>
+        </div>
 
-<hr>
-<h2><a id="l3"></a>Lección 3: Reto de 30 Días (Semanas 1-2)</h2>
-<div align="left">
-  <a href="#l2">← Lección Anterior</a>
-</div>
+        <article class="lesson-card" id="l1">
+            <h2>L1: Perfil del Líder de Futuro</h2>
+            
+            <h3>Contexto</h3>
+            <p>Has llegado a la recta final. Tienes las herramientas, tienes la metodología. Pero la diferencia entre que todo esto quede guardado en apuntes bonitos o se vuelva realidad en tu empresa, eres TÚ.</p>
+            
+            <div class="idea-central">
+                🏗️ No eres un administrador del pasado, eres un diseñador de futuro.
+            </div>
+            
+            <h3>Desarrollo</h3>
+            <ul>
+                <li><strong>El Administrador:</strong> Cuida lo que ya existe. Se preocupa por el control exhaustivo. Cuando algo sale mal, pregunta "¿Por qué fallamos?".</li>
+                <li><strong>El Diseñador:</strong> Crea lo que aún no existe. Se preocupa por el propósito y el impacto. Cuando hay un reto, pregunta "¿Cómo podemos lograrlo?".</li>
+                <li><strong>Humildad Intelectual:</strong> El líder de futuro sabe perfectamente que no tiene todas las respuestas, pero domina el arte de hacer las preguntas correctas para encontrarlas junto con su equipo.</li>
+            </ul>
+            
+            <div class="ejercicio-box">
+                <strong>📝 Ejercicio de Identidad</strong>
+                <p>Mírate al espejo (metafóricamente o literal). Repite esta frase:</p>
+                <p style="font-size: 1.2rem; color: var(--text-heading); font-style: italic; margin: 1rem 0;">"No soy solo un gestor de tareas. Soy quien diseña el futuro de este equipo."</p>
+                <p style="font-size: 0.9rem; color: #64748b;"><em>Créetelo. Porque es verdad.</em></p>
+            </div>
+            
+            <div class="lesson-nav">
+                <span></span>
+                <a href="#l2">Siguiente Lección: Los 7 Errores Comunes →</a>
+            </div>
+        </article>
 
-<h3>Contexto</h3>
-<p>¿Cómo se come un elefante? A mordidas. Implementar esto puede sonar gigante, pero si lo rompes en semanas, es pan comido.</p>
-<h3>Idea central</h3>
-<p><strong>Claridad y Conexión primero.</strong> Antes de medir, necesitamos sentir.</p>
-<h3>Plan de Acción</h3>
-<ul>
-<li><strong>Semana 1: Claridad.</strong> Tu única meta es definir el Objetivo del equipo y asegurarte que ES inspirador. Tengan esa conversación.</li>
-<li><strong>Semana 2: Conexión.</strong> Es la semana humana. Dedica tiempo a escuchar los propósitos personales y hacer el &#39;match&#39; con el objetivo.</li>
-</ul>
-<h3>Ejercicio</h3>
-<p>Abre tu calendario AHORA. Bloquea las dos sesiones para Semana 1 y Semana 2. Si no está en la agenda, no existe.</p>
-<div align="right">
-  <a href="#l4">Siguiente Lección: Reto de 30 Días (Parte 2) →</a>
-</div>
+        <article class="lesson-card" id="l2">
+            <h2>L2: Los 7 Errores Comunes</h2>
+            
+            <h3>Contexto</h3>
+            <p>Es de sabios aprender de los errores propios, pero es de genios aprender de los errores ajenos. Te voy a ahorrar años de frustración y fricción con tu equipo.</p>
+            
+            <div class="idea-central">
+                🚫 Conoce las trampas del sistema para no caer en ellas.
+            </div>
+            
+            <h3>Desarrollo</h3>
+            <p>El "Cementerio Corporativo de los OKRs" está lleno de equipos con buenas intenciones que cometieron estos errores mortales:</p>
+            <ol>
+                <li><strong>Checklist:</strong> Usarlos como burocracia para llenar formatos de Recursos Humanos.</li>
+                <li><strong>Castigo:</strong> Usar los resultados clave para regañar o condicionar bonos.</li>
+                <li><strong>Exceso:</strong> Tener 10 prioridades al mismo tiempo. (Recuerda: si todo es prioridad, nada lo es. Elige 3).</li>
+                <li><strong>Desconexión:</strong> Plantear objetivos fríos sin un propósito humano detrás.</li>
+                <li><strong>Cascada:</strong> Imponer metas desde arriba sin escuchar a la trinchera.</li>
+                <li><strong>Ceguera:</strong> Medir únicamente el dinero (Negocio) y olvidar medir la cultura (Equipo).</li>
+                <li><strong>Autopsia:</strong> Revisar los OKRs solo al final del trimestre, cuando "el paciente ya murió" y no hay nada que arreglar.</li>
+            </ol>
+            
+            <div class="ejercicio-box">
+                <strong>🛠️ Herramienta Práctica</strong>
+                <p>En tu <strong><a href="../../workbooks/module_07_worksheet.html" style="color: #b45309; text-decoration: underline;">Checklist del Reto de 30 Días</a></strong> hay una lista detallada.</p>
+                <p>Marca con un círculo rojo o resalta el error que sientes que es tu mayor tentación o hábito actual. Sé consciente de él para evitarlo.</p>
+            </div>
+            
+            <div class="lesson-nav">
+                <a href="#l1">← Anterior</a>
+                <a href="#l3">Siguiente Lección: Reto de 30 Días (Semanas 1-2) →</a>
+            </div>
+        </article>
 
-<hr>
-<h2><a id="l4"></a>Lección 4: Reto de 30 Días (Semanas 3-4)</h2>
-<div align="left">
-  <a href="#l3">← Lección Anterior</a>
-</div>
+        <article class="lesson-card" id="l3">
+            <h2>L3: Reto de 30 Días (Semanas 1 y 2)</h2>
+            
+            <h3>Contexto</h3>
+            <p>¿Cómo se come un elefante? A mordidas pequeñas. Implementar toda esta cultura de golpe puede sonar gigante, pero si lo rompes en semanas enfocadas, es un proceso natural y fluido.</p>
+            
+            <div class="idea-central">
+                🧠 Claridad y Conexión primero. Antes de medir números, necesitamos sentir el propósito.
+            </div>
+            
+            <h3>Plan de Acción Semanal</h3>
+            <div class="ejemplo-box">
+                <strong>Semana 1: La Claridad</strong><br>
+                Tu única meta esta semana es definir el Objetivo del equipo (El "Sol" de tu mapa) y asegurarte que ES inspirador. Tengan esa conversación abierta. No avances hasta que eso esté claro.<br><br>
+                
+                <strong>Semana 2: La Conexión</strong><br>
+                Es la semana humana. Dedica tiempo en tus 1 a 1 para escuchar los propósitos personales de tu gente y hacer el 'match' perfecto con el objetivo del equipo.
+            </div>
+            
+            <div class="ejercicio-box">
+                <strong>📅 Reto Inmediato</strong>
+                <p>Abre tu calendario AHORA MISMO.</p>
+                <p>Bloquea los espacios para tus sesiones de la Semana 1 y Semana 2. Manda las invitaciones. <em>Si no está en la agenda, no existe.</em></p>
+            </div>
+            
+            <div class="lesson-nav">
+                <a href="#l2">← Anterior</a>
+                <a href="#l4">Siguiente Lección: Reto de 30 Días (Semanas 3-4) →</a>
+            </div>
+        </article>
 
-<h3>Contexto</h3>
-<p>Ya tienes el &quot;Qué&quot; y el &quot;Por qué&quot;. Ahora vamos a armar el &quot;Cómo&quot; y el &quot;Cómo sabemos que llegamos&quot;.</p>
-<h3>Idea central</h3>
-<p><strong>Red y Medición para sostener el cambio.</strong></p>
-<h3>Plan de Acción</h3>
-<ul>
-<li><strong>Semana 3: La Red.</strong> Taller de iniciativas. Dibuja el mapa. Conecta los nodos. Rompe los silos.</li>
-<li><strong>Semana 4: Medición.</strong> Define tu Scorecard (4 cuadrantes) y ten tu primera sesión de feedback real.</li>
-<li><strong>Día 30:</strong> Celebra. Ya tienes un sistema vivo funcionando.</li>
-</ul>
-<h3>Ejercicio</h3>
-<p>Utilizarás la herramienta: <a href="../../workbooks/module_07_worksheet.html">Checklist del Reto de 30 Días</a>. Fírmalo. Es tu contrato contigo mismo.</p>
-<div align="right">
-  <a href="#l5">Siguiente Lección: Cierre y Compromiso →</a>
-</div>
+        <article class="lesson-card" id="l4">
+            <h2>L4: Reto de 30 Días (Semanas 3 y 4)</h2>
+            
+            <h3>Contexto</h3>
+            <p>Ya tienes el "Qué" (Objetivo) y el "Por qué" (Propósito). Ahora vamos a armar el "Cómo" (Red) y el "Cómo sabemos que llegamos" (Scorecard).</p>
+            
+            <div class="idea-central">
+                📊 Estructura y Medición para sostener el cambio en el tiempo.
+            </div>
+            
+            <h3>Plan de Acción Semanal</h3>
+            <div class="ejemplo-box">
+                <strong>Semana 3: La Red</strong><br>
+                Taller de iniciativas. Dibujen el mapa. Creen el Canvas de Compromisos Compartidos. Conecta los nodos y rompe los silos de una vez por todas.<br><br>
+                
+                <strong>Semana 4: La Medición</strong><br>
+                Define tu Scorecard (los 4 cuadrantes) y ten tu primera sesión de feedback 360° real.<br><br>
 
-<hr>
-<h2><a id="l5"></a>Lección 5: Cierre</h2>
-<div align="left">
-  <a href="#l4">← Lección Anterior</a>
-</div>
+                <strong>Día 30:</strong> Celebra. ¡Ya tienes un sistema vivo funcionando!
+            </div>
+            
+            <div class="ejercicio-box">
+                <strong>✍️ Tu Firma</strong>
+                <p>Abre el <strong><a href="../../workbooks/module_07_worksheet.html" style="color: #b45309; text-decoration: underline;">Checklist del Reto de 30 Días</a></strong>.</p>
+                <p>Fírmalo al final. Tómalo como un contrato de compromiso contigo mismo y con el futuro de tu equipo.</p>
+            </div>
+            
+            <div class="lesson-nav">
+                <a href="#l3">← Anterior</a>
+                <a href="#l5">Siguiente Lección: Cierre y Compromiso →</a>
+            </div>
+        </article>
 
-<h3>Contexto</h3>
-<p>Este no es el final del curso. Es el inicio de tu nueva forma de liderar.</p>
-<h3>Mensaje Final</h3>
-<p>La cultura no se cambia en un día, se cambia un día a la vez.
-Al liderar con propósito, estás ayudando a que tu gente tenga vidas más plenas, menos estresadas y más significativas. <strong>Ese es tu verdadero legado.</strong></p>
-<p>Imagina dentro de un año. Alguien de tu equipo se acerca y te dice: <em>&quot;Gracias, porque este año encontré sentido a lo que hago&quot;</em>. Por ese momento vale la pena todo.</p>
-<h3>Tu Compromiso</h3>
-<p>Ve y haz que suceda. El mundo necesita más brújulas y menos listas. ¡Gracias por confiar en este proceso!</p>
-<div align="center">
-  <h3>¡Felicidades! Has completado el curso.</h3>
-  <p>Ahora empieza el verdadero trabajo.</p>
-  <a href="/web/landing.html" style="color: #666; text-decoration: underline;">Volver al Inicio</a>
-</div>
-
-    </main>
-
-    <footer style="margin-top: 4rem; text-align: center; color: #6b7280; font-size: 0.9rem;">
-        <p>© 2025 Cyn de la Torre. Curso OKRs con Propósito.</p>
-    </footer>
-</body>
-</html>
+        <article class="lesson-card" id="l5" style="border: none; padding
