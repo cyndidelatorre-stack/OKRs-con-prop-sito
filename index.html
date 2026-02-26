@@ -17,6 +17,7 @@
             --text-heading: #0f172a;
             --border: #e2e8f0;
             --radius: 12px;
+            --accent: #d4af37;
         }
 
         * {
@@ -86,7 +87,7 @@
             padding: 4rem 2rem;
             border-radius: var(--radius);
             margin-top: 2rem;
-            margin-bottom: 3rem;
+            margin-bottom: 2rem;
             text-align: center;
             box-shadow: 0 10px 25px -5px rgba(29, 77, 79, 0.2);
         }
@@ -119,6 +120,55 @@
         .btn-start:hover {
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        /* ⚡️ NUEVO: BARRA DE SALTO RÁPIDO ⚡️ */
+        .quick-jump {
+            background: var(--bg-card);
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            margin-bottom: 3rem;
+            text-align: center;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);
+        }
+
+        .quick-jump p {
+            margin-bottom: 1rem;
+            font-weight: 600;
+            color: var(--text-heading);
+            font-size: 1.05rem;
+        }
+
+        .jump-links {
+            display: flex;
+            gap: 0.8rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .jump-links a {
+            background: var(--bg-body);
+            color: var(--primary);
+            width: 45px; 
+            height: 45px;
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+            border-radius: 50%; 
+            font-weight: 700; 
+            font-size: 1.1rem;
+            text-decoration: none;
+            border: 2px solid var(--border); 
+            transition: all 0.2s;
+        }
+
+        .jump-links a:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 6px rgba(29, 77, 79, 0.2);
         }
 
         /* Carta de Cyn */
@@ -181,6 +231,12 @@
             border: 1px solid var(--border);
             border-radius: var(--radius);
             overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        details[open] {
+            border-color: var(--primary-light);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
         }
 
         summary {
@@ -191,6 +247,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            font-size: 1.05rem;
         }
 
         summary::-webkit-details-marker {
@@ -233,6 +290,7 @@
             background: #f0fdf4;
             padding: 0.5rem 1rem;
             border-radius: 6px;
+            margin-bottom: 1.5rem;
         }
 
         /* Caja de Herramientas */
@@ -318,7 +376,20 @@
         <section class="welcome-hero">
             <h1>De Checklist a Brújula</h1>
             <p>Bienvenido a tu panel de control. El viaje para construir un equipo comprometido comienza aquí.</p>
-            <a href="./course/modules/module_01.html" class="btn-start">Iniciar Módulo 1 ✨</a>
+            <a href="./course/modules/module_01.html" class="btn-start">Iniciar Curso ✨</a>
+        </section>
+
+        <section class="quick-jump">
+            <p>¿Vas a la mitad? Salta directo a tu módulo:</p>
+            <div class="jump-links">
+                <a href="./course/modules/module_01.html" title="Módulo 1: Fundamentos">1</a>
+                <a href="./course/modules/module_02.html" title="Módulo 2: Conexión">2</a>
+                <a href="./course/modules/module_03.html" title="Módulo 3: Compromiso">3</a>
+                <a href="./course/modules/module_04.html" title="Módulo 4: Estrategia">4</a>
+                <a href="./course/modules/module_05.html" title="Módulo 5: Medición">5</a>
+                <a href="./course/modules/module_06.html" title="Módulo 6: Adaptación">6</a>
+                <a href="./course/modules/module_07.html" title="Módulo 7: Implementación">7</a>
+            </div>
         </section>
 
         <section class="letter-section">
@@ -362,6 +433,7 @@
                         <li>Tu nuevo rol: De controlador a facilitador.</li>
                     </ul>
                     <em>Resultado: Mentalidad renovada y diagnóstico claro.</em>
+                    <a href="./course/modules/module_01.html" class="btn-start" style="background-color: var(--primary); color: white; padding: 8px 24px; font-size: 0.95rem;">Ir a este Módulo 📖</a>
                 </div>
             </details>
 
@@ -375,6 +447,7 @@
                         <li>Taller de Alineación: El vínculo vital.</li>
                     </ul>
                     <em>Resultado: Hoja de ruta emocional del equipo.</em>
+                    <a href="./course/modules/module_02.html" class="btn-start" style="background-color: var(--primary); color: white; padding: 8px 24px; font-size: 0.95rem;">Ir a este Módulo 📖</a>
                 </div>
             </details>
 
@@ -388,6 +461,7 @@
                         <li>Canvas de compromisos compartidos.</li>
                     </ul>
                     <em>Resultado: Compromisos visibles y públicos.</em>
+                    <a href="./course/modules/module_03.html" class="btn-start" style="background-color: var(--primary); color: white; padding: 8px 24px; font-size: 0.95rem;">Ir a este Módulo 📖</a>
                 </div>
             </details>
 
@@ -401,6 +475,7 @@
                         <li>Mapa de red estratégica.</li>
                     </ul>
                     <em>Resultado: Mapa visual de interdependencias.</em>
+                    <a href="./course/modules/module_04.html" class="btn-start" style="background-color: var(--primary); color: white; padding: 8px 24px; font-size: 0.95rem;">Ir a este Módulo 📖</a>
                 </div>
             </details>
 
@@ -414,6 +489,7 @@
                         <li>Tu scorecard integral.</li>
                     </ul>
                     <em>Resultado: Tablero de mando equilibrado.</em>
+                    <a href="./course/modules/module_05.html" class="btn-start" style="background-color: var(--primary); color: white; padding: 8px 24px; font-size: 0.95rem;">Ir a este Módulo 📖</a>
                 </div>
             </details>
 
@@ -427,6 +503,7 @@
                         <li>Guía de feedback 360°.</li>
                     </ul>
                     <em>Resultado: Sistema de mejora continua instalado.</em>
+                    <a href="./course/modules/module_06.html" class="btn-start" style="background-color: var(--primary); color: white; padding: 8px 24px; font-size: 0.95rem;">Ir a este Módulo 📖</a>
                 </div>
             </details>
 
@@ -440,6 +517,7 @@
                         <li>Cierre y legado.</li>
                     </ul>
                     <em>Resultado: Plan de acción inmediato y Workbooks completos.</em>
+                    <a href="./course/modules/module_07.html" class="btn-start" style="background-color: var(--primary); color: white; padding: 8px 24px; font-size: 0.95rem;">Ir a este Módulo 📖</a>
                 </div>
             </details>
 
@@ -506,14 +584,10 @@
             </div>
         </section>
 
-        <div style="text-align: center; margin-top: 4rem;">
-            <a href="./course/modules/module_01.html" class="btn-start" style="background-color: var(--primary); color: white;">Empezar a leer el Módulo 1 🌿</a>
-        </div>
-
     </main>
 
     <footer>
-        <p>© 2026 Cultura Viva by Cyn De la Torre. Todos los derechos reservados.</p>
+        <p>© 2026 Cyn De la Torre. Curso OKRs con Propósito. Todos los derechos reservados.</p>
     </footer>
 
 </body>
